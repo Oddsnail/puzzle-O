@@ -1,0 +1,22 @@
+add(obelia)
+wait-appear(obelia)
+[obelia:front-f2:h] "Hi,{wa:0.4} Umm..."
+[::h] "Can you do a massage for me now...?"
+
+choice("Sure!" sure "Leave it to me, ma'am." sure)
+
+.sure
+disappear(obelia)
+
+puzzle(obelia 5 s f)
+
+.s
+appear(obelia)
+[obelia:front-f2:h] "Honestly speaking..."
+[:_-f3:h] "That was good,{wa:0.2} I'm pretty sure that you're talented."
+
+disappear(obelia)
+end(EOF)
+
+.f
+end(FAIL)
