@@ -2,13 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[System.Serializable]
+namespace origin.puzzle {
 
-public class PuzzleContainer {
+	[System.Serializable]
+	public class PuzzleContainer {
 
-	public RectTransform containerRoot;
-	public Image puzzleColor;
-	public TextMeshProUGUI historyText;
-	public TextMeshProUGUI trialsText;
-    
+		public RectTransform containerRoot;
+		public Image puzzleColor;
+		public TextMeshProUGUI historyText;
+		public TextMeshProUGUI trialsText;
+
+	}
+
 }

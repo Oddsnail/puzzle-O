@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Characters:
   - ID: obelia
-    displayName: Obelia
+    displayName: "\uC5F0 \uD5A5\uC8FC"
     displaySubname: RANK 3
     prefabNormal: {fileID: 2845683887390999951, guid: 1c252377259dc7c4bafbf9dbd2e330e6, type: 3}
     prefabClient: {fileID: 3548964609375085281, guid: 6c40d7322b96efd4c879094b4a908ff3, type: 3}

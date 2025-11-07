@@ -1,0 +1,10 @@
+add(lde)
+wait-appear(lde)
+[lde:stand1-2-2:h] "wtf!"
+[::h] "D- {wa:0.2}Does this still work?"
+
+choice("I guess so..." a "Maybe, yeah")
+
+.a
+
+[:stand2-1-2-blush:h] "It's nonsense..."
