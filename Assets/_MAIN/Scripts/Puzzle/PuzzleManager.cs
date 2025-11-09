@@ -7,6 +7,7 @@ using UnityEngine;
 
 using origin.audio;
 using origin.character;
+using origin.graphic;
 
 namespace origin.puzzle {
 	public class PuzzleManager : MonoBehaviour {
@@ -15,6 +16,7 @@ namespace origin.puzzle {
 
 		public PuzzleContainer puzzleContainer = new();
 		public RectTransform sofa;
+		public ColorPalette colorPalette;
 
 		public Color strike;
 		public Color semiStrike;
@@ -65,7 +67,7 @@ namespace origin.puzzle {
 			if (!CharacterManager.instance.HasCharacter(ID)) CharacterManager.instance.AddClient(charID);
 			CHARACTER character = CharacterManager.instance.GetCharacter(ID);
 
-			Color theme = character.config.themeColor;
+			Color theme = colorPalette.Getcolor(character.config.ID);
 			puzzleContainer.puzzleColor.color = theme;
 			yield return new WaitForSeconds(0.7f);
 

@@ -8,6 +8,7 @@ using TMPro;
 
 using origin.audio;
 using origin.graphic;
+using NUnit.Framework;
 
 namespace origin.dialogue {
 	public class DialogueManager : MonoBehaviour {
@@ -32,6 +33,8 @@ namespace origin.dialogue {
 		private Coroutine co_name_transitioning = null;
 		public bool isTransitioning => co_transitioning != null;
 		public bool isNameTransitioning => co_name_transitioning != null;
+
+		public ColorPalette colorPalette;
 
 		bool initialized = false;
 		bool showing = false;
@@ -68,25 +71,31 @@ namespace origin.dialogue {
 		//========================================================================
 		// <!!!> update dialogue box as new name container and theme color. <!!!>
 		//========================================================================
-		public void changeNameAndTheme(string text, Color color) {
+		public void changeNameAndTheme(string text, string ID) {
 			if (isNameTransitioning) return;
-
-			co_name_transitioning = StartCoroutine(changeNameAnimation(text, color));
+			co_name_transitioning = StartCoroutine(changeNameAnimation(text, colorPalette.Getcolor(ID)));
 		}
+
+		public void changeLetterBoxTheme(string ID) {
+			upperLetterbox.GetComponent<LetterboxLoop>().ColorTransition(colorPalette.Getcolor(ID));
+			lowerLetterbox.GetComponent<LetterboxLoop>().ColorTransition(colorPalette.Getcolor(ID));
+        }
 
 		private const float defaultChangeNameDuration = 0.1f;
 		private const float defaultNameAnimOffset = 100.0f;
 
 		private IEnumerator changeNameAnimation(string text, Color color) {
+
 			RectTransform nameRect = dialogueContainer.nameRoot;
+			Vector2 defaultPosition = nameRect.anchoredPosition;
 			CanvasGroup nameCanvasGroup = dialogueContainer.nameRoot.GetComponent<CanvasGroup>();
 
 			yield return DOTween.Sequence()
 				.Join(nameCanvasGroup.DOFade(0f, defaultChangeNameDuration))
-				.Join(nameRect.DOAnchorPosX(defaultNameAnimOffset, defaultChangeNameDuration))
+				.Join(nameRect.DOAnchorPosX(defaultPosition.x + defaultNameAnimOffset, defaultChangeNameDuration))
 				.WaitForCompletion();
 
-			nameRect.anchoredPosition = new Vector2(-defaultNameAnimOffset * 2f, 0f);
+			nameRect.anchoredPosition = new Vector2(defaultPosition.x - defaultNameAnimOffset * 2f, defaultPosition.y);
 			dialogueContainer.SetThemeColor(color);
 			dialogueContainer.nameText.SetText(text);
 			if (text == "" && nameRect.gameObject.activeSelf) nameRect.gameObject.SetActive(false);
@@ -94,7 +103,7 @@ namespace origin.dialogue {
 
 			yield return DOTween.Sequence()
 				.Join(nameCanvasGroup.DOFade(1f, defaultChangeNameDuration))
-				.Join(nameRect.DOAnchorPosX(0f, defaultChangeNameDuration))
+				.Join(nameRect.DOAnchorPosX(defaultPosition.x, defaultChangeNameDuration))
 				.WaitForCompletion();
 
 			co_name_transitioning = null;
@@ -106,6 +115,7 @@ namespace origin.dialogue {
 			if (showing) return;
 			if (isTransitioning) return;
 
+			SetLetterboxSpeed(0.45f);
 			co_transitioning = StartCoroutine(Showing());
 		}
 
@@ -113,8 +123,14 @@ namespace origin.dialogue {
 			if (!showing) return;
 			if (isTransitioning) return;
 
+			SetLetterboxSpeed(0.15f);
 			co_transitioning = StartCoroutine(Hiding());
 		}
+
+		public void SetLetterboxSpeed(float speed) {
+			upperLetterbox.GetComponent<LetterboxLoop>().speed = speed;
+			lowerLetterbox.GetComponent<LetterboxLoop>().speed = -1 * speed;
+        }
 
 		private const float defaultShowAndHideDuration = 0.6f;                      // default transition duration
 		private const float defaultDialogueHideYPos = -700f;                        // dialogue box y coord when showing = true
@@ -155,7 +171,7 @@ namespace origin.dialogue {
 			}
 		}
 
-		public IEnumerator AvailableChoices((string, string)[] choices) {
+		public IEnumerator AvailableChoices((string, string, string)[] choices, bool isColored) {
 
 			bool choiceMade = false;
 			string choicedCode = "";
@@ -168,16 +184,18 @@ namespace origin.dialogue {
 			for (int i = 0; i < choices.Length; i++) {
 				GameObject choiceButton = Instantiate(choicePrefab, choicePanel);
 				TMP_Text buttonText = choiceButton.GetComponentInChildren<TMP_Text>();
+				OptionButton optionButton = choiceButton.GetComponent<OptionButton>();
+
 				// ===== sprite change logic (might get deleted) =====
-				if (i % 2 == 1) {
-					Image buttonImage = choiceButton.GetComponent<Image>();
-					buttonImage.sprite = choiceButton.GetComponent<SpriteSheetHolder>().sprites[1];
-				}
+				optionButton.button.GetComponent<Image>().sprite = optionButton.button.GetComponent<SpriteSheetHolder>().sprites[i % 3];
+				optionButton.buttonColor.GetComponent<Image>().sprite = optionButton.buttonColor.GetComponent<SpriteSheetHolder>().sprites[i % 3];
 				// ===================================================
-				Button button = choiceButton.GetComponent<Button>();
+
+				Button button = optionButton.button.GetComponent<Button>();
 				string code = choices[i].Item2;
 				button.onClick.AddListener(() => ChoiceHandler(code));
 				buttonText.text = choices[i].Item1;
+				if (isColored) optionButton.SetSelectColor(colorPalette.Getcolor(choices[i].Item3));
 			}
 
 			yield return new WaitUntil(() => choiceMade);

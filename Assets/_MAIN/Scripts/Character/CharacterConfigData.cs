@@ -9,7 +9,6 @@ namespace origin.character {
 		public string displaySubname;
 		public GameObject prefabNormal;
 		public GameObject prefabClient;
-		public Color themeColor;
 		
 		public static CharacterConfigData Default {
 			get {
@@ -18,7 +17,6 @@ namespace origin.character {
 					displayName = "<displayName>",
 					displaySubname = null,
 					prefabNormal = null,
-					themeColor = new Color(0.7f, 0.7f, 0.7f)
 				};
 			}
 		}

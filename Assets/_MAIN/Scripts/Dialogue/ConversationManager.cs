@@ -21,7 +21,10 @@ namespace origin.dialogue {
 		private bool endBool = false;
 		private string jumpingCode = "";
 		private string endTag = "EOF";
-		private const string defaultNarratorID = "narr";
+
+		private const char noteID = '#';
+		public const string plainTextID = "default";
+		private readonly HashSet<string> autoWaitCommands = new() { "wait", "add", "choice", "choiceC", "puzzle", "hl", "uhl" };
 
 		public ConversationManager(TextArchitect architect) {
 			textArchitect = architect;
@@ -50,28 +53,29 @@ namespace origin.dialogue {
 			endBool = false;
 			dialogueManager.Show();
 
-			for (int i = 0; i < conversation.Count; i++) {
-				if (string.IsNullOrWhiteSpace(conversation[i])) continue;
+			foreach (string line in conversation) {
+				if (string.IsNullOrWhiteSpace(line) || line[0] == noteID) continue;
 
 				// ===== In choice / dot label logic =====
 				if (jumping) {
 					Debug.Log("...jumped a line");
-					if (conversation[i] != $".{jumpingCode}") continue;
+					if (line != $".{jumpingCode}") continue;
 					jumping = false;
 					continue;
 				}
-				else if (conversation[i].StartsWith('.')) continue;
+				else if (line.StartsWith('.')) continue;
 				// ===========================
 
-				Debug.Log(conversation[i]);
-				LINE_DATA data = new(conversation[i]);
+				Debug.Log(line);
+				LINE_DATA data = new(line);
 
 				if (data.isDialogue) yield return ReadingDialogue(data.dialogue);
 				else yield return ReadingCommand(data.command);
 
 				if (endBool) break;
 			}
-
+			
+			dialogueManager.changeLetterBoxTheme(plainTextID);
 			dialogueManager.Hide();
 			endTagCallback!.Invoke(endTag);
 		}
@@ -94,14 +98,16 @@ namespace origin.dialogue {
 		IEnumerator ReadingDialogue(LINE_DIALOGUE data) {
 			Debug.Log(data.ToString());
 
-			if (data.hasName && data.name != defaultNarratorID) {
+			if (data.hasName && data.name != plainTextID) {
 				recentCharacter = data.name;
 				CharacterConfigData config = characterManager.GetInfo(data.name);
-				dialogueManager.changeNameAndTheme(config.displayString, config.themeColor);
+				dialogueManager.changeNameAndTheme(config.displayString, config.ID);
+				dialogueManager.changeLetterBoxTheme(config.ID);
 			}
-			else if (data.hasName && data.name == defaultNarratorID) {
+			else if (data.hasName && data.name == plainTextID) {
 				recentCharacter = data.name;
-				dialogueManager.changeNameAndTheme("", new(0.5f, 0.5f, 0.5f));
+				dialogueManager.changeNameAndTheme("", plainTextID);
+				dialogueManager.changeLetterBoxTheme(plainTextID);
 			}
 
 			if (data.hasSpriteCode) {
@@ -154,8 +160,6 @@ namespace origin.dialogue {
 		//========================================================================
 		//                   <!!!> Executing COMMAND data <!!!>
 		//========================================================================
-
-		private readonly HashSet<string> autoWaitCommands = new() { "wait", "add", "choice", "puzzle" };
 
 		IEnumerator ReadingCommand(LINE_COMMAND data) {
 			Debug.Log(data.ToString());

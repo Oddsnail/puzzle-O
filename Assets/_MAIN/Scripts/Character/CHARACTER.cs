@@ -12,7 +12,8 @@ namespace origin.character {
 
 		protected CharacterManager characterManager => CharacterManager.instance;
 
-		private const string SPRITE_PARENT_ID = "Renderers";
+		private const float UNHIGHLIGHTED_STRENGTH = 0.65f;
+		private const float UNHIGHLIGHTED_SPEED = 5.5f;
 
 		public string ID;
 		public CharacterConfigData config;
@@ -22,13 +23,21 @@ namespace origin.character {
 		private Coroutine co_disappearing;
 		private Coroutine co_moving_x;
 		private Coroutine co_moving_y;
-		public List<SpriteSheetHolder> layers = new();
+		private Coroutine co_highlighting;
+		public SpriteManager spriteManager;
+
+		public Color color { get; protected set; } = Color.white;
+		public Color highlightedColor => color;
+		public Color unhighlightedColor => new(color.r*UNHIGHLIGHTED_STRENGTH, color.b*UNHIGHLIGHTED_STRENGTH, color.g*UNHIGHLIGHTED_STRENGTH, color.a);
 
 		public float visibility => canvasGroup.alpha;
+		public bool highlighted { get; protected set; } = true;
 		public bool isAppearing => co_appearing != null;
 		public bool isDisappearing => co_disappearing != null;
 		public bool isMovingX => co_moving_x != null;
 		public bool isMovingY => co_moving_y != null;
+		public bool isHighlighting => highlighted && co_highlighting != null;
+		public bool isUnHighlighting => !highlighted && co_highlighting != null;
 
 		public CHARACTER(string name, CharacterConfigData config, bool isClient = false) {
 			this.ID = name.ToLower();
@@ -43,6 +52,7 @@ namespace origin.character {
 		//========================================================================
 		//    <!!!> normal / client game object change invoked by command <!!!>
 		//========================================================================
+		private const float defaultNorMalYPos = -1350.0f;
 		private const float defaultClientXPos = -736.0f;
 
 		private void NormalInitiate() {
@@ -50,11 +60,11 @@ namespace origin.character {
 			GameObject ob = UnityEngine.Object.Instantiate(config.prefabNormal, characterManager.characterLayer);
 			ob.name = $"Character - [{ID}]";
 			rectTransform = ob.GetComponent<RectTransform>();
-			rectTransform.anchoredPosition = new(0.0f, 0.0f);
+			rectTransform.anchoredPosition = new(0.0f, defaultNorMalYPos);
 			canvasGroup = rectTransform.GetComponent<CanvasGroup>();
 			canvasGroup.alpha = 0;
 			ob.SetActive(true);
-			GetLayers();
+			spriteManager = rectTransform.GetComponent<SpriteManager>();
 		}
 
 		private void ClientInitiate() {
@@ -66,31 +76,43 @@ namespace origin.character {
 			canvasGroup = rectTransform.GetComponent<CanvasGroup>();
 			canvasGroup.alpha = 0;
 			ob.SetActive(true);
-			GetLayers();
 		}
 
-		private void GetLayers() {
-			Transform renderer = rectTransform.Find(SPRITE_PARENT_ID);
-			for (int i = 0; i < renderer.transform.childCount; i++) {
-				Transform child = renderer.transform.GetChild(i);
-				SpriteSheetHolder rendererImage = child.GetComponentInChildren<SpriteSheetHolder>();
-
-				if (rendererImage != null) {
-					layers.Add(rendererImage);
-					child.name = $"Layer : {i}";
-				}
-			}
-		}
-
-		public Sprite GetSprite((int, string) layerChange) => Array.Find(layers[layerChange.Item1].sprites, sprite => sprite.name == layerChange.Item2);
-
+		// SET SPRITE & SPRITE X INVERT
+		// spriteCode ex) std1-111 or _-221
 		public void SetSprite(string spriteCode) {
 			string[] spriteNames = spriteCode.Split("-");
-			for (int i = 0; i < spriteNames.Length; i++) {
-				if (spriteNames[i] == "_") continue;
-				Sprite sprite = GetSprite((i, spriteNames[i]));
-				layers[i].gameObject.GetComponent<Image>().sprite = sprite;
-			}
+			spriteManager.SetSprite(ID, spriteNames[0], spriteNames[1], spriteNames.Length > 2 ? spriteNames[2] : "");
+		}
+
+		public void InvertX() {
+			var scale = rectTransform.localScale;
+			scale.x = -scale.x;
+			rectTransform.localScale = scale;
+		}
+
+		public Coroutine Highlight(float speed = UNHIGHLIGHTED_SPEED) {
+			if (isHighlighting) return co_highlighting;
+			if (isUnHighlighting) characterManager.StopCoroutine(co_highlighting);
+
+			highlighted = true;
+			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+			return co_highlighting;
+		}
+
+		public Coroutine UnHighlight(float speed = UNHIGHLIGHTED_SPEED) {
+			if (isUnHighlighting) return co_highlighting;
+			if (isHighlighting) characterManager.StopCoroutine(co_highlighting);
+
+			highlighted = false;
+			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+			return co_highlighting;
+		}
+		
+		public virtual IEnumerator Highlighting(bool highlight, float speed) {
+			Color target = highlight ? highlightedColor : unhighlightedColor;
+			yield return spriteManager.HighlightTransition(highlight, target, speed);
+			co_highlighting = null;
 		}
 
 		//========================================================================
@@ -144,12 +166,20 @@ namespace origin.character {
 			return co_moving_y;
 		}
 
-		public Coroutine Move(float position, float duration = 0.5f, bool immediate = false) {
+		public Coroutine MoveX(float position, float duration = 0.5f, bool immediate = false) {
 			if (isMovingX) characterManager.StopCoroutine(co_moving_x);
 
-			co_moving_x = characterManager.StartCoroutine(Moving(position, duration, immediate));
+			co_moving_x = characterManager.StartCoroutine(MovingX(position, duration, immediate));
 
 			return co_moving_x;
+		}
+
+		public Coroutine MoveY(float position, float duration = 0.5f, bool immediate = false) {
+			if (isMovingY) characterManager.StopCoroutine(co_moving_y);
+
+			co_moving_y = characterManager.StartCoroutine(MovingY(position, duration, immediate));
+
+			return co_moving_y;
 		}
 
 		public Coroutine Shiver() {
@@ -183,13 +213,22 @@ namespace origin.character {
 			co_moving_y = null;
 		}
 
-		public IEnumerator Moving(float position, float duration = 0.5f, bool immediate = false) {
+		public IEnumerator MovingX(float position, float duration = 0.5f, bool immediate = false) {
 			if (!immediate) yield return rectTransform.DOAnchorPosX(position, duration);
 			else {
 				float y = rectTransform.anchoredPosition.y;
 				rectTransform.anchoredPosition = new(position, y);
 			}
 			co_moving_x = null;
+		}
+
+		public IEnumerator MovingY(float position, float duration = 0.5f, bool immediate = false) {
+			if (!immediate) yield return rectTransform.DOAnchorPosY(defaultNorMalYPos + position, duration);
+			else {
+				float x = rectTransform.anchoredPosition.x;
+				rectTransform.anchoredPosition = new(x, defaultNorMalYPos + position);
+			}
+			co_moving_y = null;
 		}
 
 		public IEnumerator Shivering() {

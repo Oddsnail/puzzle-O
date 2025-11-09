@@ -1,25 +1,78 @@
-add(obelia)
-wait-appear(obelia)
-[obelia:front-f2:h] "Hi,{wa:0.4} Umm..."
-[::h] "Can you do a massage for me now...?"
+# initializing
 
-choice("Sure!" sure "Leave it to me, ma'am." sure)
+add(leedoeun yeonjuhyang)
+ix(leedoeun)
+setposX(leedoeun -1000 -i true)
+setposX(yeonjuhyang 1000 -i true)
+setposY(yeonjuhyang -400 -i true)
+sp(leedoeun std1-111)
+sp(yeonjuhyang std1-112)
 
-.sure
-disappear(obelia)
+#dialogue start
 
-puzzle(obelia 5 s1 f1)
+wait-appear(leedoeun)
+[leedoeun::] "음{wa:0.3}.{wa:0.3}.{wa:0.3}."
+[:_-_2_-2:h] "?"
+[:_-__2-_:c] "뭔가 기분이 이상한데."
+[:_-2_3-_:h] "누군가 쳐다보는 듯한... {a}기분 탓...?"
+[:_-411:] ".{wa:0.3}.{wa:0.3}.{wa:0.3}."
+[:_-132:c] "뭐,{wa:0.6} 됐나..."
+closeDialogue()
+uhl(leedoeun)
+sp(leedoeun _-_11)
 
-.s1
-appear(obelia)
-[obelia:front-f2:h] "Honestly speaking..."
-[:_-f3:h] "That was good,{wa:0.2} I'm pretty sure that you're talented."
+wait(1.0)
+setposY(yeonjuhyang 0 -d 0.1)
+appear(yeonjuhyang)
+openDialogue()
+[yeonjuhyang::] "와악!{wa:0.5}"
+choiceC("무시한다" ig _default "쳐다본다" look _leedoeun "인사한다" hi _yeonjuhyang)
 
-[::] "Can you do that one more time?"
+.ig
+hl(leedoeun)
+uhl(yeonjuhyang)
+[leedoeun:_-411:] "..."
 
-disappear(obelia)
-puzzle(obelia 4 s2 f2)
+hl(yeonjuhyang)
+uhl(leedoeun)
+[yeonjuhyang:_-13_-2:h] "무시당했어...!"
+[:_-131-1:h] "너무해요...{wa:0.5} 놀란 척이 아니더라도 인사정도는 해줄 수 있잖아요!"
 
-.s2
+hl(leedoeun)
+uhl(yeonjuhyang)
+[leedoeun:_-242-2:] "{wa:0.3}.{wa:0.3}.{wa:0.3}.안녕"
 
-appear(obelia)
+hl(yeonjuhyang)
+setposX(yeonjuhyang -400)
+[yeonjuhyang:_-_13-11:h] "네! {wa:0.3}선배두 안녕하세요오!"
+setposX(leedoeun -1200)
+[leedoeun:_-143-12:h] "떨어져! 좀!"
+
+j(end)
+
+.hi
+hl(leedoeun)
+uhl(yeonjuhyang)
+
+[leedoeun:_-411:] "..."
+sp(yeonjuhyang _-111-2)
+wait-setposX(leedoeun -700)
+wait(1.0)
+wait-setposX(leedoeun -400)
+wait(1.0)
+wait-setposX(leedoeun -100)
+wait(1.0)
+
+hl(yeonjuhyang)
+[:_-112:c] "안녕."
+h(yeonjuhyang)
+setposX(yeonjuhyang 1100)
+[yeonjuhyang:_-111-11:h] "!!!!!!"
+[:_-122-__:c] "어...{wa:0.4}안녕하세요오..."
+
+
+#EOF
+
+.end
+wait-disappear(leedoeun yeonjuhyang)
+end(EOF)
