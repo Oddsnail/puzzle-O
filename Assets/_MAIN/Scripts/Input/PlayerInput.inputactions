@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerInput",
     "maps": [
         {
@@ -70,7 +71,7 @@
                 {
                     "name": "",
                     "id": "809bdc31-c730-41ba-b950-bd56472274ce",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/0",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -81,7 +82,7 @@
                 {
                     "name": "",
                     "id": "fdf5b0fe-5496-41bf-8595-90c0e530655b",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -92,7 +93,7 @@
                 {
                     "name": "",
                     "id": "9b322fc0-44a3-42de-bf19-194c7737bde6",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -103,7 +104,7 @@
                 {
                     "name": "",
                     "id": "0316b489-8a0c-448c-bd67-028beea427b3",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -114,7 +115,7 @@
                 {
                     "name": "",
                     "id": "756a3662-0432-4801-a2db-b204ef7dd3c5",
-                    "path": "<Keyboard>/t",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -125,7 +126,7 @@
                 {
                     "name": "",
                     "id": "87c71413-9de4-43d6-a6f4-afa9e203fd9a",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -136,7 +137,7 @@
                 {
                     "name": "",
                     "id": "9aa98728-184d-4ace-8193-7a6d8ff7ad07",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -147,7 +148,7 @@
                 {
                     "name": "",
                     "id": "31b1e5e7-54cb-44b4-8a1c-110b402c8d65",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/7",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -158,7 +159,7 @@
                 {
                     "name": "",
                     "id": "96e70c90-a126-4045-a477-1cdc6e5bf430",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/8",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -169,7 +170,7 @@
                 {
                     "name": "",
                     "id": "e7da8b84-a301-41ed-a252-20d839eb1e29",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/9",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

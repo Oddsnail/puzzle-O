@@ -10,20 +10,37 @@ namespace origin.graphic {
 		public RectTransform button;
 
 		private Coroutine co_highlighting;
+		private Image buttonColorImage;
+		private Outline buttonSeletedOutline;
 		private bool isHighlighting => highlighted && co_highlighting != null;
 		private bool isUnHighlighting => !highlighted && co_highlighting != null;
 		private const float highlightOffsetX = 25f;
-		private const float highlightSize = 1.04f;
-		private const float highlightSpeed = 3.0f;
-		public Color defaultColor;
-		public Color selectColor;
+		private const float highlightSize = 1.07f;
+		private const float highlightSpeed = 5.0f;
+		public Color DEFAULT_UI_GRAY;
+		public ColorPalette colorPalette;
+		public Color selectedColor;
+		public Color outlineColor;
+
+		void Start() {
+			buttonColorImage = buttonColor.GetComponent<Image>();
+			buttonSeletedOutline = button.GetComponent<Outline>();
+        }
 		
 		public void OnHoverEnter() { Highlight(); }
 
 		public void OnHoverExit() { UnHighlight(); }
 
-		public void SetDefaultColor(Color color) { defaultColor = color; }
-		public void SetSelectColor(Color color) { selectColor = color; }
+		public void SetSelectColor(string colorCode) {
+			if (!colorCode.StartsWith('_')) {
+                selectedColor = colorPalette.Getcolor(colorCode);
+                outlineColor = colorPalette.Getcolor(colorCode, true);
+            } else {
+				selectedColor = colorPalette.Getcolor(colorCode, true);
+				outlineColor = colorPalette.Getcolor(colorCode);
+            }
+			
+		}
 
 		private void Highlight() {
 			if (isHighlighting) return;
@@ -45,23 +62,25 @@ namespace origin.graphic {
 		
 		private IEnumerator Highlighting(bool state) {
 
-			Color startColor = buttonColor.GetComponent<Image>().color;
+			Color startColor = buttonColorImage.color;
+			Color startOutlineColor = buttonSeletedOutline.effectColor;
 			Vector3 startSize = button.localScale;
 			float startX = buttonColor.anchoredPosition.x;
 
-			Color endColor = state ? selectColor : defaultColor;
+			Color endColor = state ? selectedColor : DEFAULT_UI_GRAY;
+			Color endOutlineColor = state ? outlineColor : new(outlineColor.r, outlineColor.g, outlineColor.b, 0.0f);
 			Vector3 endSize = state ? new(highlightSize, highlightSize, 1.0f) : new(1.0f, 1.0f, 1.0f);
 			float endX = state ? 15f + highlightOffsetX : 15f;
 
 			float percent = 0f;
 			while (percent < 1f) {
 				percent += Time.deltaTime * highlightSpeed;
-				float k = Mathf.SmoothStep(0f, 1f, percent);
 
-				button.localScale = Vector3.Lerp(startSize, endSize, k);
-				buttonColor.localScale = Vector3.Lerp(startSize, endSize, k);
-				buttonColor.anchoredPosition = Vector2.Lerp(new(startX, -15f), new(endX, -15f), k);
-				buttonColor.GetComponent<Image>().color = Color.Lerp(startColor, endColor, k);
+				button.localScale = Vector3.Lerp(startSize, endSize, percent);
+				buttonColor.localScale = Vector3.Lerp(startSize, endSize, percent);
+				buttonColor.anchoredPosition = Vector2.Lerp(new(startX, -15f), new(endX, -15f), percent);
+				buttonColor.GetComponent<Image>().color = Color.Lerp(startColor, endColor, percent);
+				buttonSeletedOutline.effectColor = Color.Lerp(startOutlineColor, endOutlineColor, percent);
 
 				yield return null;
 			}
@@ -70,6 +89,7 @@ namespace origin.graphic {
 			buttonColor.localScale = endSize;
 			buttonColor.anchoredPosition = new(endX, -15f);
 			buttonColor.GetComponent<Image>().color = endColor;
+			buttonSeletedOutline.effectColor = endOutlineColor;
 
 			co_highlighting = null;
         }

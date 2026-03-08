@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace origin.graphic {
 
@@ -16,11 +17,13 @@ namespace origin.graphic {
 
 		public List<Palette> colors;
 
-		public Color Getcolor(string code) {
-			bool lookSecondary = code[0] == '_';
+		public Color Getcolor(string code, bool lookSecondary = false) {
 			foreach (Palette p in colors) {
-				if (!lookSecondary && p.ID == code) return p.primary;
-				if (lookSecondary && p.ID == code[1..]) return p.secondary;
+				if (p.ID == code) {
+					if (!lookSecondary) return p.primary;
+					else return p.secondary;
+                }
+
 			}
 			Debug.LogError($"[Error] No such color {code} exists in Pallete");
 			return Color.white;

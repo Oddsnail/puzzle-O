@@ -10,6 +10,13 @@ sp(yeonjuhyang std1-112)
 
 #dialogue start
 
+closeDialogue()
+puzzle(leedoeun 6 s f)
+
+.s
+.f
+
+openDialogue()
 wait-appear(leedoeun)
 [leedoeun::] "음{wa:0.3}.{wa:0.3}.{wa:0.3}."
 [:_-_2_-2:h] "?"
@@ -26,7 +33,7 @@ setposY(yeonjuhyang 0 -d 0.1)
 appear(yeonjuhyang)
 openDialogue()
 [yeonjuhyang::] "와악!{wa:0.5}"
-choiceC("무시한다" ig _default "쳐다본다" look _leedoeun "인사한다" hi _yeonjuhyang)
+choiceC("무시한다" ig default "쳐다본다" look leedoeun "인사한다" hi yeonjuhyang)
 
 .ig
 hl(leedoeun)

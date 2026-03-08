@@ -17,11 +17,9 @@ MonoBehaviour:
     displayName: "\uC5F0\uC8FC\uD5A5"
     displaySubname: "3\uAE09"
     prefabNormal: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
-    prefabClient: {fileID: 3548964609375085281, guid: 6c40d7322b96efd4c879094b4a908ff3, type: 3}
-    themeColor: {r: 0.30648935, g: 0.30411178, b: 0.3207547, a: 1}
+    prefabClient: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
   - ID: leedoeun
     displayName: "\uC774\uB3C4\uC740"
     displaySubname: "2\uAE09"
     prefabNormal: {fileID: 4054991153673449271, guid: 58c3321aa029c1445b014f8bc03d05bd, type: 3}
-    prefabClient: {fileID: 0}
-    themeColor: {r: 0.36774653, g: 0.26980242, b: 0.4056604, a: 1}
+    prefabClient: {fileID: 4054991153673449271, guid: 58c3321aa029c1445b014f8bc03d05bd, type: 3}

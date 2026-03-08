@@ -15,12 +15,14 @@ namespace origin.puzzle {
 		public static PuzzleManager instance;
 
 		public PuzzleContainer puzzleContainer = new();
-		public RectTransform sofa;
 		public ColorPalette colorPalette;
 
 		public Color strike;
 		public Color semiStrike;
 		public Color ball;
+
+		// Active rule set for the current puzzle
+		private List<PuzzleRule> activeRules;
 
 		public delegate void PuzzleEvent(char guess);
 		public event PuzzleEvent onCharacterGuess;
@@ -46,6 +48,12 @@ namespace origin.puzzle {
 			onCharacterGuess += CharacterTaken;
 		}
 
+		private void OnDestroy() {
+			if (instance == this) {
+				onCharacterGuess -= CharacterTaken;
+			}
+		}
+
 		public void OnCharacterGuess(char guess) => onCharacterGuess.Invoke(guess);
 
 		//========================================================================
@@ -54,12 +62,22 @@ namespace origin.puzzle {
 
 		private const string Starter = "<mspace=0.51em>";
 		private const string Ender = "</mspace>";
-		private const string TABLE = "ASDFGQWERT";
+		private const string TABLE = "0123456789";
 		private char recentChoice = ' ';
 
 		private void UpdateHistory(string history) => puzzleContainer.historyText.text = Starter + history + Ender;
 
-		public IEnumerator StartPuzzle(string charID, int trial, Action<bool> onResult) {
+		/// <summary>
+		/// Starts a puzzle with custom rules or default rules if none provided
+		/// </summary>
+		/// <param name="charID">Character ID for the puzzle</param>
+		/// <param name="trial">Number of attempts allowed</param>
+		/// <param name="onResult">Callback with success/failure result</param>
+		/// <param name="customRules">Optional custom rule set. If null, uses default rules</param>
+		public IEnumerator StartPuzzle(string charID, int trial, Action<bool> onResult, List<PuzzleRule> customRules = null) {
+
+			// Initialize rules: use custom rules if provided, otherwise use default rule set
+			activeRules = customRules ?? PuzzleRuleFactory.CreateDefaultRuleSet(strike, semiStrike, ball);
 
 			string ID = charID + "-client";
 			puzzleContainer.trialsText.text = $"{trial}/{trial}";
@@ -90,25 +108,33 @@ namespace origin.puzzle {
 
 					yield return new WaitUntil(() => recentChoice != ' ');
 
-					if (answer[choice] == recentChoice) {
-						// RED
-						history += $"<color=#{ColorUtility.ToHtmlStringRGB(strike)}>" + recentChoice + "</color> ";
-						AudioManager.Instance.PlaySoundEffect("SFX/puzzle-strike", pitch: 1.3f);
-						score += 1;
-						character.Shiver();
+					// Evaluate rules in order - first matching rule wins
+					bool ruleMatched = false;
+					foreach (PuzzleRule rule in activeRules) {
+						if (rule.Evaluate(answer, recentChoice, choice)) {
+							// Apply the matched rule
+							history += $"<color=#{ColorUtility.ToHtmlStringRGB(rule.color)}>" + recentChoice + "</color> ";
+
+							// Play appropriate sound effect
+							string soundEffect = rule.ruleID == "miss" ? "SFX/puzzle-fail" : "SFX/puzzle-strike";
+							AudioManager.Instance.PlaySoundEffect(soundEffect, pitch: rule.audioPitch);
+
+							// Add score if applicable
+							score += rule.scoreValue;
+
+							// Trigger character effect if specified
+							if (rule.characterEffect == "shiver") {
+								character.Shiver();
+							}
+
+							ruleMatched = true;
+							break; // Stop checking rules once we find a match
+						}
 					}
-					else if (TABLE.IndexOf(answer[choice]) % 5 == TABLE.IndexOf(recentChoice) % 5) {
-						// PURPLE
-						history += $"<color=#{ColorUtility.ToHtmlStringRGB(semiStrike)}>" + recentChoice + "</color> ";
-						AudioManager.Instance.PlaySoundEffect("SFX/puzzle-strike", pitch: 1.0f);
-					}
-					else if (answer.Contains(recentChoice)) {
-						// BLUE
-						history += $"<color=#{ColorUtility.ToHtmlStringRGB(ball)}>" + recentChoice + "</color> ";
-						AudioManager.Instance.PlaySoundEffect("SFX/puzzle-strike", pitch: 0.7f);
-					}
-					else {
-						// GRAY
+
+					// Fallback if no rule matched (shouldn't happen if rules are set up correctly)
+					if (!ruleMatched) {
+						Debug.LogWarning($"No puzzle rule matched for guess '{recentChoice}' at position {choice}");
 						history += $"<color=#BBBBBB>" + recentChoice + "</color> ";
 						AudioManager.Instance.PlaySoundEffect("SFX/puzzle-fail", pitch: 1.0f);
 					}
@@ -159,7 +185,6 @@ namespace origin.puzzle {
 		//========================================================================
 
 		private const float defaultShowAndHideDuration = 0.6f;
-		private const float defaultSofaYPos = -300.0f;
 		private const float defaultContainerXPos = 1700.0f;
 
 		private void Show() {
@@ -174,11 +199,9 @@ namespace origin.puzzle {
 		}
 
 		private IEnumerator Showing() {
-			sofa.gameObject.SetActive(true);
 			puzzleContainer.containerRoot.gameObject.SetActive(true);
 
 			yield return DOTween.Sequence()
-				.Join(sofa.DOAnchorPosY(0.0f, defaultShowAndHideDuration))
 				.Join(puzzleContainer.containerRoot.DOAnchorPosX(0.0f, defaultShowAndHideDuration))
 				.WaitForCompletion();
 
@@ -188,11 +211,9 @@ namespace origin.puzzle {
 		private IEnumerator Hiding() {
 
 			yield return DOTween.Sequence()
-				.Join(sofa.DOAnchorPosY(defaultSofaYPos, defaultShowAndHideDuration))
 				.Join(puzzleContainer.containerRoot.DOAnchorPosX(defaultContainerXPos, defaultShowAndHideDuration))
 				.WaitForCompletion();
 
-			sofa.gameObject.SetActive(false);
 			puzzleContainer.containerRoot.gameObject.SetActive(false);
 			co_animating = null;
 		}

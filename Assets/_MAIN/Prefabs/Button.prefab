@@ -62,8 +62,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.OptionButton
   buttonColor: {fileID: 5964253572304843150}
   button: {fileID: 533682612940836208}
-  defaultColor: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  selectColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+  DEFAULT_UI_GRAY: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
+  colorPalette: {fileID: 11400000, guid: 5d5a6280ce1593a478f6232974205ac7, type: 2}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
+  outlineColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7230649640420447909
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +80,7 @@ GameObject:
   - component: {fileID: 9171673253928802607}
   - component: {fileID: 2145056959289728646}
   - component: {fileID: 4970562215974879092}
+  - component: {fileID: 3912232030015254553}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -214,6 +217,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d74b0394f1aef442a4d7ec11c765f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.OptionButtonHoverRelay
+--- !u!114 &3912232030015254553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7230649640420447909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0}
+  m_EffectDistance: {x: 9, y: 9}
+  m_UseGraphicAlpha: 0
 --- !u!1 &7357183020579693003
 GameObject:
   m_ObjectHideFlags: 0

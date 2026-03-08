@@ -70,7 +70,12 @@ namespace origin.command {
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				characters.Add(CharacterManager.instance.GetCharacter(name));
+				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				if (character == null) {
+					Debug.LogError($"[ERROR] Character '{name}' not found for 'appear' command.");
+					continue;
+				}
+				characters.Add(character);
 			}
 
 			if (characters.Count == 0) yield break;
@@ -86,7 +91,12 @@ namespace origin.command {
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				characters.Add(CharacterManager.instance.GetCharacter(name));
+				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				if (character == null) {
+					Debug.LogError($"[ERROR] Character '{name}' not found for 'disappear' command.");
+					continue;
+				}
+				characters.Add(character);
 			}
 
 			if (characters.Count == 0) yield break;
@@ -100,7 +110,10 @@ namespace origin.command {
 
 		private static IEnumerator MoveX(string[] data) {
 			CHARACTER character = CharacterManager.instance.GetCharacter(data[0]);
-			if (character == null) yield break;
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{data[0]}' not found for 'setposX' command.");
+				yield break;
+			}
 
 			var parameters = ConvertParameters(data);
 
@@ -111,13 +124,16 @@ namespace origin.command {
 			character.MoveX(x, duration: d, immediate: i);
 
 			if (!i) {
-				while (character.isMovingY) yield return null;
+				while (character.isMovingX) yield return null;
 			}
 		}
 		
 		private static IEnumerator MoveY(string[] data) {
 			CHARACTER character = CharacterManager.instance.GetCharacter(data[0]);
-			if (character == null) yield break;
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{data[0]}' not found for 'setposY' command.");
+				yield break;
+			}
 
 			var parameters = ConvertParameters(data);
 
@@ -128,32 +144,68 @@ namespace origin.command {
 			character.MoveY(x, duration: d, immediate: i);
 
 			if (!i) {
-				while (character.isMovingX) yield return null;
+				while (character.isMovingY) yield return null;
 			}
 		}
 
-		private static IEnumerator Hop(string character) { yield return CharacterManager.instance.GetCharacter(character).Hop(); }
+		private static IEnumerator Hop(string characterName) {
+			CHARACTER character = CharacterManager.instance.GetCharacter(characterName);
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{characterName}' not found for 'h' (hop) command.");
+				yield break;
+			}
+			yield return character.Hop();
+		}
 
-		private static IEnumerator Crouch(string character) { yield return CharacterManager.instance.GetCharacter(character).Crouch(); }
+		private static IEnumerator Crouch(string characterName) {
+			CHARACTER character = CharacterManager.instance.GetCharacter(characterName);
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{characterName}' not found for 'c' (crouch) command.");
+				yield break;
+			}
+			yield return character.Crouch();
+		}
 
-		private static IEnumerator Shiver(string character) { yield return CharacterManager.instance.GetCharacter(character).Shiver(); }
+		private static IEnumerator Shiver(string characterName) {
+			CHARACTER character = CharacterManager.instance.GetCharacter(characterName);
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{characterName}' not found for 's' (shiver) command.");
+				yield break;
+			}
+			yield return character.Shiver();
+		}
 
 		private static void Sprite(string[] data) {
 			CHARACTER character = CharacterManager.instance.GetCharacter(data[0]);
-			if (character == null) return;
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{data[0]}' not found for 'sp' (setSprite) command.");
+				return;
+			}
 
 			character.SetSprite(data[1]);
 		}
 
-		private static void InvertX(string character) => CharacterManager.instance.GetCharacter(character).InvertX();
+		private static void InvertX(string characterName) {
+			CHARACTER character = CharacterManager.instance.GetCharacter(characterName);
+			if (character == null) {
+				Debug.LogError($"[ERROR] Character '{characterName}' not found for 'ix' (invertX) command.");
+				return;
+			}
+			character.InvertX();
+		}
 
 		private static IEnumerator Highlight(string[] data) {
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				characters.Add(CharacterManager.instance.GetCharacter(name));
+				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				if (character == null) {
+					Debug.LogError($"[ERROR] Character '{name}' not found for 'hl' (highlight) command.");
+					continue;
+				}
+				characters.Add(character);
 			}
-			
+
 			if (characters.Count == 0) yield break;
 
 			foreach (CHARACTER character in characters) {
@@ -162,14 +214,19 @@ namespace origin.command {
 
 			while (characters.Any(c => c.isHighlighting)) yield return null;
 		}
-		
+
 		private static IEnumerator UnHighlight(string[] data) {
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				characters.Add(CharacterManager.instance.GetCharacter(name));
+				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				if (character == null) {
+					Debug.LogError($"[ERROR] Character '{name}' not found for 'uhl' (unhighlight) command.");
+					continue;
+				}
+				characters.Add(character);
 			}
-			
+
 			if (characters.Count == 0) yield break;
 
 			foreach (CHARACTER character in characters) {

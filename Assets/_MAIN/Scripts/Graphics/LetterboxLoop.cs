@@ -9,13 +9,15 @@ namespace origin.graphic {
 		public GameObject inner;
 		private float offset = 0;
 		private Material material;
-		private bool initialized = false;
 		private Coroutine co_colorTransitioning;
+		private Image letterboxColorImage;
+		private bool initialized = false;
 		private bool is_colorTransitioning => co_colorTransitioning != null;
 
 		void Start() {
 			Image image = gameObject.GetComponent<Image>();
 			Image innerImage = inner.GetComponent<Image>();
+			letterboxColorImage = image;
 			if (image != null) {
 				material = new(image.material);
 				image.material = material;
@@ -34,12 +36,12 @@ namespace origin.graphic {
 		}
 		
 		private IEnumerator ColorTransitioning(Color endColor) {
-			Color startColor = gameObject.GetComponent<Image>().color;
+			Color startColor = letterboxColorImage.color;
 
 			float percent = 0;
 			while (percent < 1f) {
 				percent += Time.deltaTime * 2.0f;
-				gameObject.GetComponent<Image>().color = Color.Lerp(startColor, endColor, percent);
+				letterboxColorImage.color = Color.Lerp(startColor, endColor, percent);
 
 				yield return null;
 			}

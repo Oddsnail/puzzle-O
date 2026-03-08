@@ -72,7 +72,7 @@ namespace origin.character {
 			GameObject ob = UnityEngine.Object.Instantiate(config.prefabClient, characterManager.characterLayer);
 			ob.name = $"Client - [{ID}]";
 			rectTransform = ob.GetComponent<RectTransform>();
-			rectTransform.anchoredPosition = new(defaultClientXPos, 0.0f);
+			rectTransform.anchoredPosition = new(defaultClientXPos, defaultNorMalYPos);
 			canvasGroup = rectTransform.GetComponent<CanvasGroup>();
 			canvasGroup.alpha = 0;
 			ob.SetActive(true);
@@ -92,8 +92,14 @@ namespace origin.character {
 		}
 
 		public Coroutine Highlight(float speed = UNHIGHLIGHTED_SPEED) {
-			if (isHighlighting) return co_highlighting;
-			if (isUnHighlighting) characterManager.StopCoroutine(co_highlighting);
+			if (isHighlighting) {
+				characterManager.StopCoroutine(co_highlighting);
+				co_highlighting = null;
+			}
+			if (isUnHighlighting) {
+				characterManager.StopCoroutine(co_highlighting);
+				co_highlighting = null;
+			}
 
 			highlighted = true;
 			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
@@ -101,8 +107,14 @@ namespace origin.character {
 		}
 
 		public Coroutine UnHighlight(float speed = UNHIGHLIGHTED_SPEED) {
-			if (isUnHighlighting) return co_highlighting;
-			if (isHighlighting) characterManager.StopCoroutine(co_highlighting);
+			if (isUnHighlighting) {
+				characterManager.StopCoroutine(co_highlighting);
+				co_highlighting = null;
+			}
+			if (isHighlighting) {
+				characterManager.StopCoroutine(co_highlighting);
+				co_highlighting = null;
+			}
 
 			highlighted = false;
 			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
@@ -241,6 +253,24 @@ namespace origin.character {
 			yield return rectTransform.DOAnchorPosX(origin, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
 
 			co_moving_x = null;
+		}
+
+		//========================================================================
+		// Cleanup method to stop all running coroutines
+		//========================================================================
+
+		public void StopAllCoroutines() {
+			if (co_appearing != null) characterManager.StopCoroutine(co_appearing);
+			if (co_disappearing != null) characterManager.StopCoroutine(co_disappearing);
+			if (co_moving_x != null) characterManager.StopCoroutine(co_moving_x);
+			if (co_moving_y != null) characterManager.StopCoroutine(co_moving_y);
+			if (co_highlighting != null) characterManager.StopCoroutine(co_highlighting);
+
+			co_appearing = null;
+			co_disappearing = null;
+			co_moving_x = null;
+			co_moving_y = null;
+			co_highlighting = null;
 		}
 
 		//========================================================================

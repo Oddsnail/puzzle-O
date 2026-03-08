@@ -77,7 +77,7 @@ namespace origin.dialogue {
 			
 			dialogueManager.changeLetterBoxTheme(plainTextID);
 			dialogueManager.Hide();
-			endTagCallback!.Invoke(endTag);
+			endTagCallback?.Invoke(endTag);
 		}
 
 		public void Jump(string code) {
@@ -179,12 +179,12 @@ namespace origin.dialogue {
 		//========================================================================
 		IEnumerator WaitForRequest() {
 			int randNum = UnityEngine.Random.Range(1, 3);
-			dialogueManager.promptIcon.SetActive(true);
+			dialogueManager.dialogueContainer.promptIcon.SetActive(true);
 
 			while (!nextRequest) yield return null;
 
 			AudioManager.Instance.PlaySoundEffect($"SFX/dialogue-{randNum}");
-			dialogueManager.promptIcon.SetActive(false);
+			dialogueManager.dialogueContainer.promptIcon.SetActive(false);
 			nextRequest = false;
 		}
 		//========================================================================
