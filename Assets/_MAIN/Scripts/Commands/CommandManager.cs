@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 
 namespace origin.command {
-    public class CommandManager : MonoBehaviour {
+    public class CommandManager : MonoBehaviour, ICommandExecutor {
         public static CommandManager instance { get; private set; }
         private static Coroutine process = null;
         public static bool isRunningProcess => process != null;

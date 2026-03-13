@@ -2,21 +2,14 @@
 
 add(leedoeun yeonjuhyang)
 ix(leedoeun)
-setposX(leedoeun -1000 -i true)
-setposX(yeonjuhyang 1000 -i true)
-setposY(yeonjuhyang -400 -i true)
+setposX(leedoeun -660 -i true)
+setposX(yeonjuhyang 660 -i true)
+setposY(yeonjuhyang -260 -i true)
 sp(leedoeun std1-111)
 sp(yeonjuhyang std1-112)
 
-#dialogue start
+# dialogue start
 
-closeDialogue()
-puzzle(leedoeun 6 s f)
-
-.s
-.f
-
-openDialogue()
 wait-appear(leedoeun)
 [leedoeun::] "음{wa:0.3}.{wa:0.3}.{wa:0.3}."
 [:_-_2_-2:h] "?"
@@ -27,6 +20,11 @@ wait-appear(leedoeun)
 closeDialogue()
 uhl(leedoeun)
 sp(leedoeun _-_11)
+
+puzzle(leedoeun 7 classic s f)
+
+.s
+.f
 
 wait(1.0)
 setposY(yeonjuhyang 0 -d 0.1)
@@ -50,9 +48,9 @@ uhl(yeonjuhyang)
 [leedoeun:_-242-2:] "{wa:0.3}.{wa:0.3}.{wa:0.3}.안녕"
 
 hl(yeonjuhyang)
-setposX(yeonjuhyang -400)
+setposX(yeonjuhyang -260)
 [yeonjuhyang:_-_13-11:h] "네! {wa:0.3}선배두 안녕하세요오!"
-setposX(leedoeun -1200)
+setposX(leedoeun -800)
 [leedoeun:_-143-12:h] "떨어져! 좀!"
 
 j(end)
@@ -63,17 +61,17 @@ uhl(yeonjuhyang)
 
 [leedoeun:_-411:] "..."
 sp(yeonjuhyang _-111-2)
-wait-setposX(leedoeun -700)
+wait-setposX(leedoeun -550)
 wait(1.0)
-wait-setposX(leedoeun -400)
+wait-setposX(leedoeun -300)
 wait(1.0)
-wait-setposX(leedoeun -100)
+wait-setposX(leedoeun -50)
 wait(1.0)
 
 hl(yeonjuhyang)
 [:_-112:c] "안녕."
 h(yeonjuhyang)
-setposX(yeonjuhyang 1100)
+setposX(yeonjuhyang 800)
 [yeonjuhyang:_-111-11:h] "!!!!!!"
 [:_-122-__:c] "어...{wa:0.4}안녕하세요오..."
 

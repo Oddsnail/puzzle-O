@@ -5,6 +5,7 @@ using TMPro;
 namespace origin.puzzle {
 
 	[System.Serializable]
+	
 	public class PuzzleContainer {
 
 		public RectTransform containerRoot;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using origin.IO;
 using origin.dialogue;
+using origin.language;
 
 public class DialogueTester : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class DialogueTester : MonoBehaviour
     {
         List<string> conversation = FileManager.ReadTextAsset(file1);
         string result;
+
+        LocalizationManager.Instance.SetLanguage("eng");
+        yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
+
+        LocalizationManager.Instance.SetLanguage("kor");
         yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
     }
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
+using origin.language;
 
 namespace origin.character {
 	[System.Serializable]
 
 	public class CharacterConfigData {
 		public string ID;
-		public string displayName;
-		public string displaySubname;
+		public string displayName => $"@char.{ID}.name";
+		public string displaySubname => $"@char.{ID}.subname";
 		public GameObject prefabNormal;
 		public GameObject prefabClient;
 		
@@ -14,13 +15,16 @@ namespace origin.character {
 			get {
 				return new() {
 					ID = "<name>",
-					displayName = "<displayName>",
-					displaySubname = null,
 					prefabNormal = null,
+					prefabClient = null,
 				};
 			}
 		}
 
-		public string displayString => $"{displayName} <size=70%><color=#BBBBBB>{displaySubname}</color></size>";
+		public string localizedDisplayName() {
+			string localName = LocalizationManager.Instance.Resolve(displayName);
+			string localSubname = LocalizationManager.Instance.Resolve(displaySubname);
+			return $"{localName} <size=70%><color=#BBBBBB>{localSubname}</color></size>";
+		}
 	}
 }

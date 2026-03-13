@@ -8,7 +8,6 @@ using origin.dialogue;
 public class GameFlowTester : MonoBehaviour
 {
 
-
     [SerializeField] private TextAsset test1;
     [SerializeField] private TextAsset test2;
 

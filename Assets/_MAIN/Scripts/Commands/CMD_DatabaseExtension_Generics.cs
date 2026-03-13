@@ -33,16 +33,22 @@ namespace origin.command {
 			database.AddCommand("hl", new Func<string[], IEnumerator>(Highlight));
 			database.AddCommand("uhl", new Func<string[], IEnumerator>(UnHighlight));
 
-			// Dynamic Dialogue Relates 
+			// Dynamic Dialogue Relates
 			database.AddCommand("choice", new Func<string[], IEnumerator>(Choice));
 			database.AddCommand("choiceC", new Func<string[], IEnumerator>(ChoiceWithColor));
 			database.AddCommand("j", new Action<string>(Jump));
 			database.AddCommand("end", new Action<string>(EndTagReturn));
 
 			// UI Control Relates
-			database.AddCommand("closeDialogue", new Action(DialogueManager.instance.Hide));
-			database.AddCommand("openDialogue", new Action(DialogueManager.instance.Show));
-			database.AddCommand("empty", new Action(DialogueManager.instance.Empty));
+			IDialogueUI ui = DialogueManager.instance;
+			database.AddCommand("closeDialogue", new Action(ui.Hide));
+			database.AddCommand("openDialogue", new Action(ui.Show));
+			database.AddCommand("empty", new Action(ui.Empty));
+
+			// Image relates
+			database.AddCommand("changeBackground", new Action<string>(ChangeBackground));
+			database.AddCommand("changeCutscene", new Action<string>(ChangeCutscene));
+			database.AddCommand("quitCutscene", new Action(QuitCutscene));
 
 			// Puzzle relates
 			database.AddCommand("puzzle", new Func<string[], IEnumerator>(Puzzle));
@@ -53,24 +59,27 @@ namespace origin.command {
 		}
 
 		private static void Add(string[] characters) {
+			ICharacterService chars = CharacterManager.instance;
 			foreach (string name in characters) {
-				CharacterManager.instance.AddCharacter(name);
+				chars.AddCharacter(name);
 			}
 		}
 
 		private static void Remove(string[] characters) {
+			ICharacterService chars = CharacterManager.instance;
 			foreach (string name in characters) {
-				CharacterManager.instance.RemoveCharacter(name);
+				chars.RemoveCharacter(name);
 			}
 		}
 
 		// Character Animation Relates
 
 		private static IEnumerator Appear(string[] data) {
+			ICharacterService chars = CharacterManager.instance;
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				CHARACTER character = chars.GetCharacter(name);
 				if (character == null) {
 					Debug.LogError($"[ERROR] Character '{name}' not found for 'appear' command.");
 					continue;
@@ -88,10 +97,11 @@ namespace origin.command {
 		}
 
 		private static IEnumerator Disappear(string[] data) {
+			ICharacterService chars = CharacterManager.instance;
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				CHARACTER character = chars.GetCharacter(name);
 				if (character == null) {
 					Debug.LogError($"[ERROR] Character '{name}' not found for 'disappear' command.");
 					continue;
@@ -127,7 +137,7 @@ namespace origin.command {
 				while (character.isMovingX) yield return null;
 			}
 		}
-		
+
 		private static IEnumerator MoveY(string[] data) {
 			CHARACTER character = CharacterManager.instance.GetCharacter(data[0]);
 			if (character == null) {
@@ -195,10 +205,11 @@ namespace origin.command {
 		}
 
 		private static IEnumerator Highlight(string[] data) {
+			ICharacterService chars = CharacterManager.instance;
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				CHARACTER character = chars.GetCharacter(name);
 				if (character == null) {
 					Debug.LogError($"[ERROR] Character '{name}' not found for 'hl' (highlight) command.");
 					continue;
@@ -216,10 +227,11 @@ namespace origin.command {
 		}
 
 		private static IEnumerator UnHighlight(string[] data) {
+			ICharacterService chars = CharacterManager.instance;
 			List<CHARACTER> characters = new();
 
 			foreach (string name in data) {
-				CHARACTER character = CharacterManager.instance.GetCharacter(name);
+				CHARACTER character = chars.GetCharacter(name);
 				if (character == null) {
 					Debug.LogError($"[ERROR] Character '{name}' not found for 'uhl' (unhighlight) command.");
 					continue;
@@ -234,42 +246,63 @@ namespace origin.command {
 			}
 
 			while (characters.Any(c => c.isUnHighlighting)) yield return null;
-        }
+		}
 
-		// Dynamic Dialogue Relates 
+		// Dynamic Dialogue Relates
 
 		private static IEnumerator Choice(string[] data) {
+			IDialogueUI ui = DialogueManager.instance;
 			(string, string, string)[] result = new (string, string, string)[data.Length / 2];
 			for (int i = 0; i < data.Length; i += 2) {
 				result[i / 2] = (data[i], data[i + 1], null);
 			}
 
-			yield return DialogueManager.instance.AvailableChoices(result, false);
+			yield return ui.AvailableChoices(result, false);
 		}
 
 		private static IEnumerator ChoiceWithColor(string[] data) {
+			IDialogueUI ui = DialogueManager.instance;
 			(string, string, string)[] result = new (string, string, string)[data.Length / 3];
 			for (int i = 0; i < data.Length; i += 3) {
 				result[i / 3] = (data[i], data[i + 1], data[i + 2]);
 			}
 
-			yield return DialogueManager.instance.AvailableChoices(result, true);
+			yield return ui.AvailableChoices(result, true);
 		}
 
-		private static void Jump(string code) => DialogueManager.instance.Jump(code);
+		private static void Jump(string code) {
+			IConversationControl conv = DialogueManager.instance;
+			conv.Jump(code);
+		}
 
-		private static void EndTagReturn(string tag) => DialogueManager.instance.End(tag);
+		private static void EndTagReturn(string tag) {
+			IConversationControl conv = DialogueManager.instance;
+			conv.End(tag);
+		}
+
+		// Image Relates
+
+		private static void ChangeBackground(string image) => DialogueManager.instance.ChangeBackground(image);
+
+		private static void ChangeCutscene(string image) => DialogueManager.instance.ChangeCutscene(image);
+
+		private static void QuitCutscene() => DialogueManager.instance.QuitCutscene();
+
+
+		// puzzle(charID diff ruleSetCode successJumpCode failJumpCode)
 
 		private static IEnumerator Puzzle(string[] data) {
+			IDialogueUI ui = DialogueManager.instance;
+			IConversationControl conv = DialogueManager.instance;
 
 			int.TryParse(data[1], out int difficulty);
-			DialogueManager.instance.Hide();
+			ui.Hide();
 			bool successed = false;
-			yield return PuzzleManager.instance.StartPuzzle(data[0], difficulty, success => successed = success);
-			if (successed) DialogueManager.instance.Jump(data[2]);
-			else DialogueManager.instance.Jump(data[3]);
-			DialogueManager.instance.Empty();
-			DialogueManager.instance.Show();
+			yield return PuzzleManager.instance.StartPuzzle(data[0], difficulty, success => successed = success, data[2]);
+			if (successed) conv.Jump(data[3]);
+			else conv.Jump(data[4]);
+			ui.Empty();
+			ui.Show();
 		}
 	}
 }

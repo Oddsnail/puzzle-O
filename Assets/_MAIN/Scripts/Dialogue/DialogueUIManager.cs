@@ -11,7 +11,7 @@ namespace origin.dialogue {
 	public class DialogueUIManager {
 
 		private DialogueContainer container;
-		private DialogueManager dialogueManager;
+		private MonoBehaviour runner;
 
 		private Coroutine co_transitioning = null;
 		private Coroutine co_name_transitioning = null;
@@ -23,11 +23,11 @@ namespace origin.dialogue {
 		private const float defaultChangeNameDuration = 0.1f;
 		private const float defaultNameAnimOffset = 100.0f;
 		private const float defaultShowAndHideDuration = 0.6f;
-		private const float defaultDialogueHideYPos = -700f;
+		private const float defaultDialogueHideYPos = -490f;
 
-		public void Initialize(DialogueContainer dialogueContainer, DialogueManager manager) {
+		public void Initialize(DialogueContainer dialogueContainer, MonoBehaviour runner) {
 			container = dialogueContainer;
-			dialogueManager = manager;
+			this.runner = runner;
 		}
 
 		public void Empty() {
@@ -35,12 +35,9 @@ namespace origin.dialogue {
 			container.dialogueText.text = "";
 		}
 
-		//========================================================================
-		// <!!!> update dialogue box as new name container and theme color. <!!!>
-		//========================================================================
 		public void ChangeNameAndTheme(string text, Color color) {
 			if (isNameTransitioning) return;
-			co_name_transitioning = dialogueManager.StartCoroutine(ChangeNameAnimation(text, color));
+			co_name_transitioning = runner.StartCoroutine(ChangeNameAnimation(text, color));
 		}
 
 		public void ChangeLetterBoxTheme(Color color) {
@@ -73,23 +70,20 @@ namespace origin.dialogue {
 			co_name_transitioning = null;
 		}
 
-		//========================================================================
-		//    <!!!> show / hide dialogue box by conversation start / end <!!!>
-		//========================================================================
 		public void Show() {
 			if (showing) return;
-			if (isTransitioning) dialogueManager.StopCoroutine(co_transitioning);
+			if (isTransitioning) runner.StopCoroutine(co_transitioning);
 
 			SetLetterboxSpeed(0.45f);
-			co_transitioning = dialogueManager.StartCoroutine(Showing());
+			co_transitioning = runner.StartCoroutine(Showing());
 		}
 
 		public void Hide() {
 			if (!showing) return;
-			if (isTransitioning) dialogueManager.StopCoroutine(co_transitioning);
+			if (isTransitioning) runner.StopCoroutine(co_transitioning);
 
 			SetLetterboxSpeed(0.15f);
-			co_transitioning = dialogueManager.StartCoroutine(Hiding());
+			co_transitioning = runner.StartCoroutine(Hiding());
 		}
 
 		public void SetLetterboxSpeed(float speed) {
@@ -105,7 +99,7 @@ namespace origin.dialogue {
 			container.dialogueRoot.gameObject.SetActive(true);
 
 			yield return DOTween.Sequence()
-				.Join(container.dialogueRoot.DOAnchorPosY(-defaultDialogueHideYPos / 7f, defaultShowAndHideDuration))
+				.Join(container.dialogueRoot.DOAnchorPosY(-defaultDialogueHideYPos / 14f, defaultShowAndHideDuration))
 				.Join(container.upperLetterbox.DOAnchorPosY(defaultUpperLetterboxYPos, defaultShowAndHideDuration))
 				.Join(container.lowerLetterbox.DOAnchorPosY(0.0f, defaultShowAndHideDuration))
 				.WaitForCompletion();
@@ -125,9 +119,6 @@ namespace origin.dialogue {
 			co_transitioning = null;
 		}
 
-		//========================================================================
-		//                   <!!!> choice panel & jump system
-		//========================================================================
 		public void ClearChoices() {
 			foreach (Transform child in container.choicePanel) {
 				GameObject.Destroy(child.gameObject);

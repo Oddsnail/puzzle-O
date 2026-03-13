@@ -1,0 +1,15 @@
+# initializing
+
+add(leedoeun)
+ix(leedoeun)
+setposX(leedoeun -660 -i true)
+sp(leedoeun std1-111)
+
+# dialogue start
+
+puzzle(leedoeun 7 classic s f)
+
+.s
+.f
+
+end(EOF)

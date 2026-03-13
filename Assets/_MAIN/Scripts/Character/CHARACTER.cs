@@ -52,8 +52,8 @@ namespace origin.character {
 		//========================================================================
 		//    <!!!> normal / client game object change invoked by command <!!!>
 		//========================================================================
-		private const float defaultNorMalYPos = -1350.0f;
-		private const float defaultClientXPos = -736.0f;
+		private const float defaultNorMalYPos = -900.0f;
+		private const float defaultClientXPos = 0.0f;
 
 		private void NormalInitiate() {
 			if (config.prefabNormal == null) Debug.LogError($"[ERROR] No prefabNormal found for {ID}");

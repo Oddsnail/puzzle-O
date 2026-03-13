@@ -11,7 +11,6 @@ namespace origin.graphic {
 
 		private Coroutine co_highlighting;
 		private Image buttonColorImage;
-		private Outline buttonSeletedOutline;
 		private bool isHighlighting => highlighted && co_highlighting != null;
 		private bool isUnHighlighting => !highlighted && co_highlighting != null;
 		private const float highlightOffsetX = 25f;
@@ -20,11 +19,9 @@ namespace origin.graphic {
 		public Color DEFAULT_UI_GRAY;
 		public ColorPalette colorPalette;
 		public Color selectedColor;
-		public Color outlineColor;
 
 		void Start() {
 			buttonColorImage = buttonColor.GetComponent<Image>();
-			buttonSeletedOutline = button.GetComponent<Outline>();
         }
 		
 		public void OnHoverEnter() { Highlight(); }
@@ -34,10 +31,8 @@ namespace origin.graphic {
 		public void SetSelectColor(string colorCode) {
 			if (!colorCode.StartsWith('_')) {
                 selectedColor = colorPalette.Getcolor(colorCode);
-                outlineColor = colorPalette.Getcolor(colorCode, true);
             } else {
 				selectedColor = colorPalette.Getcolor(colorCode, true);
-				outlineColor = colorPalette.Getcolor(colorCode);
             }
 			
 		}
@@ -63,12 +58,10 @@ namespace origin.graphic {
 		private IEnumerator Highlighting(bool state) {
 
 			Color startColor = buttonColorImage.color;
-			Color startOutlineColor = buttonSeletedOutline.effectColor;
 			Vector3 startSize = button.localScale;
 			float startX = buttonColor.anchoredPosition.x;
 
 			Color endColor = state ? selectedColor : DEFAULT_UI_GRAY;
-			Color endOutlineColor = state ? outlineColor : new(outlineColor.r, outlineColor.g, outlineColor.b, 0.0f);
 			Vector3 endSize = state ? new(highlightSize, highlightSize, 1.0f) : new(1.0f, 1.0f, 1.0f);
 			float endX = state ? 15f + highlightOffsetX : 15f;
 
@@ -80,7 +73,6 @@ namespace origin.graphic {
 				buttonColor.localScale = Vector3.Lerp(startSize, endSize, percent);
 				buttonColor.anchoredPosition = Vector2.Lerp(new(startX, -15f), new(endX, -15f), percent);
 				buttonColor.GetComponent<Image>().color = Color.Lerp(startColor, endColor, percent);
-				buttonSeletedOutline.effectColor = Color.Lerp(startOutlineColor, endOutlineColor, percent);
 
 				yield return null;
 			}
@@ -89,7 +81,6 @@ namespace origin.graphic {
 			buttonColor.localScale = endSize;
 			buttonColor.anchoredPosition = new(endX, -15f);
 			buttonColor.GetComponent<Image>().color = endColor;
-			buttonSeletedOutline.effectColor = endOutlineColor;
 
 			co_highlighting = null;
         }

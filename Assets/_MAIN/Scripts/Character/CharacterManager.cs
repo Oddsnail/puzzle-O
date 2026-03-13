@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace origin.character {
-	public class CharacterManager : MonoBehaviour {
+	public class CharacterManager : MonoBehaviour, ICharacterService {
 		public static CharacterManager instance { get; private set; }
 
 		private Dictionary<string, CHARACTER> characters = new();

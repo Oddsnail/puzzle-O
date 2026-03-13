@@ -1,0 +1,32 @@
+# localization test scene
+
+add(leedoeun yeonjuhyang)
+setposX(leedoeun -660 -i true)
+setposX(yeonjuhyang 660 -i true)
+sp(leedoeun std1-111)
+sp(yeonjuhyang std1-112)
+
+# dialogue start
+
+[default::] "@loc_test_000"
+wait-appear(leedoeun)
+[leedoeun::] "@loc_test_001"
+[:_-_2_-2:h] "@loc_test_002"
+[:_-__2-_:c] "@loc_test_003{wa:0.5}@loc_test_004"
+
+puzzle(leedoeun 6 classic s1 f1)
+
+.s1
+.f1
+
+puzzle(yeonjuhyang 6 juhyang01 s2 f2)
+
+.s2
+.f2
+
+wait-appear(yeonjuhyang)
+[yeonjuhyang:_-111:h] "@loc_test_005"
+[:_-122:c] "@loc_test_006{wa:0.4}@loc_test_007"
+
+#EOF
+end(EOF)
