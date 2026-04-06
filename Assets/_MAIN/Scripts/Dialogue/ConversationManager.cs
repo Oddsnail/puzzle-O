@@ -43,6 +43,7 @@ namespace origin.dialogue {
 		private IEnumerator RunningConversation(List<string> conversation, Action<string> endTagCallback) {
 			endBool = false;
 			dialogueUI.Show();
+			DialogueManager.instance.EmptyLog();
 
 			foreach (string line in conversation) {
 				if (string.IsNullOrWhiteSpace(line) || line[0] == noteID) continue;
@@ -69,6 +70,9 @@ namespace origin.dialogue {
 
 				if (endBool) break;
 			}
+
+			foreach (ILineHandler handler in handlers)
+				handler.OnConversationEnd();
 
 			dialogueUI.ChangeLetterBoxTheme(plainTextID);
 			dialogueUI.Hide();

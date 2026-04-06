@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,43 +16,48 @@ namespace origin.graphic {
 
 		public FaceRigSO faceRigSO;
 		
-		private string prev_poseID = "std1";
-		private readonly float unhighlightOffset = -40.0f;
-		private readonly string concatenator = "-";
-		private readonly string empty_poseID = "_";
+		private static readonly HashSet<string> poseIndependentExpressions = new HashSet<string> { "sweat" };
+
+		private string prev_poseID = "";
+		private FaceRigData currentRig;
+		private static readonly float unhighlightOffset = -40.0f;
+		private static readonly string concatenator = "-";
+		private static readonly string empty_poseID = "_";
 
 		// poseID 			ex) std2, std1, _
 		// componentID 		ex) 221, 1__, 1_3
 		// expressionsID 	ex) 1, 12, 21, 11
-		public void SetSprite(string charID, string poseID, string componentID, string expressionsID) {
+		public void SetSprite(string charID, string poseID, string componentID, string[] expressionsIDs) {
+			bool poseChanged = false;
 			if (poseID != prev_poseID && poseID != empty_poseID) {
 				FaceRigData rig = faceRigSO.GetFaceRigData(charID + concatenator + poseID);
 				if (rig == null) return;
 
-				body.GetComponent<Image>().sprite = body.GetComponent<SpriteSheetHolder>().sprites[componentID[3] - '1'];
+				currentRig = rig;
+
+				body.GetComponent<Image>().sprite = body.GetComponent<SpriteSheetHolder>().GetSprite(poseID);
 				eye.anchoredPosition = rig.eye.localPosition;
 				eyebrow.anchoredPosition = rig.eyebrow.localPosition;
 				mouth.anchoredPosition = rig.mouth.localPosition;
-				foreach (RectTransform rt in expressions) {
-					rt.anchoredPosition = rig.expression.localPosition;
-					rt.gameObject.SetActive(false);
-				}
 
 				prev_poseID = poseID;
+				poseChanged = true;
 			}
-			if (componentID[0] != '_') eye.GetComponent<Image>().sprite = eye.GetComponent<SpriteSheetHolder>().sprites[componentID[0] - '1'];
-			if (componentID[1] != '_') eyebrow.GetComponent<Image>().sprite = eyebrow.GetComponent<SpriteSheetHolder>().sprites[componentID[1] - '1'];
-			if (componentID[2] != '_') mouth.GetComponent<Image>().sprite = mouth.GetComponent<SpriteSheetHolder>().sprites[componentID[2] - '1'];
-			for (int i = 0; i < expressions.Count; i++) {
-				if (i < expressionsID.Length && expressionsID[i] != '_') {
-					expressions[i].GetComponent<Image>().sprite = expressions[i].GetComponent<SpriteSheetHolder>().sprites[expressionsID[i] - '1'];
-					expressions[i].gameObject.SetActive(true);
-				}
-				else if(i < expressionsID.Length && expressionsID[i] == '_') {
-					continue;
-                }
-				else {
-					expressions[i].gameObject.SetActive(false);
+			if (componentID[0] != '_') { Image img = eye.GetComponent<Image>(); img.sprite = eye.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_eye{componentID[0]}"); if (poseChanged) img.SetNativeSize(); }
+			if (componentID[1] != '_') { Image img = eyebrow.GetComponent<Image>(); img.sprite = eyebrow.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_eyebrow{componentID[1]}"); if (poseChanged) img.SetNativeSize(); }
+			if (componentID[2] != '_') { Image img = mouth.GetComponent<Image>(); img.sprite = mouth.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_mouth{componentID[2]}"); if (poseChanged) img.SetNativeSize(); }
+			foreach (RectTransform rt in expressions) rt.gameObject.SetActive(false);
+			if (currentRig != null) {
+				foreach (string exprID in expressionsIDs) {
+					if (exprID == empty_poseID) continue;
+					ExpressionRigData exprData = currentRig.expressions.Find(e => e.name == exprID);
+					if (exprData == null || exprData.layer >= expressions.Count) continue;
+					RectTransform rt = expressions[exprData.layer];
+					rt.anchoredPosition = exprData.data.localPosition;
+					Image img = rt.GetComponent<Image>();
+					img.sprite = rt.GetComponent<SpriteSheetHolder>().GetSprite(poseIndependentExpressions.Contains(exprID) ? exprID : $"{prev_poseID}_{exprID}");
+					img.SetNativeSize();
+					rt.gameObject.SetActive(true);
 				}
 			}
 		}

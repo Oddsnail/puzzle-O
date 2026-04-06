@@ -23,10 +23,10 @@ public class DialogueTester : MonoBehaviour
         List<string> conversation = FileManager.ReadTextAsset(file1);
         string result;
 
-        LocalizationManager.Instance.SetLanguage("eng");
+        LocalizationManager.instance.SetLanguage("eng");
         yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
 
-        LocalizationManager.Instance.SetLanguage("kor");
-        yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
+        //LocalizationManager.Instance.SetLanguage("kor");
+        //yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
     }
 }

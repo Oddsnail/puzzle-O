@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 1305da5824818b5408e1620af8e62aff
+guid: 0bfcbdb8cc9027a4cade03c3073e6353
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8063076805279862605
-    second: IMG_4088_0
+      213: -7863100004404910564
+    second: std1_eye1_0
   - first:
-      213: -5256062235040671438
-    second: IMG_4088_1
+      213: 1090769292975833335
+    second: std1_eye1_1
   - first:
-      213: -87927486647679410
-    second: IMG_4088_2
+      213: 7626147972647398143
+    second: std1_eye1_2
   - first:
-      213: 8938113504629295217
-    second: IMG_4088_3
-  - first:
-      213: -5147753384973339104
-    second: IMG_4088_4
-  - first:
-      213: -1933079670732062269
-    second: IMG_4088_5
+      213: -4076846330051685658
+    second: std1_eye1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -63,7 +57,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -87,8 +81,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
-    resizeAlgorithm: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -115,12 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_4088_0
+      name: std1_eye1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 47
-        width: 105
+        x: 1
+        y: 34
+        width: 93
         height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -130,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4fc56762adc5ef60800000000000000
-      internalID: 8063076805279862605
+      spriteID: c16a21cd438a0e290800000000000000
+      internalID: -7863100004404910564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4088_1
+      name: std1_eye1_1
       rect:
         serializedVersion: 2
-        x: 30
-        y: 66
-        width: 66
-        height: 9
+        x: 38
+        y: 50
+        width: 54
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2391e0bbe37be07b0800000000000000
-      internalID: -5256062235040671438
+      spriteID: 7f08abf84e0332f00800000000000000
+      internalID: 1090769292975833335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4088_2
+      name: std1_eye1_2
       rect:
         serializedVersion: 2
-        x: 168
-        y: 62
-        width: 67
-        height: 9
+        x: 157
+        y: 39
+        width: 103
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,42 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e464f50ba6e97cef0800000000000000
-      internalID: -87927486647679410
+      spriteID: ffaa6321d2585d960800000000000000
+      internalID: 7626147972647398143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4088_3
+      name: std1_eye1_3
       rect:
         serializedVersion: 2
-        x: 159
-        y: 46
-        width: 114
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1780d8550ee8a0c70800000000000000
-      internalID: 8938113504629295217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_4088_4
-      rect:
-        serializedVersion: 2
-        x: 110
+        x: 104
         y: 0
-        width: 7
-        height: 18
+        width: 6
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,30 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 026795102918f88b0800000000000000
-      internalID: -5147753384973339104
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_4088_5
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 2
-        width: 13
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3c18c7708425c25e0800000000000000
-      internalID: -1933079670732062269
+      spriteID: 6e21a65ecd12c67c0800000000000000
+      internalID: -4076846330051685658
       vertices: []
       indices: 
       edges: []
@@ -260,12 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_4088_0: 8063076805279862605
-      IMG_4088_1: -5256062235040671438
-      IMG_4088_2: -87927486647679410
-      IMG_4088_3: 8938113504629295217
-      IMG_4088_4: -5147753384973339104
-      IMG_4088_5: -1933079670732062269
+      std1_eye1_0: -7863100004404910564
+      std1_eye1_1: 1090769292975833335
+      std1_eye1_2: 7626147972647398143
+      std1_eye1_3: -4076846330051685658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -7,6 +7,10 @@ namespace origin.graphic {
 		[Range(-1f, 1f)]
 		public float speed;
 		public GameObject inner;
+
+		public float hideYPos;
+		public float showYPos;
+
 		private float offset = 0;
 		private Material material;
 		private Coroutine co_colorTransitioning;

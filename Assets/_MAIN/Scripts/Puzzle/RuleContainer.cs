@@ -20,15 +20,13 @@ namespace origin.puzzle {
             return;
         }
 
-        public void Addrule(PuzzleRule puzzleRule)
+        public void Addrule(PuzzleRule puzzleRule, int order)
         {
             GameObject rule = GameObject.Instantiate(ruleTicketPrefab, ruleTicketPanel);
             RuleTicket ruleTicket = rule.GetComponent<RuleTicket>();
-            ruleTicket.title.text = puzzleRule.title;
-            ruleTicket.description.text = puzzleRule.description;
-            ruleTicket.colorImage.color = puzzleRule.color;
-
-            return;
+            ruleTicket.SetKey(puzzleRule.title, puzzleRule.description);
+            ruleTicket.order.text = $"#{order}";
+            ruleTicket.SetColor(puzzleRule.color, puzzleRule.subcolor);
         }
 
 	}

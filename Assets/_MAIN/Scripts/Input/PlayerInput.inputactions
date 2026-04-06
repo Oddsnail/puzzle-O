@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Log",
+                    "type": "Button",
+                    "id": "7bf7c3d6-3d05-42f1-ae3b-701caff5598f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -48,8 +57,8 @@
                 },
                 {
                     "name": "",
-                    "id": "7e90892e-5f09-4faa-9d95-9d2499e3eadd",
-                    "path": "<Mouse>/leftButton",
+                    "id": "11c1c6d8-07dc-4c7c-9044-c72b23419953",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -175,6 +184,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PuzzleInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aaff7eda-7f46-46a3-a573-9dce10f250d8",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Log",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

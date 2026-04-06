@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 54140c3766bdbb848af3ded471c606d6
+guid: 2bd7fd979c7e6004b9d7f6e828f6508d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5372675671215986034
-    second: IMG_4075_0
+      213: 4956016742166153197
+    second: std1_eyebrow1_0
   - first:
-      213: 261454877368855611
-    second: IMG_4075_1
+      213: -3929825712611397716
+    second: std1_eyebrow1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -75,8 +75,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
-    resizeAlgorithm: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -103,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_4075_0
+      name: std1_eyebrow1_0
       rect:
         serializedVersion: 2
-        x: 122
-        y: 48
-        width: 115
-        height: 16
+        x: 0
+        y: 18
+        width: 92
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 275563cae049f8a40800000000000000
-      internalID: 5372675671215986034
+      spriteID: de7c3b908fe47c440800000000000000
+      internalID: 4956016742166153197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4075_1
+      name: std1_eyebrow1_1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 14
-        width: 78
-        height: 31
+        x: 133
+        y: 17
+        width: 114
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3c2d5263dfd0a300800000000000000
-      internalID: 261454877368855611
+      spriteID: cafe992e5547679c0800000000000000
+      internalID: -3929825712611397716
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_4075_0: 5372675671215986034
-      IMG_4075_1: 261454877368855611
+      std1_eyebrow1_0: 4956016742166153197
+      std1_eyebrow1_1: -3929825712611397716
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

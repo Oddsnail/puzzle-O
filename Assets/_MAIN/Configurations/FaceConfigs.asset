@@ -13,25 +13,111 @@ MonoBehaviour:
   m_Name: FaceConfigs
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.FaceRigSO
   FaceRigs:
-  - poseID: leedoeun-std1
+  - poseID: yjh-std1
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -45.4, y: 3268.5}
+      localPosition: {x: -195, y: 1558}
     eyebrow:
-      localPosition: {x: -60.8, y: 3337.8}
+      localPosition: {x: -195, y: 1651}
     mouth:
-      localPosition: {x: -41.2, y: 3183}
-    expression:
-      localPosition: {x: 13.8, y: 3087.4}
-  - poseID: yeonjuhyang-std1
+      localPosition: {x: -195, y: 1450}
+    expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: -184, y: 1451}
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: -104, y: 1477}
+  - poseID: yjh-std2
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -99.5, y: 3359.6}
+      localPosition: {x: -71, y: 1583}
     eyebrow:
-      localPosition: {x: -96.5, y: 3448.6}
+      localPosition: {x: -63, y: 1678}
     mouth:
-      localPosition: {x: -104.4, y: 3280.7}
-    expression:
-      localPosition: {x: -75.3, y: 3193.2}
+      localPosition: {x: -77, y: 1493}
+    expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: -95, y: 1488}
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: -167, y: 1521}
+  - poseID: yjh-std3
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: -63, y: 1603}
+    eyebrow:
+      localPosition: {x: -58, y: 1673}
+    mouth:
+      localPosition: {x: -44, y: 1492}
+    expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: -82, y: 1511}
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: -137, y: 1502}
+    - name: finger
+      layer: 2
+      data:
+        localPosition: {x: -23, y: 1429}
+  - poseID: lde-std1
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: -166, y: 1495}
+    eyebrow:
+      localPosition: {x: -147, y: 1576}
+    mouth:
+      localPosition: {x: -176, y: 1413}
+    expressions:
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: -72, y: 1435}
+  - poseID: lde-std2
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: -28, y: 1500}
+    eyebrow:
+      localPosition: {x: -38, y: 1560}
+    mouth:
+      localPosition: {x: -12, y: 1414}
+    expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: 20, y: 1397}
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: 78, y: 1443}
+  - poseID: lde-std3
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: 108, y: 1496}
+    eyebrow:
+      localPosition: {x: 122, y: 1568}
+    mouth:
+      localPosition: {x: 90, y: 1397}
+    expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: 50, y: 1405}
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: 4, y: 1447}

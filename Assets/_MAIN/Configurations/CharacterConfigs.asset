@@ -13,13 +13,9 @@ MonoBehaviour:
   m_Name: CharacterConfigs
   m_EditorClassIdentifier: 
   Characters:
-  - ID: yeonjuhyang
-    displayName: "\uC5F0\uC8FC\uD5A5"
-    displaySubname: "3\uAE09"
+  - ID: yjh
     prefabNormal: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
     prefabClient: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
-  - ID: leedoeun
-    displayName: "\uC774\uB3C4\uC740"
-    displaySubname: "2\uAE09"
+  - ID: lde
     prefabNormal: {fileID: 4054991153673449271, guid: 58c3321aa029c1445b014f8bc03d05bd, type: 3}
     prefabClient: {fileID: 4054991153673449271, guid: 58c3321aa029c1445b014f8bc03d05bd, type: 3}

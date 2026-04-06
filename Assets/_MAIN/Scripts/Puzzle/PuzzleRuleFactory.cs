@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using origin.graphic;
+
 namespace origin.puzzle {
 	/// <summary>
 	/// Factory class for creating standard puzzle rules and custom rule sets
@@ -10,21 +12,15 @@ namespace origin.puzzle {
 
 		private const string TABLE = "0123456789";
 
-		// color table
-		private static Color red = new(0.47f, 0.28f, 0.28f);
-		private static Color orange = new(0.47f, 0.3f, 0.2f);
-		private static Color yellow = new(0.56f, 0.47f, 0.1f);
-		private static Color green = new(0.24f, 0.41f, 0.24f);
-		private static Color blue = new(0.23f, 0.29f, 0.41f);
-		private static Color purple = new(0.36f, 0.28f, 0.39f);
 		private static Color grey = new(0.73f, 0.73f, 0.73f);
 
-		public static PuzzleRule CreateStrikeRule(Color strikeColor) {
+		public static PuzzleRule CreateStrikeRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "strike",
-				color: strikeColor,
-				title: "strike",
-				description: "strike",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.1.title",
+				description: "game.rule.1.description",
 				checkCondition: (answer, guess, position) => answer[position] == guess,
 				audioPitch: 1.3f,
 				scoreValue: 1,
@@ -32,16 +28,16 @@ namespace origin.puzzle {
 			);
 		}
 
-		public static PuzzleRule CreateSemiStrikeRule(Color semiStrikeColor) {
+		public static PuzzleRule CreateSemiStrikeRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "semi-strike",
-				color: semiStrikeColor,
-				title: "strike",
-				description: "Digit at this position is congruent modulo 5 (same remainder when divided by 5)",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.2.title",
+				description: "game.rule.2.description",
 				checkCondition: (answer, guess, position) => {
 					int answerIndex = TABLE.IndexOf(answer[position]);
 					int guessIndex = TABLE.IndexOf(guess);
-					// Check if both indices are valid and congruent mod 5
 					return answerIndex != -1 && guessIndex != -1 && answerIndex % 5 == guessIndex % 5;
 				},
 				audioPitch: 1.0f,
@@ -49,12 +45,13 @@ namespace origin.puzzle {
 			);
 		}
 
-		public static PuzzleRule CreateBallRule(Color ballColor) {
+		public static PuzzleRule CreateBallRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "ball",
-				color: ballColor,
-				title: "strike",
-				description: "Correct digit exists in answer but wrong position",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.3.title",
+				description: "game.rule.3.description",
 				checkCondition: (answer, guess, position) => answer.Contains(guess),
 				audioPitch: 0.7f,
 				scoreValue: 0
@@ -64,50 +61,23 @@ namespace origin.puzzle {
 		public static PuzzleRule CreateMissRule() {
 			return new PuzzleRule(
 				id: "miss",
-				color: grey, // #BBBBBB in RGB
+				color: grey,
+				subcolor: grey,
 				title: "_Miss",
 				description: "_Digit is not in the answer",
-				checkCondition: (answer, guess, position) => true, // Always true - this is the fallback
+				checkCondition: (answer, guess, position) => true,
 				audioPitch: 1.0f,
 				scoreValue: 0
 			);
 		}
 
-		public static List<PuzzleRule> CreateRuleSet(string ruleSetCode) {
-			switch(ruleSetCode) {
-				case "classic":
-					return new List<PuzzleRule> {
-						CreateStrikeRule(red),
-						CreateSemiStrikeRule(purple),
-						CreateBallRule(blue),
-						CreateMissRule()
-					};
-				case "juhyang01":
-					return new List<PuzzleRule> {
-						CreateStrikeRule(red),
-						CreateParityRule(orange),
-						CreateBallRule(yellow),
-						CreateMissRule()
-					};
-				case "doeun01":
-					return new List<PuzzleRule> {
-						// not implemented yet
-						CreateMissRule()
-					};
-				default:
-					return new List<PuzzleRule> {
-						// no rule for default
-						CreateMissRule()
-					};
-			}	
-		}
-
-		public static PuzzleRule CreateParityRule(Color parityColor) {
+		public static PuzzleRule CreateParityRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "parity-match",
-				color: parityColor,
-				title: "strike",
-				description: "Digit has same parity (even/odd) as answer digit at this position",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.4.title",
+				description: "game.rule.4.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
@@ -118,12 +88,13 @@ namespace origin.puzzle {
 			);
 		}
 
-		public static PuzzleRule CreateRangeRule(Color rangeColor) {
+		public static PuzzleRule CreateRangeRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "range-match",
-				color: rangeColor,
-				title: "strike",
-				description: "Digit is within ±1 of the answer digit at this position",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.5.title",
+				description: "game.rule.5.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
@@ -134,12 +105,13 @@ namespace origin.puzzle {
 			);
 		}
 
-		public static PuzzleRule CreateGreaterThanRule(Color greaterColor) {
+		public static PuzzleRule CreateGreaterThanRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "greater-than",
-				color: greaterColor,
-				title: "strike",
-				description: "Guessed digit is greater than the answer digit at this position",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.6.1.title",
+				description: "game.rule.6.1.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
@@ -150,12 +122,13 @@ namespace origin.puzzle {
 			);
 		}
 
-		public static PuzzleRule CreateLessThanRule(Color lessColor) {
+		public static PuzzleRule CreateLessThanRule(Color color, Color subcolor) {
 			return new PuzzleRule(
 				id: "less-than",
-				color: lessColor,
-				title: "strike",
-				description: "Guessed digit is less than the answer digit at this position",
+				color: color,
+				subcolor: subcolor,
+				title: "game.rule.6.2.title",
+				description: "game.rule.6.2.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
@@ -164,6 +137,34 @@ namespace origin.puzzle {
 				audioPitch: 0.85f,
 				scoreValue: 0
 			);
+		}
+
+		private static PuzzleRule CreateRuleByID(string id, Color color, Color subcolor) {
+			switch (id) {
+				case "strike": return CreateStrikeRule(color, subcolor);
+				case "semi-strike": return CreateSemiStrikeRule(color, subcolor);
+				case "ball": return CreateBallRule(color, subcolor);
+				case "parity-match": return CreateParityRule(color, subcolor);
+				case "range-match": return CreateRangeRule(color, subcolor);
+				case "greater-than": return CreateGreaterThanRule(color, subcolor);
+				case "less-than": return CreateLessThanRule(color, subcolor);
+				default:
+					Debug.LogWarning($"Unknown rule ID: {id}");
+					return null;
+			}
+		}
+
+		public static List<PuzzleRule> CreateRuleSet(RulePalette rulePalette) {
+			List<PuzzleRule> rules = new();
+			foreach (Palette p in rulePalette.palettes) {
+
+				PuzzleRule rule = CreateRuleByID(p.ID, p.primary, p.secondary);
+				if (rule != null) {
+					rules.Add(rule);
+				}
+			}
+			rules.Add(CreateMissRule());
+			return rules;
 		}
 	}
 }

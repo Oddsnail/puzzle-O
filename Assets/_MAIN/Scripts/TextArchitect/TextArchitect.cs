@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using origin.audio;
 
 namespace origin.dialogue {
     public class TextArchitect {
@@ -28,7 +29,9 @@ namespace origin.dialogue {
 
         public bool speedUp = false;
 
-        public TextArchitect(TextMeshProUGUI tmpro) { this.tmpro = tmpro; }
+        public TextArchitect(TextMeshProUGUI tmpro) {
+            this.tmpro = tmpro;
+        }
 
         public Coroutine Build(string text) {
             PreText = "";
@@ -106,6 +109,7 @@ namespace origin.dialogue {
         private IEnumerator Build_Typewriter() {
             while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount) {
                 tmpro.maxVisibleCharacters += speedUp ? 3 * CharactersPerCycle : CharactersPerCycle;
+                AudioManager.instance.PlayPreloadedSFX("textBuild", AudioManager.instance.sfxMixer, 0.2f, 1.7f + Random.Range(-0.05f, 0.05f));
                 yield return new WaitForSeconds(0.02f / Speed);
             }
         }

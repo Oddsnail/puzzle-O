@@ -9,23 +9,36 @@ namespace origin.dialogue
     {
 		private MonoBehaviour runner;
         private GameObject background;
+        private GameObject backgroundFog;
         private GameObject cutscene;
 
-        private const string BGfilePath = "Audio/Graphics/Backgrounds";
-        private const string CSfilePath = "Audio/Graphics/Cutscenes";
+        private bool bgFogOn = false;
+
+        private const string BGfilePath = "Graphics/Backgrounds";
+        private const string CSfilePath = "Graphics/Cutscenes";
         private const float defaultChangeImageDuration = 0.5f;
+        private const float defaultFogTransparency = 0.9f;
 
         private Coroutine co_background = null;
+        private Coroutine co_backgroundFog = null;
         private Coroutine co_cutscene = null;
 
         public bool isBackgroundTransitioning => co_background != null;
+        public bool isBackgroundFogTransitioning => co_backgroundFog != null;
         public bool isCutsceneTransitioning => co_cutscene != null;
 
-        public void Initialize(GameObject backgroundImage, GameObject cutsceneImage, MonoBehaviour runner) {
+        public void Initialize(GameObject backgroundImage, GameObject cutsceneImage, GameObject backgroundFogImage, MonoBehaviour runner) {
 			this.background = backgroundImage;
             this.cutscene = cutsceneImage;
+            this.backgroundFog = backgroundFogImage;
             this.runner = runner;
 		}
+
+        public void BackgroundFog(bool show) {
+            if (isBackgroundFogTransitioning) return;
+            if (bgFogOn == show) return;
+            co_backgroundFog = runner.StartCoroutine(BackgroundFogTransition(show));
+        }
 
         public void ChangeBackground(string backgroundName) {
             if (isBackgroundTransitioning) return;
@@ -54,6 +67,16 @@ namespace origin.dialogue
             yield return bgImage.DOFade(1f, defaultChangeImageDuration).WaitForCompletion();
 
             co_background = null;
+        }
+
+        private IEnumerator BackgroundFogTransition(bool show) {
+            Image bgFog = backgroundFog.GetComponent<Image>();
+            float targetTransparency = show ? defaultFogTransparency : 0f;
+
+            yield return bgFog.DOFade(targetTransparency, defaultChangeImageDuration).WaitForCompletion();
+
+            bgFogOn = show;
+            co_backgroundFog = null;
         }
 
         private IEnumerator CutsceneTransition(string cutsceneName) {

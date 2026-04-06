@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using origin.audio;
 using origin.character;
@@ -18,6 +19,8 @@ namespace origin.dialogue {
 
 		private const string plainTextID = "default";
 
+		private List<string> currentLine = new();
+
 		public DialogueLineHandler(
 				TextArchitect textArchitect,
 				IDialogueUI dialogueUI,
@@ -28,6 +31,7 @@ namespace origin.dialogue {
 			this.charService = charService;
 			this.commandExecutor = commandExecutor;
 			dialogueUI.onNextDialogueRequest += OnNextDialogueRequest;
+			LocalizationManager.OnLanguageChanged += OnLanguageChanged;
 		}
 
 		private void OnNextDialogueRequest() => nextRequest = true;
@@ -39,15 +43,20 @@ namespace origin.dialogue {
 		private IEnumerator ReadingDialogue(LINE_DIALOGUE data) {
 			Debug.Log(data.ToString());
 
+			if (currentLine.Count != 0) {
+				DialogueManager.instance.AddLog(recentCharacter == plainTextID ? plainTextID : charService.GetInfo(recentCharacter).nameKey, currentLine);
+			}
+			currentLine.Clear();
+
 			if (data.hasName && data.name != plainTextID) {
 				recentCharacter = data.name;
 				CharacterConfigData config = charService.GetInfo(data.name);
-				dialogueUI.ChangeNameAndTheme(config.localizedDisplayName(), config.ID);
+				dialogueUI.ChangeNameAndTheme(config.nameKey, config.subnameKey, config.ID);
 				dialogueUI.ChangeLetterBoxTheme(config.ID);
 			}
 			else if (data.hasName && data.name == plainTextID) {
 				recentCharacter = data.name;
-				dialogueUI.ChangeNameAndTheme("", plainTextID);
+				dialogueUI.ChangeNameAndTheme("", "", plainTextID);
 				dialogueUI.ChangeLetterBoxTheme(plainTextID);
 			}
 
@@ -63,6 +72,7 @@ namespace origin.dialogue {
 
 			foreach (LINE_DIALOGUE.LINE_SEGMENT segment in data.segments) {
 				yield return WaitLineSegments(segment);
+				currentLine.Add(segment.dialogue);
 				yield return BuildDialogue(segment.dialogue, segment.isAppend);
 			}
 
@@ -86,8 +96,8 @@ namespace origin.dialogue {
 		}
 
 		private IEnumerator BuildDialogue(string dialogue, bool append = false) {
-			string resolved = LocalizationManager.Instance != null
-				? LocalizationManager.Instance.Resolve(dialogue)
+			string resolved = LocalizationManager.instance != null
+				? LocalizationManager.instance.Resolve(dialogue)
 				: dialogue;
 			if (!append) textArchitect.Build(resolved);
 			else textArchitect.Append(resolved);
@@ -101,13 +111,45 @@ namespace origin.dialogue {
 			}
 		}
 
+		private void OnLanguageChanged() {
+			if (textArchitect.isBuilding) {
+				textArchitect.ForceComplete();
+			}
+
+			RebuildCurrentLine();
+		}
+
+		private void RebuildCurrentLine() {
+			if (currentLine.Count == 0) return;
+
+			var prev = textArchitect.buildMethod;
+			textArchitect.buildMethod = TextArchitect.TextBuildMethod.instant;
+
+			for (int i = 0; i < currentLine.Count; i++) {
+				string resolved = LocalizationManager.instance != null
+					? LocalizationManager.instance.Resolve(currentLine[i])
+					: currentLine[i];
+
+				if (i == 0) textArchitect.Build(resolved);
+				else textArchitect.Append(resolved);
+			}
+
+			textArchitect.buildMethod = prev;
+		}
+
+		public void OnConversationEnd() {
+			if (currentLine.Count != 0) {
+				DialogueManager.instance.AddLog(recentCharacter == plainTextID ? plainTextID : charService.GetInfo(recentCharacter).nameKey, currentLine);
+				currentLine.Clear();
+			}
+		}
+
 		private IEnumerator WaitForRequest() {
-			int randNum = Random.Range(1, 3);
 			dialogueUI.SetPromptVisible(true);
 
 			while (!nextRequest) yield return null;
 
-			AudioManager.Instance.PlaySoundEffect($"SFX/dialogue-{randNum}");
+			AudioManager.instance.PlayPreloadedSFX("nextDialogue", AudioManager.instance.sfxMixer);
 			dialogueUI.SetPromptVisible(false);
 			nextRequest = false;
 		}

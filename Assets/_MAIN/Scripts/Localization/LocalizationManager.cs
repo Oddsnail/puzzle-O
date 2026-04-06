@@ -5,14 +5,14 @@ namespace origin.language
 {
     public class LocalizationManager : MonoBehaviour
     {
-        public static LocalizationManager Instance;
+        public static LocalizationManager instance;
         
         private Dictionary<string, string> _currentTable = new();
         public static event System.Action OnLanguageChanged;
 
         void Awake()
         {
-            Instance = this;
+            instance = this;
             SetLanguage(DetectLanguageCode());
         }
 
@@ -21,7 +21,6 @@ namespace origin.language
             return Application.systemLanguage switch
             {
                 SystemLanguage.Korean   => "kor",
-                SystemLanguage.Japanese => "jpn",
                 _                       => "eng"
             };
         }
@@ -31,7 +30,6 @@ namespace origin.language
             string fileName = code switch
             {
                 "kor" => "strings_ko",
-                "jpn" => "strings_ja",
                 _     => "strings_en"
             };
 
@@ -46,16 +44,14 @@ namespace origin.language
             OnLanguageChanged?.Invoke();
         }
 
-        public string Get(string key) =>
-            _currentTable.TryGetValue(key, out var val) ? val : $"[{key}]";
+        public string Get(string key) {
+            if(key == null || key == "" || key[0] == KeyIgnorePrefix) return key;
+            return _currentTable.TryGetValue(key, out var val) ? val : $"[{key}]";
+        }
 
+        private const char KeyIgnorePrefix = '_';
         private const char KeyPrefix = '@';
 
-        /// Resolves a dialogue segment to its localized string.
-        /// Segments prefixed with '@' are treated as localization keys (prefix stripped before lookup).
-        /// All other text is returned as-is — no lookup is performed.
-        ///   "@loc_test_001"  →  looks up "loc_test_001" in the current table
-        ///   "."              →  returned unchanged
         public string Resolve(string text) {
             if (string.IsNullOrEmpty(text)) return text;
             string trimmed = text.Trim();

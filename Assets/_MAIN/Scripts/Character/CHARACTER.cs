@@ -52,7 +52,7 @@ namespace origin.character {
 		//========================================================================
 		//    <!!!> normal / client game object change invoked by command <!!!>
 		//========================================================================
-		private const float defaultNorMalYPos = -900.0f;
+		private const float defaultNorMalYPos = 0.0f;
 		private const float defaultClientXPos = 0.0f;
 
 		private void NormalInitiate() {
@@ -82,7 +82,7 @@ namespace origin.character {
 		// spriteCode ex) std1-111 or _-221
 		public void SetSprite(string spriteCode) {
 			string[] spriteNames = spriteCode.Split("-");
-			spriteManager.SetSprite(ID, spriteNames[0], spriteNames[1], spriteNames.Length > 2 ? spriteNames[2] : "");
+			spriteManager.SetSprite(ID, spriteNames[0], spriteNames[1], spriteNames.Length > 2 ? spriteNames[2..] : Array.Empty<string>());
 		}
 
 		public void InvertX() {
@@ -205,7 +205,7 @@ namespace origin.character {
 		private const float defaultHopTime = 0.2f;
 		private const float defaultHopLength = 60f;
 		private const float defaultShiverTime = 0.07f;
-		private const float defaultShiverLength = 40f;
+		private const float defaultShiverLength = 20f;
 
 		public IEnumerator Hopping() {
 			float origin = rectTransform.anchoredPosition.y;

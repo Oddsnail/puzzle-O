@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 using origin.dialogue;
 using origin.puzzle;
+using origin.settings;
 
 namespace origin.IO {
 	public class InputManager : MonoBehaviour {
@@ -13,14 +14,11 @@ namespace origin.IO {
 
 		private void Awake() {
 			input = GetComponent<PlayerInput>();
-			InitializeActions();
-		}
-
-		private void InitializeActions() {
-			actionMap.Clear();
 			var currentActionMap = input.currentActionMap;
 			actionMap.Add(currentActionMap["NextDialogue"], OnNext);
 			actionMap.Add(currentActionMap["PuzzleInput"], OnPuzzleChoice);
+			actionMap.Add(currentActionMap["Escape"], OnEscapeMenu);
+			actionMap.Add(currentActionMap["Log"], OnLogToggle);
 		}
 
 		private void OnEnable() {
@@ -35,11 +33,12 @@ namespace origin.IO {
 			}
 		}
 
-		public void SwitchActionMap(string actionMapName) {
-			OnDisable(); // 기존 액션 이벤트 제거
-			input.SwitchCurrentActionMap(actionMapName); // 새로운 Action Map으로 전환
-			InitializeActions(); // 새로운 Action Map에 맞게 초기화
-			OnEnable(); // 이벤트 재등록
+		public void SetActionEnabled(string actionName, bool enabled) {
+			var action = input.currentActionMap.FindAction(actionName);
+			if (action == null) return;
+
+			if (enabled) action.Enable();
+			else action.Disable();
 		}
 
 		public void OnNext(InputAction.CallbackContext c) {
@@ -48,6 +47,14 @@ namespace origin.IO {
 
 		public void OnPuzzleChoice(InputAction.CallbackContext c) {
 			PuzzleManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
+		}
+
+		public void OnEscapeMenu(InputAction.CallbackContext c) {
+			GameSettingManager.instance.OnEscapeMenu();
+		}
+
+		public void OnLogToggle(InputAction.CallbackContext c) {
+			DialogueManager.instance.ToggleLog();
 		}
 	}
 }

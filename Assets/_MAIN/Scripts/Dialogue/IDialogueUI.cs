@@ -11,7 +11,7 @@ namespace origin.dialogue {
         void Hide();
         void Empty();
 
-        void ChangeNameAndTheme(string text, string ID);
+        void ChangeNameAndTheme(string nameKey, string subnameKey, string ID);
         void ChangeLetterBoxTheme(string ID);
         void SetLetterboxSpeed(float speed);
         void SetPromptVisible(bool visible);

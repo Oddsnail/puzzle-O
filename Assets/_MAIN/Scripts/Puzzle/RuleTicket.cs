@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using origin.language;
 using TMPro;
 
 namespace origin.puzzle {
@@ -8,9 +9,22 @@ namespace origin.puzzle {
 	
 	public class RuleTicket: MonoBehaviour {
 
-		public Image colorImage;
-		public TextMeshProUGUI title;
-        public TextMeshProUGUI description;
+		public GameObject root;
+		public LocalizedText title;
+        public LocalizedText description;
+		public TextMeshProUGUI order;
 
-    }
+		public Image colorImage;
+		public Image subcolorImage;
+
+		public void SetColor(Color color, Color subcolor) {
+			colorImage.color = color;
+			subcolorImage.color = subcolor;
+		}
+
+		public void SetKey(string titleKey, string descriptionKey) {
+			title.SetKey(titleKey);
+			description.SetKey(descriptionKey);
+		}
+	}
 }

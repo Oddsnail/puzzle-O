@@ -1,15 +1,36 @@
 # initializing
 
-add(leedoeun)
-ix(leedoeun)
-setposX(leedoeun -660 -i true)
-sp(leedoeun std1-111)
+add(yjh lde)
+setposX(yjh -400 -i true)
+setposX(lde 400 -i true)
+sp(yjh std1-113)
+sp(lde std2-411)
 
 # dialogue start
 
-puzzle(leedoeun 7 classic s f)
+[default::] "NEW SPRITE ASSET MIGRATION & POSE CHANGE TEST"
+appear(yjh)
+[yjh::h] "Eyyy"
+[:_-__4:h] "Oh, so...I should do many poses as possible."
+setposX(yjh -300)
+[:std2-112:h] "Like this one?"
+setposX(yjh -500)
+[:std3-132-_-_-finger1:h] "Maybe,{wa:0.5} Maybe this one..."
+setposX(yjh -400)
+[:std2-131:h] "Hmm!"
+[:std3-113-_-_-finger2:h] "Much more to go..."
+[:std1-122-blsh:c] "Heh..."
 
-.s
-.f
+appear(lde)
+[lde::] "..."
+[:_-__2:c] "Can you stay still, {wa:0.5}for just a minute...?"
+[yjh:std2-111:h] "Hmm..."
+
+setposX(yjh 200)
+setposX(lde 600)
+sp(lde std2-431-blsh-sweat)
+h(lde)
+
+[yjh:_-_32:h] "No!"
 
 end(EOF)

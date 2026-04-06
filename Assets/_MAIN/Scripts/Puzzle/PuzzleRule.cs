@@ -11,6 +11,7 @@ namespace origin.puzzle {
 
 		public string ruleID;
 		public Color color;
+		public Color subcolor;
 		public string title;
 		public string description;
 		public Func<string, char, int, bool> CheckCondition { get; set; }
@@ -18,18 +19,12 @@ namespace origin.puzzle {
 		public int scoreValue = 0;
 		public string characterEffect = "";
 
-		public PuzzleRule(string id, Color color, string title, string description, Func<string, char, int, bool> checkCondition) {
-			this.ruleID = id;
-			this.color = color;
-			this.description = description;
-			this.CheckCondition = checkCondition;
-		}
-
-		public PuzzleRule(string id, Color color, string title, string description,
+		public PuzzleRule(string id, Color color, Color subcolor, string title, string description,
 		                  Func<string, char, int, bool> checkCondition,
 		                  float audioPitch, int scoreValue, string characterEffect = "") {
 			this.ruleID = id;
 			this.color = color;
+			this.subcolor = subcolor;
 			this.title = title;
 			this.description = description;
 			this.CheckCondition = checkCondition;

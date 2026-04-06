@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using origin.graphic;
+using origin.language;
 
 namespace origin.dialogue {
 	public class DialogueUIManager {
@@ -23,7 +24,8 @@ namespace origin.dialogue {
 		private const float defaultChangeNameDuration = 0.1f;
 		private const float defaultNameAnimOffset = 100.0f;
 		private const float defaultShowAndHideDuration = 0.6f;
-		private const float defaultDialogueHideYPos = -490f;
+		private const float defaultDialogueHideYPos = -700f;
+		private const float defaultDialogueShowYPos = 120f;
 
 		public void Initialize(DialogueContainer dialogueContainer, MonoBehaviour runner) {
 			container = dialogueContainer;
@@ -35,9 +37,9 @@ namespace origin.dialogue {
 			container.dialogueText.text = "";
 		}
 
-		public void ChangeNameAndTheme(string text, Color color) {
+		public void ChangeNameAndTheme(string nameKey, string subnameKey, Color color) {
 			if (isNameTransitioning) return;
-			co_name_transitioning = runner.StartCoroutine(ChangeNameAnimation(text, color));
+			co_name_transitioning = runner.StartCoroutine(ChangeNameAnimation(nameKey, subnameKey, color));
 		}
 
 		public void ChangeLetterBoxTheme(Color color) {
@@ -45,7 +47,7 @@ namespace origin.dialogue {
 			container.lowerLetterbox.GetComponent<LetterboxLoop>().ColorTransition(color);
 		}
 
-		private IEnumerator ChangeNameAnimation(string text, Color color) {
+		private IEnumerator ChangeNameAnimation(string nameKey, string subnameKey, Color color) {
 
 			RectTransform nameRect = container.nameRoot;
 			Vector2 defaultPosition = nameRect.anchoredPosition;
@@ -58,9 +60,26 @@ namespace origin.dialogue {
 
 			nameRect.anchoredPosition = new Vector2(defaultPosition.x - defaultNameAnimOffset * 2f, defaultPosition.y);
 			container.SetThemeColor(color);
-			container.nameText.SetText(text);
-			if (text == "" && nameRect.gameObject.activeSelf) nameRect.gameObject.SetActive(false);
-			if (text != "" && !nameRect.gameObject.activeSelf) nameRect.gameObject.SetActive(true);
+
+			bool isEmpty = string.IsNullOrEmpty(nameKey);
+
+			if (!isEmpty) {
+				LocalizedText localizedText = container.nameText.GetComponent<LocalizedText>();
+				if (localizedText != null) {
+					localizedText.SetFormatter(() => {
+						var lm = LocalizationManager.instance;
+						string name = lm.Get(nameKey);
+						string subname = lm.Get(subnameKey);
+						return $"{name} <size=70%><color=#BBBBBB>{subname}</color></size>";
+					});
+				}
+			}
+			else {
+				container.nameText.SetText("");
+			}
+
+			if (isEmpty && nameRect.gameObject.activeSelf) nameRect.gameObject.SetActive(false);
+			if (!isEmpty && !nameRect.gameObject.activeSelf) nameRect.gameObject.SetActive(true);
 
 			yield return DOTween.Sequence()
 				.Join(nameCanvasGroup.DOFade(1f, defaultChangeNameDuration))
@@ -91,17 +110,14 @@ namespace origin.dialogue {
 			container.lowerLetterbox.GetComponent<LetterboxLoop>().speed = -1 * speed;
 		}
 
-		private float defaultLetterboxGap => container.upperLetterbox.sizeDelta.y / 2f;
-		private float defaultUpperLetterboxYPos => -container.upperLetterbox.sizeDelta.y;
-
 		private IEnumerator Showing() {
 			showing = true;
 			container.dialogueRoot.gameObject.SetActive(true);
 
 			yield return DOTween.Sequence()
-				.Join(container.dialogueRoot.DOAnchorPosY(-defaultDialogueHideYPos / 14f, defaultShowAndHideDuration))
-				.Join(container.upperLetterbox.DOAnchorPosY(defaultUpperLetterboxYPos, defaultShowAndHideDuration))
-				.Join(container.lowerLetterbox.DOAnchorPosY(0.0f, defaultShowAndHideDuration))
+				.Join(container.dialogueRoot.DOAnchorPosY(defaultDialogueShowYPos, defaultShowAndHideDuration))
+				.Join(container.upperLetterbox.DOAnchorPosY(container.upperLetterbox.GetComponent<LetterboxLoop>().showYPos, defaultShowAndHideDuration))
+				.Join(container.lowerLetterbox.DOAnchorPosY(container.lowerLetterbox.GetComponent<LetterboxLoop>().showYPos, defaultShowAndHideDuration))
 				.WaitForCompletion();
 
 			co_transitioning = null;
@@ -111,8 +127,8 @@ namespace origin.dialogue {
 			showing = false;
 			yield return DOTween.Sequence()
 				.Join(container.dialogueRoot.DOAnchorPosY(defaultDialogueHideYPos, defaultShowAndHideDuration))
-				.Join(container.upperLetterbox.DOAnchorPosY(defaultUpperLetterboxYPos + defaultLetterboxGap, defaultShowAndHideDuration))
-				.Join(container.lowerLetterbox.DOAnchorPosY(-defaultLetterboxGap, defaultShowAndHideDuration))
+				.Join(container.upperLetterbox.DOAnchorPosY(container.upperLetterbox.GetComponent<LetterboxLoop>().hideYPos, defaultShowAndHideDuration))
+				.Join(container.lowerLetterbox.DOAnchorPosY(container.lowerLetterbox.GetComponent<LetterboxLoop>().hideYPos, defaultShowAndHideDuration))
 				.WaitForCompletion();
 
 			container.dialogueRoot.gameObject.SetActive(false);
@@ -137,7 +153,7 @@ namespace origin.dialogue {
 
 			for (int i = 0; i < choices.Length; i++) {
 				GameObject choiceButton = GameObject.Instantiate(container.choicePrefab, container.choicePanel);
-				TMP_Text buttonText = choiceButton.GetComponentInChildren<TMP_Text>();
+				LocalizedText buttonText = choiceButton.GetComponentInChildren<LocalizedText>();
 				OptionButton optionButton = choiceButton.GetComponent<OptionButton>();
 
 				// ===== sprite change logic (might get deleted) =====
@@ -148,7 +164,7 @@ namespace origin.dialogue {
 				Button button = optionButton.button.GetComponent<Button>();
 				string code = choices[i].Item2;
 				button.onClick.AddListener(() => ChoiceHandler(code));
-				buttonText.text = choices[i].Item1;
+				buttonText.SetKey(choices[i].Item1);
 				if (isColored) optionButton.SetSelectColor(choices[i].Item3);
 			}
 

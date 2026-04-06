@@ -1,59 +1,84 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace origin.graphic {
-    public class SideBox : MonoBehaviour{
+    public class SideBox : MonoBehaviour {
 
-        public bool shown { get; private set; }
         public RectTransform sideBoxRect;
-
-        private Coroutine co_showing;
-        private bool isShowing => shown && co_showing != null;
-        private bool isHiding => !shown && co_showing != null;
-        public float animationXoffset = 0.0f;
+        public Graphic hoverTarget;
+        public float hideXPos;
+        public float peekXPos;
+        public float showXPos = 0f;
         public float animationSpeed = 2.0f;
 
-		public void OnHoverEnter() { Show(); }
+        private bool hoverEnabled = false;
+        private bool isHovered = false;
+        private Coroutine co_sliding = null;
+        public bool isSliding => co_sliding != null;
 
-		public void OnHoverExit() { Hide(); }
+        private PointerEventData pointerData;
+        private readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
 
-		private void Show() {
-			if (isShowing) return;
-			if (isHiding) StopCoroutine(co_showing);
+        public void EnableHover() {
+            hoverEnabled = true;
+            isHovered = false;
+        }
 
-			shown = true;
-			co_showing = StartCoroutine(Showing(true));
-			return;
-		}
+        public void DisableHover() {
+            hoverEnabled = false;
+            isHovered = false;
+        }
 
-		private void Hide() {
-			if (isHiding) return;
-			if (isShowing) StopCoroutine(co_showing);
+        private void Update() {
+            if (!hoverEnabled) return;
 
-			shown = false;
-			co_showing = StartCoroutine(Showing(false));
-			return;
-		}
+            if (pointerData == null)
+                pointerData = new PointerEventData(EventSystem.current);
 
-		private IEnumerator Showing(bool state) {
-			float startX = sideBoxRect.anchoredPosition.x;
-			float startY = sideBoxRect.anchoredPosition.y;
+            pointerData.position = Input.mousePosition;
+            raycastResults.Clear();
+            EventSystem.current.RaycastAll(pointerData, raycastResults);
 
-			float endX = state ? 0f : 0f + animationXoffset;
+            bool mouseOver = false;
+            for (int i = 0; i < raycastResults.Count; i++) {
+                if (raycastResults[i].gameObject == hoverTarget.gameObject) {
+                    mouseOver = true;
+                    break;
+                }
+            }
 
-			float percent = 0f;
-			while (percent < 1f) {
-				percent += Time.deltaTime * animationSpeed;
+            if (mouseOver && !isHovered) {
+                isHovered = true;
+                SlideTo(showXPos);
+            }
+            else if (!mouseOver && isHovered) {
+                isHovered = false;
+                SlideTo(peekXPos);
+            }
+        }
 
-				sideBoxRect.anchoredPosition = Vector2.Lerp(new(startX, startY), new(endX, startY), percent);
+        public void SlideTo(float targetX) {
+            if (co_sliding != null) StopCoroutine(co_sliding);
+            co_sliding = StartCoroutine(Sliding(targetX));
+        }
 
-				yield return null;
-			}
+        private IEnumerator Sliding(float targetX) {
+            Vector2 start = sideBoxRect.anchoredPosition;
+            float startX = start.x;
+            float percent = 0f;
 
-			sideBoxRect.anchoredPosition = new(endX, startY);
+            while (percent < 1f) {
+                percent += Time.deltaTime * animationSpeed;
+                float x = Mathf.Lerp(startX, targetX, percent);
+                sideBoxRect.anchoredPosition = new Vector2(x, start.y);
+                yield return null;
+            }
 
-			co_showing = null;
-		}
+            sideBoxRect.anchoredPosition = new Vector2(targetX, start.y);
+            co_sliding = null;
+        }
     }
 }

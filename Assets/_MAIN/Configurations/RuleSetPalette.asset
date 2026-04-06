@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5ec34ec2ddbef4bbadec0403da2185, type: 3}
+  m_Name: RuleSetPalette
+  m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.RuleSetPalette
+  rulePalettes:
+  - ruleSetCode: classic
+    palettes:
+    - ID: strike
+      primary: {r: 0.3820755, g: 0.2018512, b: 0.2018512, a: 1}
+      secondary: {r: 0.5849056, g: 0.2896938, b: 0.2896938, a: 1}
+    - ID: semi-strike
+      primary: {r: 0.31847635, g: 0.21168566, b: 0.33490568, a: 1}
+      secondary: {r: 0.5424528, g: 0.27634388, b: 0.53660834, a: 1}
+    - ID: ball
+      primary: {r: 0.17265932, g: 0.19609699, b: 0.3773585, a: 1}
+      secondary: {r: 0.32645074, g: 0.3458823, b: 0.6179246, a: 1}
+  - ruleSetCode: oddeven
+    palettes:
+    - ID: strike
+      primary: {r: 0.5, g: 0.42271057, b: 0.18632075, a: 1}
+      secondary: {r: 0.8018868, g: 0.6759854, b: 0.26099145, a: 1}
+    - ID: parity-match
+      primary: {r: 0.5801887, g: 0.27233922, b: 0.16967781, a: 1}
+      secondary: {r: 0.7122642, g: 0.4129505, b: 0.30573604, a: 1}
+    - ID: range-match
+      primary: {r: 0.5424528, g: 0.21237539, b: 0.3600895, a: 1}
+      secondary: {r: 0.7877358, g: 0.41987804, b: 0.5880426, a: 1}

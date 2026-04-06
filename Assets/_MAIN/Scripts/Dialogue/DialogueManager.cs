@@ -7,7 +7,6 @@ using origin.audio;
 using origin.graphic;
 using origin.character;
 using origin.command;
-using Microsoft.Unity.VisualStudio.Editor;
 
 namespace origin.dialogue {
 	public class DialogueManager : MonoBehaviour, IDialogueUI, IConversationControl {
@@ -18,8 +17,11 @@ namespace origin.dialogue {
 		private ConversationManager conversationManager;
 		private DialogueUIManager dialogueUIManager;
 		private BackgroundManager backgroundManager;
+		private LogManager logManager;
 		public DialogueContainer dialogueContainer = new();
+		public LogContainer logContainer = new();
 		public GameObject backgroundImage;
+		public GameObject backgroundFogImage;
 		public GameObject cutsceneImage;
 
 		public event Action onNextDialogueRequest;
@@ -41,8 +43,10 @@ namespace origin.dialogue {
 			textArchitect = new(dialogueContainer.dialogueText);
 			dialogueUIManager = new();
 			backgroundManager = new();
+			logManager = new();
 			dialogueUIManager.Initialize(dialogueContainer, this);
-			backgroundManager.Initialize(backgroundImage, cutsceneImage, this);
+			backgroundManager.Initialize(backgroundImage, cutsceneImage, backgroundFogImage, this);
+			logManager.Initialize(logContainer, this);
 		}
 
 		private void Start() {
@@ -70,7 +74,7 @@ namespace origin.dialogue {
 
 		public void OnNextDialogueRequest() => onNextDialogueRequest?.Invoke();
 
-		public void ChangeNameAndTheme(string text, string ID) => dialogueUIManager.ChangeNameAndTheme(text, colorPalette.Getcolor(ID));
+		public void ChangeNameAndTheme(string nameKey, string subnameKey, string ID) => dialogueUIManager.ChangeNameAndTheme(nameKey, subnameKey, colorPalette.Getcolor(ID));
 
 		public void ChangeLetterBoxTheme(string ID) => dialogueUIManager.ChangeLetterBoxTheme(colorPalette.Getcolor(ID));
 
@@ -83,11 +87,18 @@ namespace origin.dialogue {
 
 		public void ChangeBackground(string backgroundName) => backgroundManager.ChangeBackground(backgroundName);
 		public void ChangeCutscene(string cutsceneName) => backgroundManager.ChangeCutscene(cutsceneName);
+		public void ChangeBgFog(bool show) => backgroundManager.BackgroundFog(show);
 		public void QuitCutscene() => backgroundManager.QuitCutscene();
+
+		public bool IsLogOpen => logManager.IsLogOpen;
+		public void ToggleLog() => logManager.ToggleLog();
+		public void CloseLog() => logManager.CloseLog();
+		public void AddLog(string speaker, List<string> content) => logManager.AddLog(speaker, content);
+		public void EmptyLog() => logManager.EmptyLog();
 
 		public IEnumerator AvailableChoices((string, string, string)[] choices, bool isColored) {
 			yield return dialogueUIManager.CreateChoices(choices, isColored, (choicedCode) => {
-				AudioManager.Instance.PlaySoundEffect("SFX/dialogue-3");
+				AudioManager.instance.PlayPreloadedSFX("choiceMade", AudioManager.instance.sfxMixer);
 				conversationManager.Jump(choicedCode);
 			});
 		}
