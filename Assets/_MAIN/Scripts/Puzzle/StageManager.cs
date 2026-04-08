@@ -31,9 +31,9 @@ namespace origin.puzzle {
 			this.runner = runner;
 		}
 
-		public Coroutine StartStage(string charID, int trial, Action<bool> onResult, string ruleSetCode = "classic") {
+		public Coroutine StartStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode = "classic") {
 			StopStage();
-			co_stage = runner.StartCoroutine(RunningStage(charID, trial, onResult, ruleSetCode));
+			co_stage = runner.StartCoroutine(RunningStage(charID, digitCount, trial, onResult, ruleSetCode));
 			return co_stage;
 		}
 
@@ -48,8 +48,9 @@ namespace origin.puzzle {
 			if (guessing) recentChoice = guess;
 		}
 
-		private IEnumerator RunningStage(string charID, int trial, Action<bool> onResult, string ruleSetCode) {
+		private IEnumerator RunningStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode) {
 
+			// ** RULE SET SETUP **
 			activeRules = null;
 			foreach (RulePalette rp in ruleSetPalette.rulePalettes) {
 				if (rp.ruleSetCode == ruleSetCode) {
@@ -62,19 +63,17 @@ namespace origin.puzzle {
 				activeRules = PuzzleRuleFactory.CreateRuleSet(ruleSetPalette.rulePalettes[0]);
 			}
 
+			// ** UI COLOR THEME SETUP**
 			string ID = charID + "-client";
 			puzzleUI.UpdateTrials(trial, trial);
-
-			if (!CharacterManager.instance.HasCharacter(ID)) CharacterManager.instance.AddClient(charID);
-			CHARACTER character = CharacterManager.instance.GetCharacter(ID);
-
-			Color theme = colorPalette.Getcolor(character.config.ID);
+			// if (!CharacterManager.instance.HasCharacter(ID)) CharacterManager.instance.AddClient(charID);
+			// CHARACTER character = CharacterManager.instance.GetCharacter(ID);
+			Color theme = colorPalette.Getcolor(charID);
 			puzzleUI.SetThemeColor(theme);
-			yield return new WaitForSeconds(0.7f);
+			yield return new WaitForSeconds(0.5f);
 
-			string answer = GenerateUniqueFourDigitNumber();
-			string history = "";
-			puzzleUI.UpdateHistory(history);
+			// ** ANSWER GENERATION **
+			string answer = GenerateUnique_nDigitNumber(digitCount);
 			puzzleUI.UpdateRuleSet(activeRules);
 
 			bool successed = false;
@@ -82,50 +81,47 @@ namespace origin.puzzle {
 			Debug.Log($"answer is : {answer}");
 
 			puzzleUI.Show();
-			character.Appear();
+			// character.Appear();
 
 			for (int i = 0; i < trial; i++) {
 				int score = 0;
-				for (int choice = 0; choice < 4; choice++) {
+				for (int choice = 0; choice < digitCount; choice++) {
 					guessing = true;
 
 					yield return new WaitUntil(() => recentChoice != ' ');
 
-					bool ruleMatched = false;
+					PuzzleRule matchedRule = null;
 					foreach (PuzzleRule rule in activeRules) {
 						if (rule.Evaluate(answer, recentChoice, choice)) {
-							history += $"<color=#{ColorUtility.ToHtmlStringRGB(rule.color)}>" + recentChoice + "</color>";
-
+							
 							string soundEffect = rule.ruleID == "miss" ? "sfx/puzzle-fail" : "sfx/puzzle-strike";
 							AudioManager.instance.PlaySoundEffect(soundEffect, pitch: rule.audioPitch);
 
-							score += rule.scoreValue;
+							score += recentChoice == answer[choice] ? 1 : 0;
 
-							if (rule.characterEffect == "shiver") {
-								character.Shiver();
-							}
+							// if (rule.characterEffect == "shiver") {
+							// 	character.Shiver();
+							// }
 
-							ruleMatched = true;
+							matchedRule = rule;
 							break;
 						}
 					}
 
-					if (!ruleMatched) {
-						Debug.LogWarning($"No puzzle rule matched for guess '{recentChoice}' at position {choice}");
-						history += $"<color=#BBBBBB>" + recentChoice + "</color>";
-						AudioManager.instance.PlaySoundEffect("sfx/puzzle-fail", pitch: 1.0f);
+					if (matchedRule == null) {
+						Debug.LogWarning($"No matching rule found for guess '{recentChoice}' at position {choice} in trial {i + 1}");
+						break;
 					}
 
-					puzzleUI.UpdateHistory(history);
+					puzzleUI.UpdateTrial(i, recentChoice - '0', matchedRule.color, matchedRule.subcolor);
 
 					guessing = false;
 					recentChoice = ' ';
 				}
-				history += "\n";
 				puzzleUI.UpdateTrials(trial - 1 - i, trial);
 				AudioManager.instance.PlaySoundEffect("sfx/dialogue-3");
 
-				if (score == 4) {
+				if (score == digitCount) {
 					successed = true;
 					break;
 				}
@@ -133,17 +129,18 @@ namespace origin.puzzle {
 
 			yield return new WaitForSeconds(0.1f);
 			puzzleUI.Hide();
-			character.Disappear();
+			puzzleUI.Empty();
+			// character.Disappear();
 			co_stage = null;
 			onResult?.Invoke(successed);
 			yield return new WaitForSeconds(0.1f);
 		}
 
-		public static string GenerateUniqueFourDigitNumber() {
+		public static string GenerateUnique_nDigitNumber(int digitCount) {
 			List<char> numbers = new();
 			HashSet<char> uniqueness = new();
 
-			while (numbers.Count < 4) {
+			while (numbers.Count < digitCount) {
 				int digit = UnityEngine.Random.Range(0, 10);
 				if (!uniqueness.Contains(TABLE[digit])) {
 					numbers.Add(TABLE[digit]);

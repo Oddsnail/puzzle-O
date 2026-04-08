@@ -109,7 +109,7 @@ namespace origin.dialogue {
         private IEnumerator Build_Typewriter() {
             while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount) {
                 tmpro.maxVisibleCharacters += speedUp ? 3 * CharactersPerCycle : CharactersPerCycle;
-                AudioManager.instance.PlayPreloadedSFX("textBuild", AudioManager.instance.sfxMixer, 0.2f, 1.7f + Random.Range(-0.05f, 0.05f));
+                AudioManager.instance.PlayPreloadedSFX("textBuild", AudioManager.instance.sfxMixer, 1.0f + Random.Range(-0.05f, 0.05f));
                 yield return new WaitForSeconds(0.02f / Speed);
             }
         }

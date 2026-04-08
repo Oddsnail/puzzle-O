@@ -17,11 +17,11 @@ play(bgm/spaceship_earth -l true)
 
 #puzzle test (temp)
 wait-disappear(lde)
-puzzle(lde 6 classic s f)
+puzzle(lde 4 8 classic s f)
 
 .s
 
-puzzle(yjh 6 oddeven s2 f2)
+puzzle(yjh 3 6 oddeven s2 f2)
 
 .s2
 .f2

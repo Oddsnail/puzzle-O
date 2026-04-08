@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using origin.audio;
+using origin.settings;
 
 namespace origin.graphic {
     public class SideBox : MonoBehaviour {
@@ -11,7 +13,7 @@ namespace origin.graphic {
         public Graphic hoverTarget;
         public float hideXPos;
         public float peekXPos;
-        public float showXPos = 0f;
+        public float showXPos;
         public float animationSpeed = 2.0f;
 
         private bool hoverEnabled = false;
@@ -34,6 +36,7 @@ namespace origin.graphic {
 
         private void Update() {
             if (!hoverEnabled) return;
+            if (GameSettingManager.instance.IsMenuOn) return;
 
             if (pointerData == null)
                 pointerData = new PointerEventData(EventSystem.current);
@@ -69,10 +72,12 @@ namespace origin.graphic {
             Vector2 start = sideBoxRect.anchoredPosition;
             float startX = start.x;
             float percent = 0f;
+            AudioManager.instance.PlayPreloadedSFX("sideBoxHover", AudioManager.instance.sfxMixer);
 
             while (percent < 1f) {
                 percent += Time.deltaTime * animationSpeed;
-                float x = Mathf.Lerp(startX, targetX, percent);
+                float eased = 1f - Mathf.Pow(1f - percent, 3f);
+                float x = Mathf.Lerp(startX, targetX, eased);
                 sideBoxRect.anchoredPosition = new Vector2(x, start.y);
                 yield return null;
             }

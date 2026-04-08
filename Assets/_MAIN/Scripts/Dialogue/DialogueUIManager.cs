@@ -112,7 +112,6 @@ namespace origin.dialogue {
 
 		private IEnumerator Showing() {
 			showing = true;
-			container.dialogueRoot.gameObject.SetActive(true);
 
 			yield return DOTween.Sequence()
 				.Join(container.dialogueRoot.DOAnchorPosY(defaultDialogueShowYPos, defaultShowAndHideDuration))
@@ -131,7 +130,6 @@ namespace origin.dialogue {
 				.Join(container.lowerLetterbox.DOAnchorPosY(container.lowerLetterbox.GetComponent<LetterboxLoop>().hideYPos, defaultShowAndHideDuration))
 				.WaitForCompletion();
 
-			container.dialogueRoot.gameObject.SetActive(false);
 			co_transitioning = null;
 		}
 

@@ -21,7 +21,7 @@ namespace origin.puzzle {
 
 		public PuzzleRule(string id, Color color, Color subcolor, string title, string description,
 		                  Func<string, char, int, bool> checkCondition,
-		                  float audioPitch, int scoreValue, string characterEffect = "") {
+		                  float audioPitch, string characterEffect = "") {
 			this.ruleID = id;
 			this.color = color;
 			this.subcolor = subcolor;
@@ -29,7 +29,6 @@ namespace origin.puzzle {
 			this.description = description;
 			this.CheckCondition = checkCondition;
 			this.audioPitch = audioPitch;
-			this.scoreValue = scoreValue;
 			this.characterEffect = characterEffect;
 		}
 

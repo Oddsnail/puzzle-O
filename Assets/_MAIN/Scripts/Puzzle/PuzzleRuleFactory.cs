@@ -12,7 +12,7 @@ namespace origin.puzzle {
 
 		private const string TABLE = "0123456789";
 
-		private static Color grey = new(0.73f, 0.73f, 0.73f);
+		private static Color grey = new(0.40f, 0.40f, 0.40f);
 
 		public static PuzzleRule CreateStrikeRule(Color color, Color subcolor) {
 			return new PuzzleRule(
@@ -23,7 +23,6 @@ namespace origin.puzzle {
 				description: "game.rule.1.description",
 				checkCondition: (answer, guess, position) => answer[position] == guess,
 				audioPitch: 1.3f,
-				scoreValue: 1,
 				characterEffect: "shiver"
 			);
 		}
@@ -40,8 +39,7 @@ namespace origin.puzzle {
 					int guessIndex = TABLE.IndexOf(guess);
 					return answerIndex != -1 && guessIndex != -1 && answerIndex % 5 == guessIndex % 5;
 				},
-				audioPitch: 1.0f,
-				scoreValue: 0
+				audioPitch: 1.0f
 			);
 		}
 
@@ -53,8 +51,7 @@ namespace origin.puzzle {
 				title: "game.rule.3.title",
 				description: "game.rule.3.description",
 				checkCondition: (answer, guess, position) => answer.Contains(guess),
-				audioPitch: 0.7f,
-				scoreValue: 0
+				audioPitch: 0.7f
 			);
 		}
 
@@ -63,11 +60,10 @@ namespace origin.puzzle {
 				id: "miss",
 				color: grey,
 				subcolor: grey,
-				title: "_Miss",
-				description: "_Digit is not in the answer",
+				title: "game.rule.miss.title",
+				description: "game.rule.miss.description",
 				checkCondition: (answer, guess, position) => true,
-				audioPitch: 1.0f,
-				scoreValue: 0
+				audioPitch: 1.0f
 			);
 		}
 
@@ -83,8 +79,7 @@ namespace origin.puzzle {
 					int guessDigit = guess - '0';
 					return (answerDigit % 2) == (guessDigit % 2);
 				},
-				audioPitch: 0.9f,
-				scoreValue: 0
+				audioPitch: 0.9f
 			);
 		}
 
@@ -100,8 +95,7 @@ namespace origin.puzzle {
 					int guessDigit = guess - '0';
 					return Math.Abs(answerDigit - guessDigit) <= 1;
 				},
-				audioPitch: 0.8f,
-				scoreValue: 0
+				audioPitch: 0.8f
 			);
 		}
 
@@ -117,8 +111,7 @@ namespace origin.puzzle {
 					int guessDigit = guess - '0';
 					return guessDigit > answerDigit;
 				},
-				audioPitch: 0.85f,
-				scoreValue: 0
+				audioPitch: 0.85f
 			);
 		}
 
@@ -134,8 +127,7 @@ namespace origin.puzzle {
 					int guessDigit = guess - '0';
 					return guessDigit < answerDigit;
 				},
-				audioPitch: 0.85f,
-				scoreValue: 0
+				audioPitch: 0.85f
 			);
 		}
 

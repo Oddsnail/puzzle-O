@@ -10,8 +10,10 @@ namespace origin.puzzle {
 		void Hide();
 
 		void SetThemeColor(Color color);
-		void UpdateHistory(string history);
+		void SetupTrials(int digitCount, int trialCount);
 		void UpdateRuleSet(List<PuzzleRule> ruleSet);
+		void UpdateTrial(int trial, int digit, Color color, Color subcolor);
 		void UpdateTrials(int remaining, int total);
+		void Empty();
 	}
 }

@@ -11,8 +11,8 @@ namespace origin.graphic {
 		public float hideYPos;
 		public float showYPos;
 
-		private float offset = 0;
 		private Material material;
+		private float offset = 0;
 		private Coroutine co_colorTransitioning;
 		private Image letterboxColorImage;
 		private bool initialized = false;
@@ -23,7 +23,7 @@ namespace origin.graphic {
 			Image innerImage = inner.GetComponent<Image>();
 			letterboxColorImage = image;
 			if (image != null) {
-				material = new(image.material);
+				material = new Material(gameObject.GetComponent<Image>().material);
 				image.material = material;
 				innerImage.material = material;
 				initialized = true;

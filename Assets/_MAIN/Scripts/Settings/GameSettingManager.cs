@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 using origin.IO;
 using origin.language;

@@ -14,13 +14,8 @@ namespace origin.puzzle {
 		private SideBox ruleSideBox;
 
 		private Coroutine co_animating = null;
+		private List<Trial> trials = new();
 		public bool isAnimating => co_animating != null;
-
-		private const string Starter = "";
-		private const string Ender = "";
-
-		private const float defaultHideXPos = 1250.0f;
-		private const float defaultPeekXPos = 1050.0f;
 
 		public void Initialize(PuzzleContainer puzzleContainer, RuleContainer ruleContainer, MonoBehaviour runner) {
 			this.puzzleContainer = puzzleContainer;
@@ -29,14 +24,6 @@ namespace origin.puzzle {
 
 			puzzleSideBox = puzzleContainer.containerRoot.GetComponent<SideBox>();
 			ruleSideBox = ruleContainer.containerRoot.GetComponent<SideBox>();
-
-			puzzleSideBox.hideXPos = defaultHideXPos;
-			puzzleSideBox.peekXPos = defaultPeekXPos;
-			puzzleSideBox.showXPos = 0f;
-
-			ruleSideBox.hideXPos = -defaultHideXPos;
-			ruleSideBox.peekXPos = -defaultPeekXPos;
-			ruleSideBox.showXPos = 0f;
 		}
 
 		public void SetThemeColor(Color color) {
@@ -44,15 +31,24 @@ namespace origin.puzzle {
 			ruleContainer.puzzleColor.color = color;
 		}
 
-		public void UpdateHistory(string history) {
-			puzzleContainer.historyText.text = Starter + history + Ender;
+		public void SetupTrials(int digitCount, int trialCount) {
+			for (int i = 0; i < trialCount; i++) {
+				GameObject trialObj = Object.Instantiate(puzzleContainer.trialPrefab, puzzleContainer.trialPanel);
+				Trial trial = trialObj.GetComponent<Trial>();
+				trial.Initialize(digitCount);
+				trials.Add(trial);
+			}
+		}
+
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) {
+			if (trial < 0 || trial >= trials.Count) return;
+			trials[trial].InputDigit(digit, color, subcolor);
 		}
 
 		public void UpdateRuleSet(List<PuzzleRule> ruleSet) {
 			ruleContainer.EmptyRule();
 			int order = 1;
 			foreach (PuzzleRule rule in ruleSet) {
-				if (rule.ruleID == "miss") break;
 				ruleContainer.Addrule(rule, order);
 				order++;
 			}
@@ -60,6 +56,15 @@ namespace origin.puzzle {
 
 		public void UpdateTrials(int remaining, int total) {
 			puzzleContainer.trialsText.text = $"{remaining}/{total}";
+		}
+
+		public void Empty() {
+			foreach (Trial trial in trials) {
+				if (trial != null) Object.Destroy(trial.gameObject);
+			}
+			trials.Clear();
+			ruleContainer.EmptyRule();
+			puzzleContainer.trialsText.text = "";
 		}
 
 		public void Show() {
@@ -82,8 +87,8 @@ namespace origin.puzzle {
 			puzzleSideBox.DisableHover();
 			ruleSideBox.DisableHover();
 
-			puzzleSideBox.SlideTo(defaultPeekXPos);
-			ruleSideBox.SlideTo(-defaultPeekXPos);
+			puzzleSideBox.SlideTo(puzzleSideBox.peekXPos);
+			ruleSideBox.SlideTo(ruleSideBox.peekXPos);
 
 			yield return new WaitUntil(() => !puzzleSideBox.isSliding && !ruleSideBox.isSliding);
 
@@ -97,8 +102,8 @@ namespace origin.puzzle {
 			puzzleSideBox.DisableHover();
 			ruleSideBox.DisableHover();
 
-			puzzleSideBox.SlideTo(defaultHideXPos);
-			ruleSideBox.SlideTo(-defaultHideXPos);
+			puzzleSideBox.SlideTo(puzzleSideBox.hideXPos);
+			ruleSideBox.SlideTo(ruleSideBox.hideXPos);
 
 			yield return new WaitUntil(() => !puzzleSideBox.isSliding && !ruleSideBox.isSliding);
 

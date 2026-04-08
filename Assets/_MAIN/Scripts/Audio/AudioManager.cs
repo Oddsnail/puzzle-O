@@ -8,6 +8,8 @@ namespace origin.audio {
     [Serializable]
     public struct SFXEntry {
         public string id;
+        [Range(0f, 3f)]
+        public float volume;
         public AudioClip clip;
     }
 
@@ -20,7 +22,7 @@ namespace origin.audio {
 
         [SerializeField] private SFXEntry[] preloadedSFX;
 
-        private Dictionary<string, AudioClip> _sfxMap;
+        private Dictionary<string, (float, AudioClip)> _sfxMap;
         private Transform sfxRoot;
         private Transform musicRoot;
         private Transform voiceRoot;
@@ -45,16 +47,16 @@ namespace origin.audio {
             voiceRoot = new GameObject("Voice").transform;
             voiceRoot.SetParent(transform);
 
-            _sfxMap = new Dictionary<string, AudioClip>();
+            _sfxMap = new Dictionary<string, (float, AudioClip)>();
             foreach (var entry in preloadedSFX) {
                 if (entry.clip != null && !string.IsNullOrEmpty(entry.id))
-                    _sfxMap[entry.id] = entry.clip;
+                    _sfxMap[entry.id] = (entry.volume, entry.clip);
             }
         }
 
-        public AudioSource PlayPreloadedSFX(string id, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false) {
-            if (_sfxMap.TryGetValue(id, out AudioClip clip))
-                return PlaySoundEffect(clip, mixer, volume, pitch, loop);
+        public AudioSource PlayPreloadedSFX(string id, AudioMixerGroup mixer = null, float pitch = 1, bool loop = false) {
+            if (_sfxMap.TryGetValue(id, out var sfxData))
+                return PlaySoundEffect(sfxData.Item2, mixer, sfxData.Item1, pitch, loop);
 
             Debug.LogError($"Preloaded SFX '{id}' not found in sfxMap.");
             return null;

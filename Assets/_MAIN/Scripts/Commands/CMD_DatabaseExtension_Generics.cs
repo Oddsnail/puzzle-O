@@ -324,12 +324,13 @@ namespace origin.command {
 			IDialogueUI ui = DialogueManager.instance;
 			IConversationControl conv = DialogueManager.instance;
 
-			int.TryParse(data[1], out int difficulty);
+			int.TryParse(data[1], out int digitCount);
+			int.TryParse(data[2], out int difficulty);
 			ui.Hide();
 			bool successed = false;
-			yield return PuzzleManager.instance.StartPuzzle(data[0], difficulty, success => successed = success, data[2]);
-			if (successed) conv.Jump(data[3]);
-			else conv.Jump(data[4]);
+			yield return PuzzleManager.instance.StartPuzzle(data[0], digitCount, difficulty, success => successed = success, data[3]);
+			if (successed) conv.Jump(data[4]);
+			else conv.Jump(data[5]);
 			ui.Empty();
 			ui.Show();
 		}

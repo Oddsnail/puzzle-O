@@ -10,7 +10,8 @@ namespace origin.puzzle {
 
 		public RectTransform containerRoot;
 		public Image puzzleColor;
-		public TextMeshProUGUI historyText;
+		public Transform trialPanel;
+		public GameObject trialPrefab;
 		public TextMeshProUGUI trialsText;
 
 	}

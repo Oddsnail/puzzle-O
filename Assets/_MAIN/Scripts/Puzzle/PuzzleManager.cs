@@ -54,16 +54,19 @@ namespace origin.puzzle {
 
 		public void OnCharacterGuess(char guess) => onCharacterGuess.Invoke(guess);
 
-		public IEnumerator StartPuzzle(string charID, int trial, Action<bool> onResult, string ruleSetCode = "classic") {
-			yield return stageManager.StartStage(charID, trial, onResult, ruleSetCode);
+		public IEnumerator StartPuzzle(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode = "classic") {
+			puzzleUIManager.SetupTrials(digitCount, trial);
+			yield return stageManager.StartStage(charID, digitCount, trial, onResult, ruleSetCode);
 		}
 
 		// IPuzzleUI delegation
 		public void Show() => puzzleUIManager.Show();
 		public void Hide() => puzzleUIManager.Hide();
 		public void SetThemeColor(Color color) => puzzleUIManager.SetThemeColor(color);
-		public void UpdateHistory(string history) => puzzleUIManager.UpdateHistory(history);
+		public void SetupTrials(int digitCount, int trialCount) => puzzleUIManager.SetupTrials(digitCount, trialCount);
 		public void UpdateRuleSet(List<PuzzleRule> ruleSet) => puzzleUIManager.UpdateRuleSet(ruleSet);
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) => puzzleUIManager.UpdateTrial(trial, digit, color, subcolor);
 		public void UpdateTrials(int remaining, int total) => puzzleUIManager.UpdateTrials(remaining, total);
+		public void Empty() => puzzleUIManager.Empty();
 	}
 }
