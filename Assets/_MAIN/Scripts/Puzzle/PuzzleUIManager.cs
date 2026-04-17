@@ -40,6 +40,11 @@ namespace origin.puzzle {
 			}
 		}
 
+		public void HighlightTrial(int trial, bool highlight) {
+			if (trial < 0 || trial >= trials.Count) return;
+			trials[trial].HighlightTrial(highlight);
+		}
+
 		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) {
 			if (trial < 0 || trial >= trials.Count) return;
 			trials[trial].InputDigit(digit, color, subcolor);

@@ -21,6 +21,7 @@ namespace origin.puzzle {
 		private List<PuzzleRule> activeRules;
 		private bool guessing = false;
 		private char recentChoice = ' ';
+		private bool[] usedDigits = new bool[10];
 
 		private const string TABLE = "0123456789";
 
@@ -45,7 +46,14 @@ namespace origin.puzzle {
 		}
 
 		public void OnCharacterGuess(char guess) {
-			if (guessing) recentChoice = guess;
+			if (guessing) {
+				if (usedDigits[guess - '0']) {
+					AudioManager.instance.PlaySoundEffect("sfx/puzzle-fail");
+					return;
+				}
+				recentChoice = guess;
+				usedDigits[guess - '0'] = true;
+			}
 		}
 
 		private IEnumerator RunningStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode) {
@@ -85,6 +93,8 @@ namespace origin.puzzle {
 
 			for (int i = 0; i < trial; i++) {
 				int score = 0;
+				Array.Fill(usedDigits, false);
+				puzzleUI.HighlightTrial(i, true);
 				for (int choice = 0; choice < digitCount; choice++) {
 					guessing = true;
 
@@ -119,6 +129,7 @@ namespace origin.puzzle {
 					recentChoice = ' ';
 				}
 				puzzleUI.UpdateTrials(trial - 1 - i, trial);
+				puzzleUI.HighlightTrial(i, false);
 				AudioManager.instance.PlaySoundEffect("sfx/dialogue-3");
 
 				if (score == digitCount) {

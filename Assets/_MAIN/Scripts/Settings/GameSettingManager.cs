@@ -100,7 +100,7 @@ namespace origin.settings {
 
 		private void UpdateScreenModeLabel() {
 			bool isFullscreen = Screen.fullScreenMode == FullScreenMode.FullScreenWindow;
-			menuContainer.currentScreenModeText.SetKey(isFullscreen ? "ui.settings.fullscreen" : "ui.settings.windowed");
+			menuContainer.currentScreenModeText.SetKey(isFullscreen ? "ui.settings.screen.fullscreen" : "ui.settings.screen.windowed");
 		}
 	}
 }

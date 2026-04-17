@@ -64,6 +64,7 @@ namespace origin.puzzle {
 		public void Hide() => puzzleUIManager.Hide();
 		public void SetThemeColor(Color color) => puzzleUIManager.SetThemeColor(color);
 		public void SetupTrials(int digitCount, int trialCount) => puzzleUIManager.SetupTrials(digitCount, trialCount);
+		public void HighlightTrial(int trial, bool highlight) => puzzleUIManager.HighlightTrial(trial, highlight);
 		public void UpdateRuleSet(List<PuzzleRule> ruleSet) => puzzleUIManager.UpdateRuleSet(ruleSet);
 		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) => puzzleUIManager.UpdateTrial(trial, digit, color, subcolor);
 		public void UpdateTrials(int remaining, int total) => puzzleUIManager.UpdateTrials(remaining, total);

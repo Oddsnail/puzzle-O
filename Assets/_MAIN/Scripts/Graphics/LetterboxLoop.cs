@@ -6,7 +6,6 @@ namespace origin.graphic {
 	public class LetterboxLoop : MonoBehaviour {
 		[Range(-1f, 1f)]
 		public float speed;
-		public GameObject inner;
 
 		public float hideYPos;
 		public float showYPos;
@@ -20,12 +19,10 @@ namespace origin.graphic {
 
 		void Start() {
 			Image image = gameObject.GetComponent<Image>();
-			Image innerImage = inner.GetComponent<Image>();
 			letterboxColorImage = image;
 			if (image != null) {
 				material = new Material(gameObject.GetComponent<Image>().material);
 				image.material = material;
-				innerImage.material = material;
 				initialized = true;
 			}
 			else {
