@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace origin.language
@@ -10,11 +11,17 @@ namespace origin.language
         private Dictionary<string, string> _currentTable = new();
         public static event System.Action OnLanguageChanged;
 
-        void Awake()
-        {
-            instance = this;
-            SetLanguage(DetectLanguageCode());
-        }
+		void Awake() {
+			instance = this;
+			if (PlayerPrefs.HasKey("Language")) {
+				string lang = PlayerPrefs.GetString("Language");
+				SetLanguage(lang);
+			}
+			else {
+				string lang = DetectLanguageCode();
+				SetLanguage(lang);
+			}
+		}
 
         private string DetectLanguageCode()
         {
@@ -27,6 +34,7 @@ namespace origin.language
 
         public void SetLanguage(string code)
         {
+			PlayerPrefs.SetString("Language", code);
             string fileName = code switch
             {
                 "kor" => "strings_ko",

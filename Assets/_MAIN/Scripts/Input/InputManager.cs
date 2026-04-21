@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using origin.dialogue;
 using origin.puzzle;
 using origin.settings;
+using origin.tutorial;
 
 namespace origin.IO {
 	public class InputManager : MonoBehaviour {
@@ -42,18 +43,33 @@ namespace origin.IO {
 		}
 
 		public void OnNext(InputAction.CallbackContext c) {
+			if (TutorialManager.instance != null && TutorialManager.instance.IsRunning) {
+				if (!TutorialManager.instance.ShouldAllowInput("NextDialogue")) return;
+				TutorialManager.instance.OnNextDialogueRequest();
+				return;
+			}
 			DialogueManager.instance.OnNextDialogueRequest();
 		}
 
 		public void OnPuzzleChoice(InputAction.CallbackContext c) {
+			if (TutorialManager.instance != null && TutorialManager.instance.IsRunning) {
+				if (!TutorialManager.instance.ShouldAllowInput("PuzzleGuess")) return;
+				Debug.Log("shoudallowinp[ut pass]");
+				TutorialManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
+				return;
+			}
 			PuzzleManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
 		}
 
 		public void OnEscapeMenu(InputAction.CallbackContext c) {
+			if (TutorialManager.instance != null && !TutorialManager.instance.ShouldAllowInput("Escape"))
+				return;
 			GameSettingManager.instance.OnEscapeMenu();
 		}
 
 		public void OnLogToggle(InputAction.CallbackContext c) {
+			if (TutorialManager.instance != null && !TutorialManager.instance.ShouldAllowInput("Log"))
+				return;
 			DialogueManager.instance.ToggleLog();
 		}
 	}

@@ -38,6 +38,7 @@ namespace origin.puzzle {
 				trial.Initialize(digitCount);
 				trials.Add(trial);
 			}
+			puzzleContainer.trialsPanel.SetTrialIcons(trialCount);
 		}
 
 		public void HighlightTrial(int trial, bool highlight) {
@@ -45,9 +46,9 @@ namespace origin.puzzle {
 			trials[trial].HighlightTrial(highlight);
 		}
 
-		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) {
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order) {
 			if (trial < 0 || trial >= trials.Count) return;
-			trials[trial].InputDigit(digit, color, subcolor);
+			trials[trial].InputDigit(digit, color, subcolor, order);
 		}
 
 		public void UpdateRuleSet(List<PuzzleRule> ruleSet) {
@@ -59,8 +60,8 @@ namespace origin.puzzle {
 			}
 		}
 
-		public void UpdateTrials(int remaining, int total) {
-			puzzleContainer.trialsText.text = $"{remaining}/{total}";
+		public void UpdateTrials() {
+			puzzleContainer.trialsPanel.MinusLive();
 		}
 
 		public void Empty() {
@@ -69,7 +70,7 @@ namespace origin.puzzle {
 			}
 			trials.Clear();
 			ruleContainer.EmptyRule();
-			puzzleContainer.trialsText.text = "";
+			puzzleContainer.trialsPanel.ClearTrialIcons();
 		}
 
 		public void Show() {

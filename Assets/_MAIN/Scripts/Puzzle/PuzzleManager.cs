@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using origin.graphic;
+using origin.tutorial;
 
 namespace origin.puzzle {
 	public class PuzzleManager : MonoBehaviour, IPuzzleUI {
@@ -17,6 +18,7 @@ namespace origin.puzzle {
 
 		private PuzzleUIManager puzzleUIManager;
 		private StageManager stageManager;
+		private TutorialManager tutorialManager;
 
 		public delegate void PuzzleEvent(char guess);
 		public event PuzzleEvent onCharacterGuess;
@@ -42,6 +44,7 @@ namespace origin.puzzle {
 			puzzleUIManager.Initialize(puzzleContainer, ruleContainer, this);
 
 			stageManager = new(this, colorPalette, ruleSetPalettes, this);
+			tutorialManager = GetComponentInChildren<TutorialManager>();
 
 			onCharacterGuess += stageManager.OnCharacterGuess;
 		}
@@ -59,6 +62,17 @@ namespace origin.puzzle {
 			yield return stageManager.StartStage(charID, digitCount, trial, onResult, ruleSetCode);
 		}
 
+		private readonly Dictionary<string, (int, int, string, string)> tutorialIDdict = new() {
+			{"basic", (4, 6, "classic", "6537")}
+		};
+
+		public IEnumerator StartPuzzleWithTutorial(string charID, string tutorialID, Action<bool> onResult) {
+			var tutorialInfo = tutorialIDdict[tutorialID];
+			puzzleUIManager.SetupTrials(tutorialInfo.Item1, tutorialInfo.Item2);
+			tutorialManager.StartTutorial(tutorialID);
+			yield return stageManager.StartStage(charID, tutorialInfo.Item1, tutorialInfo.Item2, onResult, tutorialInfo.Item3, tutorialInfo.Item4);
+		}
+
 		// IPuzzleUI delegation
 		public void Show() => puzzleUIManager.Show();
 		public void Hide() => puzzleUIManager.Hide();
@@ -66,8 +80,8 @@ namespace origin.puzzle {
 		public void SetupTrials(int digitCount, int trialCount) => puzzleUIManager.SetupTrials(digitCount, trialCount);
 		public void HighlightTrial(int trial, bool highlight) => puzzleUIManager.HighlightTrial(trial, highlight);
 		public void UpdateRuleSet(List<PuzzleRule> ruleSet) => puzzleUIManager.UpdateRuleSet(ruleSet);
-		public void UpdateTrial(int trial, int digit, Color color, Color subcolor) => puzzleUIManager.UpdateTrial(trial, digit, color, subcolor);
-		public void UpdateTrials(int remaining, int total) => puzzleUIManager.UpdateTrials(remaining, total);
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order) => puzzleUIManager.UpdateTrial(trial, digit, color, subcolor, order);
+		public void UpdateTrials() => puzzleUIManager.UpdateTrials();
 		public void Empty() => puzzleUIManager.Empty();
 	}
 }

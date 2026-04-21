@@ -18,8 +18,11 @@ namespace origin.dialogue {
 		private DialogueUIManager dialogueUIManager;
 		private BackgroundManager backgroundManager;
 		private LogManager logManager;
+
 		public DialogueContainer dialogueContainer = new();
 		public LogContainer logContainer = new();
+		
+		[Header("Core UI Components Connection")]
 		public GameObject backgroundImage;
 		public GameObject backgroundFogImage;
 		public GameObject cutsceneImage;

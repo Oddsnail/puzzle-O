@@ -32,9 +32,9 @@ namespace origin.puzzle {
 			this.runner = runner;
 		}
 
-		public Coroutine StartStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode = "classic") {
+		public Coroutine StartStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode = "classic", string predefinedAnswer = "_") {
 			StopStage();
-			co_stage = runner.StartCoroutine(RunningStage(charID, digitCount, trial, onResult, ruleSetCode));
+			co_stage = runner.StartCoroutine(RunningStage(charID, digitCount, trial, onResult, ruleSetCode, predefinedAnswer));
 			return co_stage;
 		}
 
@@ -56,7 +56,7 @@ namespace origin.puzzle {
 			}
 		}
 
-		private IEnumerator RunningStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode) {
+		private IEnumerator RunningStage(string charID, int digitCount, int trial, Action<bool> onResult, string ruleSetCode, string predefinedAnswer = "_") {
 
 			// ** RULE SET SETUP **
 			activeRules = null;
@@ -73,7 +73,6 @@ namespace origin.puzzle {
 
 			// ** UI COLOR THEME SETUP**
 			string ID = charID + "-client";
-			puzzleUI.UpdateTrials(trial, trial);
 			// if (!CharacterManager.instance.HasCharacter(ID)) CharacterManager.instance.AddClient(charID);
 			// CHARACTER character = CharacterManager.instance.GetCharacter(ID);
 			Color theme = colorPalette.Getcolor(charID);
@@ -81,7 +80,9 @@ namespace origin.puzzle {
 			yield return new WaitForSeconds(0.5f);
 
 			// ** ANSWER GENERATION **
-			string answer = GenerateUnique_nDigitNumber(digitCount);
+			string answer = "1234";
+			if (predefinedAnswer != "_") answer = predefinedAnswer;
+			else answer = GenerateUnique_nDigitNumber(digitCount);
 			puzzleUI.UpdateRuleSet(activeRules);
 
 			bool successed = false;
@@ -97,13 +98,14 @@ namespace origin.puzzle {
 				puzzleUI.HighlightTrial(i, true);
 				for (int choice = 0; choice < digitCount; choice++) {
 					guessing = true;
+					int matchingRuleOrder = 1;
 
 					yield return new WaitUntil(() => recentChoice != ' ');
 
 					PuzzleRule matchedRule = null;
 					foreach (PuzzleRule rule in activeRules) {
 						if (rule.Evaluate(answer, recentChoice, choice)) {
-							
+
 							string soundEffect = rule.ruleID == "miss" ? "sfx/puzzle-fail" : "sfx/puzzle-strike";
 							AudioManager.instance.PlaySoundEffect(soundEffect, pitch: rule.audioPitch);
 
@@ -116,6 +118,7 @@ namespace origin.puzzle {
 							matchedRule = rule;
 							break;
 						}
+						matchingRuleOrder++;
 					}
 
 					if (matchedRule == null) {
@@ -123,12 +126,12 @@ namespace origin.puzzle {
 						break;
 					}
 
-					puzzleUI.UpdateTrial(i, recentChoice - '0', matchedRule.color, matchedRule.subcolor);
+					puzzleUI.UpdateTrial(i, recentChoice - '0', matchedRule.color, matchedRule.subcolor, matchingRuleOrder);
 
 					guessing = false;
 					recentChoice = ' ';
 				}
-				puzzleUI.UpdateTrials(trial - 1 - i, trial);
+				puzzleUI.UpdateTrials();
 				puzzleUI.HighlightTrial(i, false);
 				AudioManager.instance.PlaySoundEffect("sfx/dialogue-3");
 

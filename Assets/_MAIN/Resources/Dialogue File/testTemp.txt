@@ -17,7 +17,7 @@ play(bgm/spaceship_earth -l true)
 
 #puzzle test (temp)
 wait-disappear(lde)
-puzzle(lde 4 4 classic s f)
+puzzleT(lde basic s f basic)
 
 .s
 

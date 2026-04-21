@@ -31,8 +31,6 @@ namespace origin.audio {
 
         private void Awake() {
             if (instance == null) {
-                transform.SetParent(null);
-                DontDestroyOnLoad(gameObject);
                 instance = this;
             }
             else {

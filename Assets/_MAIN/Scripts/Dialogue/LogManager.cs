@@ -29,7 +29,7 @@ namespace origin.dialogue {
         }
 
         private void OpenLog() {
-            if (GameSettingManager.instance != null && GameSettingManager.instance.IsMenuOn) return;
+            if (GameSettingManager.instance != null && GameSettingManager.instance.isMenuOn) return;
 
             var input = Object.FindAnyObjectByType<InputManager>();
             if (input != null) {

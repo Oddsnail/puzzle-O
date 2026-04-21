@@ -25,8 +25,9 @@ namespace origin.puzzle {
             GameObject rule = GameObject.Instantiate(ruleTicketPrefab, ruleTicketPanel);
             RuleTicket ruleTicket = rule.GetComponent<RuleTicket>();
             ruleTicket.SetKey(puzzleRule.title, puzzleRule.description);
-            ruleTicket.order.text = $"#{order}";
-            ruleTicket.SetColor(puzzleRule.color, puzzleRule.subcolor);
+            ruleTicket.SetOrder(order);
+			ruleTicket.SetColor(puzzleRule.color, puzzleRule.subcolor);
+			ruleTicket.colorblindIcon.Refresh();
         }
 
 	}

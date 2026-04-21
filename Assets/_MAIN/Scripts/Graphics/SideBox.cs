@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using origin.audio;
 using origin.settings;
+using origin.dialogue;
+using origin.tutorial;
 
 namespace origin.graphic {
     public class SideBox : MonoBehaviour {
@@ -36,7 +38,9 @@ namespace origin.graphic {
 
         private void Update() {
             if (!hoverEnabled) return;
-            if (GameSettingManager.instance.IsMenuOn) return;
+			if (GameSettingManager.instance.isMenuOn) return;
+			if (DialogueManager.instance.IsLogOpen) return;
+			if (TutorialManager.instance.IsRunning) return;
 
             if (pointerData == null)
                 pointerData = new PointerEventData(EventSystem.current);

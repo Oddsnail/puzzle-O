@@ -9,12 +9,23 @@ namespace origin.settings {
 	public class MenuContainer {
 
 		public GameObject containerRoot;
+
+		[Header("Language Menu")]
 		public Button languageButtonR;
 		public Button languageButtonL;
 		public TextMeshProUGUI currentLanguageText;
+
+		[Header("Screen Mode Menu")]
 		public Button screenModeButtonR;
 		public Button screenModeButtonL;
 		public LocalizedText currentScreenModeText;
+
+		[Header("Colorblind Mode")]
+		public Button colorblindButtonR;
+		public Button colorblindButtonL;
+		public LocalizedText colorblindButtonText;
+
+		[Header("Version")]
 		public TextMeshProUGUI versionText;
 
 	}

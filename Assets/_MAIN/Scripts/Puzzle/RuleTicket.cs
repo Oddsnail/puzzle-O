@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using origin.language;
 using TMPro;
+using origin.graphics;
 
 namespace origin.puzzle {
 
@@ -13,6 +14,7 @@ namespace origin.puzzle {
 		public LocalizedText title;
         public LocalizedText description;
 		public TextMeshProUGUI order;
+		public ColorblindIcon colorblindIcon;
 
 		public Image colorImage;
 		public Image subcolorImage;
@@ -20,11 +22,17 @@ namespace origin.puzzle {
 		public void SetColor(Color color, Color subcolor) {
 			colorImage.color = color;
 			subcolorImage.color = subcolor;
+			colorblindIcon.SetColor(subcolor);
 		}
 
 		public void SetKey(string titleKey, string descriptionKey) {
 			title.SetKey(titleKey);
 			description.SetKey(descriptionKey);
+		}
+
+		public void SetOrder(int order) {
+			this.order.text = $"#{order}";
+			colorblindIcon.SetOrder(order);
 		}
 	}
 }

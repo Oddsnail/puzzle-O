@@ -7,7 +7,7 @@ namespace origin.dialogue {
 	public class CommandLineHandler : ILineHandler {
 
 		private readonly ICommandExecutor commandExecutor;
-		private readonly HashSet<string> autoWaitCommands = new() { "wait", "add", "choice", "choiceC", "puzzle", "hl", "uhl" };
+		private readonly HashSet<string> autoWaitCommands = new() { "wait", "add", "choice", "choiceC", "puzzle", "puzzleT", "hl", "uhl" };
 
 		public CommandLineHandler(ICommandExecutor commandExecutor) {
 			this.commandExecutor = commandExecutor;

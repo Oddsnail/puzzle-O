@@ -12,7 +12,7 @@ namespace origin.puzzle {
 		public Image puzzleColor;
 		public Transform trialPanel;
 		public GameObject trialPrefab;
-		public TextMeshProUGUI trialsText;
+		public TrialIconPanel trialsPanel;
 
 	}
 

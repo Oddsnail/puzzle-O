@@ -7,13 +7,17 @@ namespace origin.dialogue {
 
 	public class DialogueContainer {
 
+		[Header("Dialogue Container Connection")]
 		public RectTransform dialogueRoot;
-		public RectTransform nameRoot;
 		public TextMeshProUGUI dialogueText;
-		public TextMeshProUGUI nameText;
 		public Image dialogueColor;
+		
+		[Header("Name Container Connection")]
+		public RectTransform nameRoot;
+		public TextMeshProUGUI nameText;
 		public Image nameColor;
 
+		[Header("UI Connection")]
 		public RectTransform upperLetterbox;
 		public RectTransform lowerLetterbox;
 		public GameObject promptIcon;

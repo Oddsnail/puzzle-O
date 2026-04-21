@@ -9,6 +9,7 @@ namespace origin.graphic {
 
 		public float hideYPos;
 		public float showYPos;
+		public Image innerLetterbox;
 
 		private Material material;
 		private float offset = 0;
@@ -23,6 +24,7 @@ namespace origin.graphic {
 			if (image != null) {
 				material = new Material(gameObject.GetComponent<Image>().material);
 				image.material = material;
+				innerLetterbox.material = material;
 				initialized = true;
 			}
 			else {
