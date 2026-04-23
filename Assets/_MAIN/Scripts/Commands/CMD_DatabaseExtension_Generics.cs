@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 
 using origin.dialogue;
 using origin.audio;
+using origin.graphic;
 
 namespace origin.command {
 
@@ -31,11 +32,11 @@ namespace origin.command {
 
 		// Image Relates
 
-		private static void ChangeBackground(string image) => DialogueManager.instance.ChangeBackground(image);
-		private static void ChangeCutscene(string image) => DialogueManager.instance.ChangeCutscene(image);
-		private static void QuitCutscene() => DialogueManager.instance.QuitCutscene();
-		private static void bgFogOn() => DialogueManager.instance.ChangeBgFog(true);
-		private static void bgFogOff() => DialogueManager.instance.ChangeBgFog(false);
+		private static void ChangeBackground(string image) => BackgroundManager.instance.ChangeBackground(image);
+		private static void ChangeCutscene(string image) => BackgroundManager.instance.ChangeCutscene(image);
+		private static void QuitCutscene() => BackgroundManager.instance.QuitCutscene();
+		private static void bgFogOn() => BackgroundManager.instance.thinkFogOn(true);
+		private static void bgFogOff() => BackgroundManager.instance.thinkFogOn(false);
 
 		// Audio Relates
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace origin.language
@@ -9,17 +10,20 @@ namespace origin.language
         public static LocalizationManager instance;
         
         private Dictionary<string, string> _currentTable = new();
-        public static event System.Action OnLanguageChanged;
+		public static event System.Action OnLanguageChanged;
+		public string currentLanguageCode { get; private set; }
 
 		void Awake() {
 			instance = this;
 			if (PlayerPrefs.HasKey("Language")) {
 				string lang = PlayerPrefs.GetString("Language");
 				SetLanguage(lang);
+				currentLanguageCode = lang;
 			}
 			else {
 				string lang = DetectLanguageCode();
 				SetLanguage(lang);
+				currentLanguageCode = lang;
 			}
 		}
 
@@ -49,6 +53,7 @@ namespace origin.language
             }
 
             _currentTable = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(asset.text);
+			currentLanguageCode = code;
             OnLanguageChanged?.Invoke();
         }
 

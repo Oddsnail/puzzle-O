@@ -15,17 +15,13 @@ play(bgm/spaceship_earth -l true)
 [:_-34_:c] "@loc.temp.2-1{wa:0.4}@loc.temp.2-2"
 [:_-_32:c] "@loc.temp.3{wa:0.3}.{wa:0.3}.{wa:0.3}.{wa:0.3} @loc.temp.4-1{wa:0.5}@loc.temp.4-2"
 
-#puzzle test (temp)
 wait-disappear(lde)
-puzzleT(lde basic s f basic)
+# puzzle(lde 4 6 classic s f)
+puzzleT(lde basic s f)
 
 .s
-
-puzzle(yjh 3 5 oddeven s2 f2)
-
-.s2
-.f2
 .f
+
 wait-appear(lde)
 
 wait(0.3)
@@ -48,6 +44,13 @@ setposX(yjh 1500)
 h(lde)
 sp(lde _-141-sweat)
 [yjh::h] "@loc.temp.5-1"
+
+wait-disappear(yjh)
+
+.s2
+.f2
+wait-appear(yjh)
+
 [lde:std2-241:] ".{wa:0.3}.{wa:0.3}.{wa:0.3}."
 [yjh:std1-114:h] "?"
 setposX(yjh 1200)

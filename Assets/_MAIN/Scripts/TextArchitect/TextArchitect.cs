@@ -29,9 +29,11 @@ namespace origin.dialogue {
 
         public bool speedUp = false;
 
-        public TextArchitect(TextMeshProUGUI tmpro) {
-            this.tmpro = tmpro;
-        }
+		public TextArchitect(TextMeshProUGUI tmpro) {
+			this.tmpro = tmpro;
+		}
+
+		public void SetSpeed(float speed) => speedMultiplier = speed;
 
         public Coroutine Build(string text) {
             PreText = "";

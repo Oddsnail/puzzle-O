@@ -9,35 +9,40 @@ namespace origin.puzzle {
 	[Serializable]
 	public class PuzzleRule {
 
+		private const string keyPrefix = "rule.";
+		private const string titleSuffix = ".title";
+		private const string descriptionSuffix = ".description";
+		private const string commentSuffix = ".comment.";
+
 		public string ruleID;
 		public Color color;
 		public Color subcolor;
-		public string title;
-		public string description;
-		public Func<string, char, int, bool> CheckCondition { get; set; }
+		public string title => keyPrefix + ruleID + titleSuffix;
+		public string description => keyPrefix + ruleID + descriptionSuffix;
+		public string commentPrefix => keyPrefix + ruleID + commentSuffix;
+		public Func<string, char, int, bool> checkCondition { get; set; }
 		public float audioPitch = 1.0f;
-		public int scoreValue = 0;
+		public int scoreValue = 0; // max 5, least 0
 		public string characterEffect = "";
 
-		public PuzzleRule(string id, Color color, Color subcolor, string title, string description,
+		public PuzzleRule(string id, Color color, Color subcolor,
 		                  Func<string, char, int, bool> checkCondition,
-		                  float audioPitch, string characterEffect = "") {
+		                  float audioPitch, int scoreValue, string characterEffect = "") {
 			this.ruleID = id;
 			this.color = color;
 			this.subcolor = subcolor;
-			this.title = title;
-			this.description = description;
-			this.CheckCondition = checkCondition;
+			this.checkCondition = checkCondition;
 			this.audioPitch = audioPitch;
+			this.scoreValue = scoreValue;
 			this.characterEffect = characterEffect;
 		}
 
 		public bool Evaluate(string answer, char guess, int position) {
-			if (CheckCondition == null) {
+			if (checkCondition == null) {
 				Debug.LogError($"PuzzleRule '{ruleID}' has no CheckCondition defined!");
 				return false;
 			}
-			return CheckCondition(answer, guess, position);
+			return checkCondition(answer, guess, position);
 		}
 	}
 }

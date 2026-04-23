@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using origin.graphics;
+using Unity.VisualScripting;
+using origin.graphic;
 
 namespace origin.puzzle {
 
@@ -79,7 +81,7 @@ namespace origin.puzzle {
 			if (co_highlighting != null) StopCoroutine(co_highlighting);
 		}
 
-		public void InputDigit(int digit, Color color, Color subcolor, int order) {
+		public void InputDigit(int digit, Color color, Color subcolor, int order, bool doHitEffect = false) {
 			if (!isActive || digitCount >= numDigits) return;
 
 			digitDisplays[digitCount].image.color = color;
@@ -88,6 +90,11 @@ namespace origin.puzzle {
 			digitDisplays[digitCount].icon.SetOrder(order);
 			digitDisplays[digitCount].icon.SetColor(color);
 			digitDisplays[digitCount].icon.Refresh();
+
+			if (doHitEffect) {
+				GameObject hitEffector = Instantiate(digitDisplays[digitCount].rect.gameObject, digitDisplays[digitCount].rect);
+				hitEffector.AddComponent<HitEffector>();
+			}
 			digitCount++;
 		}
 	}

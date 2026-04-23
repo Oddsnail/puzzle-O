@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 using origin.graphic;
 using origin.tutorial;
@@ -15,10 +16,12 @@ namespace origin.puzzle {
 		public RuleContainer ruleContainer = new();
 		public ColorPalette colorPalette;
 		public RuleSetPalette ruleSetPalettes;
+		
+		public GameObject reactionTextBox;
+		public TextMeshProUGUI reactionText;
 
 		private PuzzleUIManager puzzleUIManager;
 		private StageManager stageManager;
-		private TutorialManager tutorialManager;
 
 		public delegate void PuzzleEvent(char guess);
 		public event PuzzleEvent onCharacterGuess;
@@ -44,7 +47,6 @@ namespace origin.puzzle {
 			puzzleUIManager.Initialize(puzzleContainer, ruleContainer, this);
 
 			stageManager = new(this, colorPalette, ruleSetPalettes, this);
-			tutorialManager = GetComponentInChildren<TutorialManager>();
 
 			onCharacterGuess += stageManager.OnCharacterGuess;
 		}
@@ -69,8 +71,7 @@ namespace origin.puzzle {
 		public IEnumerator StartPuzzleWithTutorial(string charID, string tutorialID, Action<bool> onResult) {
 			var tutorialInfo = tutorialIDdict[tutorialID];
 			puzzleUIManager.SetupTrials(tutorialInfo.Item1, tutorialInfo.Item2);
-			tutorialManager.StartTutorial(tutorialID);
-			yield return stageManager.StartStage(charID, tutorialInfo.Item1, tutorialInfo.Item2, onResult, tutorialInfo.Item3, tutorialInfo.Item4);
+			yield return stageManager.StartStage(charID, tutorialInfo.Item1, tutorialInfo.Item2, onResult, tutorialInfo.Item3, tutorialInfo.Item4, tutorialID);
 		}
 
 		// IPuzzleUI delegation
@@ -79,8 +80,9 @@ namespace origin.puzzle {
 		public void SetThemeColor(Color color) => puzzleUIManager.SetThemeColor(color);
 		public void SetupTrials(int digitCount, int trialCount) => puzzleUIManager.SetupTrials(digitCount, trialCount);
 		public void HighlightTrial(int trial, bool highlight) => puzzleUIManager.HighlightTrial(trial, highlight);
-		public void UpdateRuleSet(List<PuzzleRule> ruleSet) => puzzleUIManager.UpdateRuleSet(ruleSet);
-		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order) => puzzleUIManager.UpdateTrial(trial, digit, color, subcolor, order);
+		public void UpdateRuleSet(List<PuzzleRule> ruleSet, string callerID) => puzzleUIManager.UpdateRuleSet(ruleSet, callerID);
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order, bool doHitEfect)
+			=> puzzleUIManager.UpdateTrial(trial, digit, color, subcolor, order, doHitEfect);
 		public void UpdateTrials() => puzzleUIManager.UpdateTrials();
 		public void Empty() => puzzleUIManager.Empty();
 	}

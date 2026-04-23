@@ -14,12 +14,13 @@ namespace origin.tutorial {
 		public static TutorialManager instance;
 
 		[Header("Tutorial Data")]
-		public List<TutorialSet> tutorialSets;
+		public TextAsset tutorialSets;
 
 		[Header("UI References")]
 		public GameObject tutorialTextBox;
 		public TextMeshProUGUI tutorialText;
 		public GameObject promptIcon;
+		public GameObject skipPanel;
 
 		[Header("Fog Panels")]
 		public GameObject tutorialFog;
@@ -49,6 +50,7 @@ namespace origin.tutorial {
 
 		private const float waitBetweenSteps = 0.2f;
 		private const string textKeyPrefix = "tutorial.";
+		private const string prefSawPrefix = "saw.";
 
 		public bool IsRunning => co_tutorial != null;
 		public bool IsOnStep => isOnStep;
@@ -73,11 +75,14 @@ namespace origin.tutorial {
 		// --- Public API ---
 
 		public void StartTutorial(string setID) {
-			TutorialSet set = tutorialSets.Find(s => s.setID == setID);
+			TutorialSet set = TutorialSetParser.Parse(tutorialSets, setID);
 			if (set == null) {
 				Debug.LogWarning($"TutorialManager: No tutorial set found with ID '{setID}'");
 				return;
 			}
+
+			if (PlayerPrefs.GetInt(prefSawPrefix + setID) == 1) skipPanel.SetActive(true);
+			else skipPanel.SetActive(false);
 			textKeyFormat = textKeyPrefix + setID + ".";
 			if (IsRunning) StopTutorial();
 
@@ -201,6 +206,8 @@ namespace origin.tutorial {
 			yield return new WaitForSeconds(waitBetweenSteps);
 
 			CleanupTutorialUI();
+			PlayerPrefs.SetInt(prefSawPrefix + set.setID, 1);
+
 			co_tutorial = null;
 		}
 
@@ -228,6 +235,7 @@ namespace origin.tutorial {
 			nextRequest = false;
 			currentStep = null;
 			tutorialTextBox.SetActive(false);
+			skipPanel.SetActive(false);
 			if (co_fog != null) { StopCoroutine(co_fog); co_fog = null; }
 			fogCanvasGroup.alpha = 0f;
 			tutorialFog.SetActive(false);

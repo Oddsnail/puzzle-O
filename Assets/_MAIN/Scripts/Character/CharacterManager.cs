@@ -27,6 +27,7 @@ namespace origin.character {
 		}
 
 		public bool HasCharacter(string ID) => characters.ContainsKey(ID.ToLower());
+		
 		public CharacterConfigData GetInfo(string ID) {
 			string key = ID.ToLower();
 			if (characters.ContainsKey(key)) return characters[key].config;

@@ -7,6 +7,7 @@ using origin.audio;
 using origin.settings;
 using origin.dialogue;
 using origin.tutorial;
+using TMPro;
 
 namespace origin.graphic {
     public class IconBox : MonoBehaviour {
@@ -14,7 +15,8 @@ namespace origin.graphic {
         public RectTransform iconBoxRect;
         public Graphic hoverTarget;
         public float highlightSize = 1.3f;
-        public float animationSpeed = 6.0f;
+		public float animationSpeed = 6.0f;
+		public TextMeshProUGUI invisibleText;
 
         private bool isHovered = false;
         private Coroutine co_scaling = null;
@@ -57,24 +59,28 @@ namespace origin.graphic {
             co_scaling = StartCoroutine(Scaling(targetScale));
         }
 
-        private IEnumerator Scaling(float targetScale) {
-            float startScale = iconBoxRect.localScale.x;
-            float percent = 0f;
-            if (targetScale != 1.0f) AudioManager.instance.PlayPreloadedSFX("iconBoxHover", AudioManager.instance.sfxMixer);
+		private IEnumerator Scaling(float targetScale) {
+			float startScale = iconBoxRect.localScale.x;
+			float startTransparency = targetScale != 1.0f ? 0f : 1f;
+			float targetTransparency = targetScale != 1.0f ? 1f : 0f;
+			float percent = 0f;
+			if (targetScale != 1.0f) AudioManager.instance.PlayPreloadedSFX("iconBoxHover", AudioManager.instance.sfxMixer);
 
-            while (percent < 1f) {
-                percent += Time.deltaTime * animationSpeed;
-                float s = Mathf.Lerp(startScale, targetScale, percent);
-                float a = percent * (2 * percent - 1) * (percent - 1);
-                iconBoxRect.localScale = new Vector3(s, s, 1f);
-                iconBoxRect.rotation = Quaternion.Euler(0f, 0f, a * 20);
-                yield return null;
-            }
-            iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
-            iconBoxRect.rotation = Quaternion.identity;
+			while (percent < 1f) {
+				percent += Time.deltaTime * animationSpeed;
+				float s = Mathf.Lerp(startScale, targetScale, percent);
+				float a = percent * (2 * percent - 1) * (percent - 1);
+				iconBoxRect.localScale = new Vector3(s, s, 1f);
+				iconBoxRect.rotation = Quaternion.Euler(0f, 0f, a * 20);
+				invisibleText.alpha = Mathf.Lerp(startTransparency, targetTransparency, percent);
+				yield return null;
+			}
+			iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
+			iconBoxRect.rotation = Quaternion.identity;
+			invisibleText.alpha = targetTransparency;
 
-            iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
-            co_scaling = null;
-        }
+			iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
+			co_scaling = null;
+		}
     }
 }

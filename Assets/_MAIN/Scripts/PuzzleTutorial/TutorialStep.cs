@@ -1,4 +1,3 @@
-using UnityEditor.Search;
 using UnityEngine;
 
 namespace origin.tutorial {
@@ -13,7 +12,6 @@ namespace origin.tutorial {
 		public float dialogueLength = 800f;
 
 		[Header("Highlight Settings (HighlightArea & ForceInput)")]
-		public RectTransform highlightTarget;
 		public Rect highlightRect;
 
 		[Header("Force Input Settings (ForceInput only)")]

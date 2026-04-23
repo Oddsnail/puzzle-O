@@ -4,6 +4,7 @@ using origin.IO;
 using origin.language;
 using origin.audio;
 using origin.dialogue;
+using System.Collections.Generic;
 
 namespace origin.settings {
 	public class GameSettingManager : MonoBehaviour {
@@ -19,7 +20,7 @@ namespace origin.settings {
 
 		private readonly string[] languageCodes = { "kor", "eng" };
 		private readonly string[] languageLabels = { "한국어", "ENGLISH" };
-		private int currentLanguageIndex = 1;
+		private int currentLanguageIndex;
 
 		private void Awake() {
 			if (instance == null) instance = this;
@@ -28,7 +29,8 @@ namespace origin.settings {
 			isMenuOn = false;
 			if (PlayerPrefs.HasKey("ColorblindMode")) {
 				isColorblindModeOn = PlayerPrefs.GetInt("ColorblindMode") == 1;
-			} else {
+			}
+			else {
 				PlayerPrefs.SetInt("ColorblindMode", 0);
 				isColorblindModeOn = false;
 			}
@@ -42,8 +44,12 @@ namespace origin.settings {
 			menuContainer.colorblindButtonL.onClick.AddListener(ToggleColorblindMode);
 
 			menuContainer.versionText.text = $"v{Application.version}";
-			UpdateLanguageLabel();
 			UpdateScreenModeLabel();
+		}
+		
+		private void Start() {
+			currentLanguageIndex = System.Array.IndexOf(languageCodes, LocalizationManager.instance.currentLanguageCode);
+			UpdateLanguageLabel();
 		}
 
 		private void OnDestroy() {

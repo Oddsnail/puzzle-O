@@ -16,21 +16,25 @@ namespace origin.graphic {
 
 		public FaceRigSO faceRigSO;
 		
-		private static readonly HashSet<string> poseIndependentExpressions = new HashSet<string> { "sweat" };
+		private static HashSet<string> poseIndependentExpressions = new() { "sweat" };
 
 		private string prev_poseID = "";
 		private FaceRigData currentRig;
-		private static readonly float unhighlightOffset = -40.0f;
-		private static readonly string concatenator = "-";
-		private static readonly string empty_poseID = "_";
+		private const float unhighlightYOffset = -40.0f;
+		private const string concatenator = "-";
+		private const string empty_poseID = "_";
 
-		// poseID 			ex) std2, std1, _
+		// poseID 			ex) std2, std1, std1-eq
 		// componentID 		ex) 221, 1__, 1_3
 		// expressionsID 	ex) 1, 12, 21, 11
 		public void SetSprite(string charID, string poseID, string componentID, string[] expressionsIDs) {
+			
+			// pose
 			bool poseChanged = false;
-			if (poseID != prev_poseID && poseID != empty_poseID) {
-				FaceRigData rig = faceRigSO.GetFaceRigData(charID + concatenator + poseID);
+			if (poseID != empty_poseID) {
+				prev_poseID = poseID.Split("_")[0];
+
+				FaceRigData rig = faceRigSO.GetFaceRigData(charID + concatenator + prev_poseID);
 				if (rig == null) return;
 
 				currentRig = rig;
@@ -40,19 +44,25 @@ namespace origin.graphic {
 				eyebrow.anchoredPosition = rig.eyebrow.localPosition;
 				mouth.anchoredPosition = rig.mouth.localPosition;
 
-				prev_poseID = poseID;
 				poseChanged = true;
 			}
+			
+			// component
 			if (componentID[0] != '_') { Image img = eye.GetComponent<Image>(); img.sprite = eye.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_eye{componentID[0]}"); if (poseChanged) img.SetNativeSize(); }
 			if (componentID[1] != '_') { Image img = eyebrow.GetComponent<Image>(); img.sprite = eyebrow.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_eyebrow{componentID[1]}"); if (poseChanged) img.SetNativeSize(); }
 			if (componentID[2] != '_') { Image img = mouth.GetComponent<Image>(); img.sprite = mouth.GetComponent<SpriteSheetHolder>().GetSprite($"{prev_poseID}_mouth{componentID[2]}"); if (poseChanged) img.SetNativeSize(); }
+
+			// expressions
 			foreach (RectTransform rt in expressions) rt.gameObject.SetActive(false);
 			if (currentRig != null) {
 				foreach (string exprID in expressionsIDs) {
 					if (exprID == empty_poseID) continue;
+
 					ExpressionRigData exprData = currentRig.expressions.Find(e => e.name == exprID);
 					if (exprData == null || exprData.layer >= expressions.Count) continue;
+					
 					RectTransform rt = expressions[exprData.layer];
+
 					rt.anchoredPosition = exprData.data.localPosition;
 					Image img = rt.GetComponent<Image>();
 					img.sprite = rt.GetComponent<SpriteSheetHolder>().GetSprite(poseIndependentExpressions.Contains(exprID) ? exprID : $"{prev_poseID}_{exprID}");
@@ -66,7 +76,7 @@ namespace origin.graphic {
 			Color oldColor = body.GetComponent<Image>().color;
 			
 			Vector2 oldPosition = entire.anchoredPosition;
-			Vector2 targetPosition = new(oldPosition.x, oldPosition.y + (highlight ? -1 * unhighlightOffset : unhighlightOffset));
+			Vector2 targetPosition = new(oldPosition.x, oldPosition.y + (highlight ? -1 * unhighlightYOffset : unhighlightYOffset));
 			
 			List<Image> images = new List<Image> {
 				body.GetComponent<Image>(),

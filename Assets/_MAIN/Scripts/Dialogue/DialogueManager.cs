@@ -16,16 +16,10 @@ namespace origin.dialogue {
 		private TextArchitect textArchitect;
 		private ConversationManager conversationManager;
 		private DialogueUIManager dialogueUIManager;
-		private BackgroundManager backgroundManager;
 		private LogManager logManager;
 
 		public DialogueContainer dialogueContainer = new();
 		public LogContainer logContainer = new();
-		
-		[Header("Core UI Components Connection")]
-		public GameObject backgroundImage;
-		public GameObject backgroundFogImage;
-		public GameObject cutsceneImage;
 
 		public event Action onNextDialogueRequest;
 
@@ -45,10 +39,8 @@ namespace origin.dialogue {
 			// Self-only init — other singletons are not guaranteed to exist yet
 			textArchitect = new(dialogueContainer.dialogueText);
 			dialogueUIManager = new();
-			backgroundManager = new();
 			logManager = new();
 			dialogueUIManager.Initialize(dialogueContainer, this);
-			backgroundManager.Initialize(backgroundImage, cutsceneImage, backgroundFogImage, this);
 			logManager.Initialize(logContainer, this);
 		}
 
@@ -71,27 +63,17 @@ namespace origin.dialogue {
 		}
 
 		public void Empty() => dialogueUIManager.Empty();
-		
-
 		public void End(string code) => conversationManager.End(code);
 
 		public void OnNextDialogueRequest() => onNextDialogueRequest?.Invoke();
-
 		public void ChangeNameAndTheme(string nameKey, string subnameKey, string ID) => dialogueUIManager.ChangeNameAndTheme(nameKey, subnameKey, colorPalette.Getcolor(ID));
-
 		public void ChangeLetterBoxTheme(string ID) => dialogueUIManager.ChangeLetterBoxTheme(colorPalette.Getcolor(ID));
-
 		public void SetPromptVisible(bool visible) => dialogueContainer.promptIcon.SetActive(visible);
 
 		public void Show() => dialogueUIManager.Show();
 		public void Hide() => dialogueUIManager.Hide();
 
 		public void SetLetterboxSpeed(float speed) => dialogueUIManager.SetLetterboxSpeed(speed);
-
-		public void ChangeBackground(string backgroundName) => backgroundManager.ChangeBackground(backgroundName);
-		public void ChangeCutscene(string cutsceneName) => backgroundManager.ChangeCutscene(cutsceneName);
-		public void ChangeBgFog(bool show) => backgroundManager.BackgroundFog(show);
-		public void QuitCutscene() => backgroundManager.QuitCutscene();
 
 		public bool IsLogOpen => logManager.IsLogOpen;
 		public void ToggleLog() => logManager.ToggleLog();

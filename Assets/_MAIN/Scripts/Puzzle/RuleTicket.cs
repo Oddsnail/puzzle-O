@@ -13,6 +13,7 @@ namespace origin.puzzle {
 		public GameObject root;
 		public LocalizedText title;
         public LocalizedText description;
+        public LocalizedText comments;
 		public TextMeshProUGUI order;
 		public ColorblindIcon colorblindIcon;
 
@@ -25,9 +26,10 @@ namespace origin.puzzle {
 			colorblindIcon.SetColor(subcolor);
 		}
 
-		public void SetKey(string titleKey, string descriptionKey) {
+		public void SetKey(string titleKey, string descriptionKey, string commentKey) {
 			title.SetKey(titleKey);
 			description.SetKey(descriptionKey);
+			comments.SetKey(commentKey);
 		}
 
 		public void SetOrder(int order) {

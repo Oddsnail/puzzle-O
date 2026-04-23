@@ -12,36 +12,48 @@ namespace origin.character {
 
 		protected CharacterManager characterManager => CharacterManager.instance;
 
-		private const float UNHIGHLIGHTED_STRENGTH = 0.65f;
-		private const float UNHIGHLIGHTED_SPEED = 5.5f;
+		private const float defaultUnhighlightStrength = 0.65f;
+		private const float defaultUnhighlightSpeed = 5.5f;
+
+		private const float defaultNorMalYPos = 0.0f;
+		private const float defaultClientXPos = 0.0f;
+		private const float defaultTransitionTime = 0.1f;
+
+		private const float defaultHopTime = 0.2f;
+		private const float defaultHopLength = 60f;
+		private const float defaultShiverTime = 0.07f;
+		private const float defaultShiverLength = 20f;
 
 		public string ID;
 		public CharacterConfigData config;
 		public RectTransform rectTransform;
+		public SpriteManager spriteManager;
+
 		private CanvasGroup canvasGroup;
+
 		private Coroutine co_appearing;
 		private Coroutine co_disappearing;
 		private Coroutine co_moving_x;
 		private Coroutine co_moving_y;
 		private Coroutine co_highlighting;
-		public SpriteManager spriteManager;
-
-		public Color color { get; protected set; } = Color.white;
-		public Color highlightedColor => color;
-		public Color unhighlightedColor => new(color.r*UNHIGHLIGHTED_STRENGTH, color.b*UNHIGHLIGHTED_STRENGTH, color.g*UNHIGHLIGHTED_STRENGTH, color.a);
+		
+		public Color highlightedColor => Color.white;
+		public Color unhighlightedColor => new(defaultUnhighlightStrength, defaultUnhighlightStrength, defaultUnhighlightStrength, 1f);
 
 		public float visibility => canvasGroup.alpha;
-		public bool highlighted { get; protected set; } = true;
+		public bool ishighlighted { get; protected set; } = true;
+		public bool isClient = false;
 		public bool isAppearing => co_appearing != null;
 		public bool isDisappearing => co_disappearing != null;
 		public bool isMovingX => co_moving_x != null;
 		public bool isMovingY => co_moving_y != null;
-		public bool isHighlighting => highlighted && co_highlighting != null;
-		public bool isUnHighlighting => !highlighted && co_highlighting != null;
+		public bool isHighlighting => ishighlighted && co_highlighting != null;
+		public bool isUnHighlighting => !ishighlighted && co_highlighting != null;
 
 		public CHARACTER(string name, CharacterConfigData config, bool isClient = false) {
 			this.ID = name.ToLower();
 			this.config = config;
+			this.isClient = isClient;
 
 			if (!isClient) NormalInitiate();
 			else ClientInitiate();
@@ -52,19 +64,18 @@ namespace origin.character {
 		//========================================================================
 		//    <!!!> normal / client game object change invoked by command <!!!>
 		//========================================================================
-		private const float defaultNorMalYPos = 0.0f;
-		private const float defaultClientXPos = 0.0f;
 
 		private void NormalInitiate() {
 			if (config.prefabNormal == null) Debug.LogError($"[ERROR] No prefabNormal found for {ID}");
 			GameObject ob = UnityEngine.Object.Instantiate(config.prefabNormal, characterManager.characterLayer);
 			ob.name = $"Character - [{ID}]";
 			rectTransform = ob.GetComponent<RectTransform>();
+			canvasGroup = ob.GetComponent<CanvasGroup>();
+			spriteManager = ob.GetComponent<SpriteManager>();
+
 			rectTransform.anchoredPosition = new(0.0f, defaultNorMalYPos);
-			canvasGroup = rectTransform.GetComponent<CanvasGroup>();
 			canvasGroup.alpha = 0;
 			ob.SetActive(true);
-			spriteManager = rectTransform.GetComponent<SpriteManager>();
 		}
 
 		private void ClientInitiate() {
@@ -72,8 +83,10 @@ namespace origin.character {
 			GameObject ob = UnityEngine.Object.Instantiate(config.prefabClient, characterManager.characterLayer);
 			ob.name = $"Client - [{ID}]";
 			rectTransform = ob.GetComponent<RectTransform>();
+			canvasGroup = ob.GetComponent<CanvasGroup>();
+			spriteManager = ob.GetComponent<SpriteManager>();
+			
 			rectTransform.anchoredPosition = new(defaultClientXPos, defaultNorMalYPos);
-			canvasGroup = rectTransform.GetComponent<CanvasGroup>();
 			canvasGroup.alpha = 0;
 			ob.SetActive(true);
 		}
@@ -82,7 +95,7 @@ namespace origin.character {
 		// spriteCode ex) std1-111 or _-221
 		public void SetSprite(string spriteCode) {
 			string[] spriteNames = spriteCode.Split("-");
-			spriteManager.SetSprite(ID, spriteNames[0], spriteNames[1], spriteNames.Length > 2 ? spriteNames[2..] : Array.Empty<string>());
+			spriteManager.SetSprite(isClient ? ID + "-client" : ID, spriteNames[0], spriteNames[1], spriteNames.Length > 2 ? spriteNames[2..] : Array.Empty<string>());
 		}
 
 		public void InvertX() {
@@ -91,7 +104,7 @@ namespace origin.character {
 			rectTransform.localScale = scale;
 		}
 
-		public Coroutine Highlight(float speed = UNHIGHLIGHTED_SPEED) {
+		public Coroutine Highlight(float speed = defaultUnhighlightSpeed) {
 			if (isHighlighting) {
 				characterManager.StopCoroutine(co_highlighting);
 				co_highlighting = null;
@@ -101,12 +114,12 @@ namespace origin.character {
 				co_highlighting = null;
 			}
 
-			highlighted = true;
-			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+			ishighlighted = true;
+			co_highlighting = characterManager.StartCoroutine(Highlighting(ishighlighted, speed));
 			return co_highlighting;
 		}
 
-		public Coroutine UnHighlight(float speed = UNHIGHLIGHTED_SPEED) {
+		public Coroutine UnHighlight(float speed = defaultUnhighlightSpeed) {
 			if (isUnHighlighting) {
 				characterManager.StopCoroutine(co_highlighting);
 				co_highlighting = null;
@@ -116,8 +129,8 @@ namespace origin.character {
 				co_highlighting = null;
 			}
 
-			highlighted = false;
-			co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+			ishighlighted = false;
+			co_highlighting = characterManager.StartCoroutine(Highlighting(ishighlighted, speed));
 			return co_highlighting;
 		}
 		
@@ -147,8 +160,6 @@ namespace origin.character {
 
 			return co_disappearing;
 		}
-
-		private const float defaultTransitionTime = 0.25f;
 
 		public IEnumerator Appearing() {
 			yield return canvasGroup.DOFade(1f, defaultTransitionTime);
@@ -202,15 +213,11 @@ namespace origin.character {
 			return co_moving_x;
 		}
 
-		private const float defaultHopTime = 0.2f;
-		private const float defaultHopLength = 60f;
-		private const float defaultShiverTime = 0.07f;
-		private const float defaultShiverLength = 20f;
-
 		public IEnumerator Hopping() {
 			float origin = rectTransform.anchoredPosition.y;
+			float hopLength = !isClient ? defaultHopLength : defaultHopLength / 3f;
 
-			yield return rectTransform.DOAnchorPosY(origin + defaultHopLength, defaultHopTime).SetEase(Ease.OutQuad).WaitForCompletion();
+			yield return rectTransform.DOAnchorPosY(origin + hopLength, defaultHopTime).SetEase(Ease.OutQuad).WaitForCompletion();
 			yield return rectTransform.DOAnchorPosY(origin, defaultHopTime).SetEase(Ease.InQuad).WaitForCompletion();
 
 			co_moving_y = null;
@@ -218,8 +225,9 @@ namespace origin.character {
 
 		public IEnumerator Crouching() {
 			float origin = rectTransform.anchoredPosition.y;
+			float crouchLength = !isClient ? defaultHopLength : defaultHopLength / 3f;
 
-			yield return rectTransform.DOAnchorPosY(origin - defaultHopLength, defaultHopTime).SetEase(Ease.OutQuad).WaitForCompletion();
+			yield return rectTransform.DOAnchorPosY(origin - crouchLength, defaultHopTime).SetEase(Ease.OutQuad).WaitForCompletion();
 			yield return rectTransform.DOAnchorPosY(origin, defaultHopTime).SetEase(Ease.InQuad).WaitForCompletion();
 
 			co_moving_y = null;
@@ -245,10 +253,11 @@ namespace origin.character {
 
 		public IEnumerator Shivering() {
 			float origin = rectTransform.anchoredPosition.x;
+			float shiverLength = !isClient ? defaultShiverLength : defaultShiverLength / 3f;
 
 			for (int i = 0; i < 2; i++) {
-				yield return rectTransform.DOAnchorPosX(origin - defaultShiverLength, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
-				yield return rectTransform.DOAnchorPosX(origin + defaultShiverLength, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
+				yield return rectTransform.DOAnchorPosX(origin - shiverLength, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
+				yield return rectTransform.DOAnchorPosX(origin + shiverLength, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
 			}
 			yield return rectTransform.DOAnchorPosX(origin, defaultShiverTime).SetEase(Ease.InOutQuad).WaitForCompletion();
 

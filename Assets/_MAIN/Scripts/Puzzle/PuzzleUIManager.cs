@@ -46,16 +46,16 @@ namespace origin.puzzle {
 			trials[trial].HighlightTrial(highlight);
 		}
 
-		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order) {
+		public void UpdateTrial(int trial, int digit, Color color, Color subcolor, int order, bool doHitEfect = false) {
 			if (trial < 0 || trial >= trials.Count) return;
-			trials[trial].InputDigit(digit, color, subcolor, order);
+			trials[trial].InputDigit(digit, color, subcolor, order, doHitEfect);
 		}
 
-		public void UpdateRuleSet(List<PuzzleRule> ruleSet) {
+		public void UpdateRuleSet(List<PuzzleRule> ruleSet, string callerID) {
 			ruleContainer.EmptyRule();
 			int order = 1;
 			foreach (PuzzleRule rule in ruleSet) {
-				ruleContainer.Addrule(rule, order);
+				ruleContainer.Addrule(rule, order, callerID);
 				order++;
 			}
 		}
@@ -87,8 +87,6 @@ namespace origin.puzzle {
 		}
 
 		private IEnumerator Showing() {
-			puzzleContainer.containerRoot.gameObject.SetActive(true);
-			ruleContainer.containerRoot.gameObject.SetActive(true);
 
 			puzzleSideBox.DisableHover();
 			ruleSideBox.DisableHover();
@@ -112,9 +110,6 @@ namespace origin.puzzle {
 			ruleSideBox.SlideTo(ruleSideBox.hideXPos);
 
 			yield return new WaitUntil(() => !puzzleSideBox.isSliding && !ruleSideBox.isSliding);
-
-			puzzleContainer.containerRoot.gameObject.SetActive(false);
-			ruleContainer.containerRoot.gameObject.SetActive(false);
 
 			co_animating = null;
 		}

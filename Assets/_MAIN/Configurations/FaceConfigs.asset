@@ -121,3 +121,17 @@ MonoBehaviour:
       layer: 1
       data:
         localPosition: {x: 4, y: 1447}
+  - poseID: lde-client-std1
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: 795, y: 1514}
+    eyebrow:
+      localPosition: {x: 786, y: 1618}
+    mouth:
+      localPosition: {x: 726, y: 1298}
+    expressions:
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: 963, y: 1365}

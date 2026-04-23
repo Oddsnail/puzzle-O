@@ -19,10 +19,9 @@ namespace origin.puzzle {
 				id: "strike",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.1.title",
-				description: "game.rule.1.description",
 				checkCondition: (answer, guess, position) => answer[position] == guess,
 				audioPitch: 1.3f,
+				scoreValue: 5,
 				characterEffect: "shiver"
 			);
 		}
@@ -32,14 +31,14 @@ namespace origin.puzzle {
 				id: "semi-strike",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.2.title",
-				description: "game.rule.2.description",
 				checkCondition: (answer, guess, position) => {
 					int answerIndex = TABLE.IndexOf(answer[position]);
 					int guessIndex = TABLE.IndexOf(guess);
 					return answerIndex != -1 && guessIndex != -1 && answerIndex % 5 == guessIndex % 5;
 				},
-				audioPitch: 1.0f
+				audioPitch: 1.0f,
+				scoreValue: 4,
+				characterEffect: "shiver"
 			);
 		}
 
@@ -48,22 +47,22 @@ namespace origin.puzzle {
 				id: "ball",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.3.title",
-				description: "game.rule.3.description",
 				checkCondition: (answer, guess, position) => answer.Contains(guess),
-				audioPitch: 0.7f
+				audioPitch: 0.7f,
+				scoreValue: 3,
+				characterEffect: "crouch"
 			);
 		}
 
+		// always true, bottom rule.
 		public static PuzzleRule CreateMissRule() {
 			return new PuzzleRule(
 				id: "miss",
 				color: grey,
 				subcolor: grey,
-				title: "game.rule.miss.title",
-				description: "game.rule.miss.description",
 				checkCondition: (answer, guess, position) => true,
-				audioPitch: 1.0f
+				audioPitch: 1.0f,
+				scoreValue: 0
 			);
 		}
 
@@ -72,14 +71,13 @@ namespace origin.puzzle {
 				id: "parity-match",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.4.title",
-				description: "game.rule.4.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
 					return (answerDigit % 2) == (guessDigit % 2);
 				},
-				audioPitch: 0.9f
+				audioPitch: 0.9f,
+				scoreValue: 3
 			);
 		}
 
@@ -88,14 +86,14 @@ namespace origin.puzzle {
 				id: "range-match",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.5.title",
-				description: "game.rule.5.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
 					return Math.Abs(answerDigit - guessDigit) <= 1;
 				},
-				audioPitch: 0.8f
+				audioPitch: 0.8f,
+				scoreValue: 4,
+				characterEffect: "crouch"
 			);
 		}
 
@@ -104,14 +102,13 @@ namespace origin.puzzle {
 				id: "greater-than",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.6.1.title",
-				description: "game.rule.6.1.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
 					return guessDigit > answerDigit;
 				},
-				audioPitch: 0.85f
+				audioPitch: 0.85f,
+				scoreValue: 2
 			);
 		}
 
@@ -120,14 +117,24 @@ namespace origin.puzzle {
 				id: "less-than",
 				color: color,
 				subcolor: subcolor,
-				title: "game.rule.6.2.title",
-				description: "game.rule.6.2.description",
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
 					return guessDigit < answerDigit;
 				},
-				audioPitch: 0.85f
+				audioPitch: 0.85f,
+				scoreValue: 2
+			);
+		}
+
+		public static PuzzleRule CreateGhostRule(Color color, Color subcolor) {
+			return new PuzzleRule(
+				id: "ghost",
+				color: color,
+				subcolor: subcolor,
+				checkCondition: (answer, guess, position) => !answer.Contains(guess),
+				audioPitch: 0.85f,
+				scoreValue: 0
 			);
 		}
 

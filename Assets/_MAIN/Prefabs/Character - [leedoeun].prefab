@@ -525,7 +525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ca1f745dc38c64844a13e7bccf384410, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2dc18f58974884340be3fc8229adc01d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -548,8 +548,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.SpriteSheetHolder
   sprites:
-  - {fileID: 21300000, guid: d25b9995d9ecca2428c1bcbc9054773a, type: 3}
-  - {fileID: 21300000, guid: ca1f745dc38c64844a13e7bccf384410, type: 3}
+  - {fileID: 21300000, guid: 1bbdcae19d3363644835828908796327, type: 3}
+  - {fileID: 21300000, guid: 3b778461a59a4a5429af9043dc6b012f, type: 3}
+  - {fileID: 21300000, guid: 2dc18f58974884340be3fc8229adc01d, type: 3}
   - {fileID: 21300000, guid: ef6d3785f4ac14940bcfb70094502a7e, type: 3}
 --- !u!114 &4525762437715044986
 MonoBehaviour:
@@ -602,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1200}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1248503719910433166
@@ -621,7 +622,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4054991153673449271}
   m_Enabled: 1
-  m_Alpha: 0.3
+  m_Alpha: 0.9
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

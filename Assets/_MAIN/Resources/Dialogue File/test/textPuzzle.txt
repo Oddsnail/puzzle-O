@@ -1,0 +1,25 @@
+# puzzle test scene
+
+add(lde)
+setposX(lde 0 -i true)
+sp(lde std2-431)
+wait-appear(lde)
+
+# dialogue start
+
+[default::] "Puzzle Test Scene"
+disappear(lde)
+puzzleT(lde basic s f)
+
+.s
+wait-appear(lde)
+[default::] "Puzzle Success"
+j(eof)
+
+.f
+wait-appear(lde)
+[default::] "Puzzle Fail"
+j(eof)
+
+.eof
+remove(lde)
