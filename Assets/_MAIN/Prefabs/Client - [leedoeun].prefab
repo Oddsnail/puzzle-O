@@ -427,7 +427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14cca930ff5472e44a9e30b3bda9626c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97e615b262c876d42843c0496508dc0c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.SpriteSheetHolder
   sprites:
-  - {fileID: 21300000, guid: 14cca930ff5472e44a9e30b3bda9626c, type: 3}
-  - {fileID: 21300000, guid: 50871ee5bcdba4d4a82fd5af5d880610, type: 3}
+  - {fileID: 21300000, guid: 97e615b262c876d42843c0496508dc0c, type: 3}
+  - {fileID: 21300000, guid: 670ca8fd79917764bad28f011ded1f7b, type: 3}
 --- !u!114 &1181434574958254876
 MonoBehaviour:
   m_ObjectHideFlags: 0

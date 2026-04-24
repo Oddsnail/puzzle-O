@@ -4,8 +4,6 @@ using UnityEngine;
 
 using origin.IO;
 using origin.dialogue;
-using origin.language;
-using System.Linq.Expressions;
 
 public class DialogueTester : MonoBehaviour
 {

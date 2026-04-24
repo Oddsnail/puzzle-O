@@ -55,6 +55,7 @@ namespace origin.dialogue {
 		private void OnDestroy() {
 			if (instance == this) {
 				instance = null;
+				conversationManager.Dispose();
 			}
 		}
 
@@ -83,7 +84,7 @@ namespace origin.dialogue {
 
 		public IEnumerator AvailableChoices((string, string, string)[] choices, bool isColored) {
 			yield return dialogueUIManager.CreateChoices(choices, isColored, (choicedCode) => {
-				AudioManager.instance.PlayPreloadedSFX("choiceMade", AudioManager.instance.sfxMixer);
+				AudioManager.instance.PlayPreloadedSFX("choiceMade");
 				conversationManager.Jump(choicedCode);
 			});
 		}

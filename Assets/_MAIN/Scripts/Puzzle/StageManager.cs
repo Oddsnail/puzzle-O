@@ -65,7 +65,7 @@ namespace origin.puzzle {
 		public void OnCharacterGuess(char guess) {
 			if (guessing) {
 				if (usedDigits[guess - '0']) {
-					AudioManager.instance.PlaySoundEffect("sfx/puzzle-fail");
+					AudioManager.instance.PlayPreloadedSFX("puzzleFail");
 					return;
 				}
 				recentChoice = guess;
@@ -144,8 +144,8 @@ namespace origin.puzzle {
 					foreach (PuzzleRule rule in activeRules) {
 						if (rule.Evaluate(answer, recentChoice, choice)) {
 
-							string soundEffect = rule.ruleID == "miss" ? "sfx/puzzle-fail" : "sfx/puzzle-strike";
-							AudioManager.instance.PlaySoundEffect(soundEffect, pitch: rule.audioPitch);
+							if (rule.ruleID != "miss") AudioManager.instance.PlayPreloadedSFX("puzzleSuccess", pitch: rule.audioPitch);
+							else AudioManager.instance.PlayPreloadedSFX("puzzleFail", pitch: rule.audioPitch);
 
 							score += recentChoice == answer[choice] ? 5 : rule.scoreValue;
 							
@@ -183,7 +183,7 @@ namespace origin.puzzle {
 				}
 				puzzleUI.UpdateTrials();
 				puzzleUI.HighlightTrial(i, false);
-				AudioManager.instance.PlaySoundEffect("sfx/dialogue-3");
+				AudioManager.instance.PlayPreloadedSFX("nextTrial");
 
 				// full score is digit * 5
 				// { 0       digitcount  	 			    digitcount*3  		 digitcount*4 	       digitcount*5      }

@@ -11,7 +11,8 @@ using origin.tutorial;
 namespace origin.graphic {
     public class SideBox : MonoBehaviour {
 
-        public RectTransform sideBoxRect;
+		public RectTransform sideBoxRect;
+		public Outline clipOutline;
         public Graphic hoverTarget;
         public float hideXPos;
         public float peekXPos;
@@ -21,7 +22,15 @@ namespace origin.graphic {
         private bool hoverEnabled = false;
         private bool isHovered = false;
         private Coroutine co_sliding = null;
-        public bool isSliding => co_sliding != null;
+		public bool isSliding => co_sliding != null;
+
+		private bool clipped = false;
+		private Coroutine co_soundBuffer = null;
+
+		private IEnumerator SoundBuffer() {
+			yield return new WaitForSeconds(0.1f);
+			co_soundBuffer = null;
+		}
 
         private PointerEventData pointerData;
         private readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
@@ -31,16 +40,36 @@ namespace origin.graphic {
             isHovered = false;
         }
 
-        public void DisableHover() {
-            hoverEnabled = false;
-            isHovered = false;
-        }
+		public void DisableHover() {
+			hoverEnabled = false;
+			isHovered = false;
+		}
+		
+		public void OnClipButtonPressed() {
+			if (TutorialManager.instance.IsRunning) return;
+
+			clipped = !clipped;
+			AudioManager.instance.PlayPreloadedSFX("optionChange");
+			if (co_soundBuffer != null) StopCoroutine(co_soundBuffer);
+			co_soundBuffer = StartCoroutine(SoundBuffer());
+			
+			if (clipped) {
+				clipOutline.effectColor = Color.white;
+				DisableHover();
+				SlideTo(showXPos);
+			} else {
+				clipOutline.effectColor = Color.black;
+				EnableHover();
+			}
+		}
 
         private void Update() {
             if (!hoverEnabled) return;
 			if (GameSettingManager.instance.isMenuOn) return;
 			if (DialogueManager.instance.IsLogOpen) return;
 			if (TutorialManager.instance.IsRunning) return;
+
+			if (clipped) return;
 
             if (pointerData == null)
                 pointerData = new PointerEventData(EventSystem.current);
@@ -57,9 +86,10 @@ namespace origin.graphic {
                 }
             }
 
+
             if (mouseOver && !isHovered) {
                 isHovered = true;
-                SlideTo(showXPos);
+				SlideTo(showXPos);
             }
             else if (!mouseOver && isHovered) {
                 isHovered = false;
@@ -68,7 +98,14 @@ namespace origin.graphic {
         }
 
         public void SlideTo(float targetX) {
-            if (co_sliding != null) StopCoroutine(co_sliding);
+			if (co_sliding != null) StopCoroutine(co_sliding);
+			if (targetX != showXPos && clipped) {
+				clipped = false;
+				clipOutline.effectColor = Color.black;
+			}else if (co_soundBuffer == null) {
+				AudioManager.instance.PlayPreloadedSFX("sideBoxHover");
+				co_soundBuffer = StartCoroutine(SoundBuffer());
+			}
             co_sliding = StartCoroutine(Sliding(targetX));
         }
 
@@ -76,7 +113,6 @@ namespace origin.graphic {
             Vector2 start = sideBoxRect.anchoredPosition;
             float startX = start.x;
             float percent = 0f;
-            AudioManager.instance.PlayPreloadedSFX("sideBoxHover", AudioManager.instance.sfxMixer);
 
             while (percent < 1f) {
                 percent += Time.deltaTime * animationSpeed;

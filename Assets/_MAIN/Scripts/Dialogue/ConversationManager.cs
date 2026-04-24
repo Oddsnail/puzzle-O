@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace origin.dialogue {
-	public class ConversationManager {
+	public class ConversationManager : IDisposable {
 
 		private readonly IDialogueUI dialogueUI;
 		private readonly MonoBehaviour runner;
@@ -25,6 +25,10 @@ namespace origin.dialogue {
 			this.handlers = handlers;
 			this.dialogueUI = dialogueUI;
 			this.runner = runner;
+		}
+
+		public void Dispose() {
+			foreach (ILineHandler handler in handlers) handler.Dispose();
 		}
 
 		public Coroutine StartConversation(List<string> conversation, Action<string> endTagCallback) {

@@ -14,7 +14,9 @@ namespace origin.language
 		public string currentLanguageCode { get; private set; }
 
 		void Awake() {
-			instance = this;
+			if (instance == null) instance = this;
+			else { DestroyImmediate(gameObject); return; }
+
 			if (PlayerPrefs.HasKey("Language")) {
 				string lang = PlayerPrefs.GetString("Language");
 				SetLanguage(lang);
@@ -25,6 +27,10 @@ namespace origin.language
 				SetLanguage(lang);
 				currentLanguageCode = lang;
 			}
+		}
+
+		void OnDestroy() {
+			instance = null;
 		}
 
         private string DetectLanguageCode()

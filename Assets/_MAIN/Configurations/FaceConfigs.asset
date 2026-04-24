@@ -135,3 +135,17 @@ MonoBehaviour:
       layer: 1
       data:
         localPosition: {x: 963, y: 1365}
+  - poseID: yjh-client-std1
+    root:
+      localPosition: {x: 0, y: 0}
+    eye:
+      localPosition: {x: -1004, y: 1365}
+    eyebrow:
+      localPosition: {x: -1015, y: 1477}
+    mouth:
+      localPosition: {x: -998, y: 1147}
+    expressions:
+    - name: sweat
+      layer: 1
+      data:
+        localPosition: {x: -844, y: 1214}

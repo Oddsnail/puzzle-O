@@ -1,25 +1,32 @@
 # puzzle test scene
 
-add(lde)
-setposX(lde 0 -i true)
-sp(lde std2-431)
-wait-appear(lde)
+add(lde yjh)
 
 # dialogue start
 
 [default::] "Puzzle Test Scene"
-disappear(lde)
-puzzleT(lde basic s f)
+puzzleT(lde basic s1 f1)
 
-.s
-wait-appear(lde)
-[default::] "Puzzle Success"
+.s1
+[default::] "Puzzle 1 Success"
+j(n)
+
+.f1
+[default::] "Puzzle 1 Fail"
+j(n)
+
+.n
+puzzle(yjh 4 6 oddeven s2 f2)
+
+
+.s2
+[default::] "Puzzle 2 Success"
 j(eof)
 
-.f
-wait-appear(lde)
-[default::] "Puzzle Fail"
+.f2
+[default::] "Puzzle 2 Fail"
 j(eof)
 
 .eof
-remove(lde)
+remove(lde yjh)
+end(EOF)

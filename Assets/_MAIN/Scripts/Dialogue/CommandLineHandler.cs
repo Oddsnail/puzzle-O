@@ -17,6 +17,10 @@ namespace origin.dialogue {
 
 		public IEnumerator Handle(LINE_DATA data) => ReadingCommand(data.command);
 
+		public void Dispose() {
+			return;
+		}
+
 		private IEnumerator ReadingCommand(LINE_COMMAND data) {
 			Debug.Log(data.ToString());
 

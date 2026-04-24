@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.SpriteSheetHolder
   sprites:
-  - {fileID: 21300000, guid: e23b6fa8def23b94a8034db686220599, type: 3}
-  - {fileID: 21300000, guid: b6d74ee7a091faf4b9314b4d6f34d4e5, type: 3}
+  - {fileID: 21300000, guid: b181ace81cffe07439fd0091a7261d04, type: 3}
+  - {fileID: 21300000, guid: b9d21910525feb44dac9464b6c2a01f6, type: 3}
   - {fileID: 21300000, guid: 38a578909f8561c43a174608493b4f50, type: 3}
 --- !u!114 &2818592280385311849
 MonoBehaviour:

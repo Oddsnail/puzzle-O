@@ -28,6 +28,9 @@ namespace origin.command {
 
 			// Sound relates
 			database.AddCommand("play", new Func<string[], IEnumerator>(PlaySoundEffect));
+			database.AddCommand("stop", new Action<string>(StopSoundEffect));
+			database.AddCommand("playGrad", new Func<string[], IEnumerator>(PlaySoundEffectGradient));
+			database.AddCommand("stopGrad", new Action<string>(StopSoundEffectGradient));
 		}
 
 		// Image Relates
@@ -54,7 +57,28 @@ namespace origin.command {
 			parameters.TryGetValue("-p", out float pitch, defaultValue: 1.0f);
 			parameters.TryGetValue("-l", out bool loop, defaultValue: false);
 
-			yield return AudioManager.instance.PlaySoundEffect(filePath, mixer, volume, pitch, loop);
+			yield return AudioManager.instance.PlaySound(filePath, mixer, volume, pitch, loop);
 		}
+
+		private static void StopSoundEffect(string soundName) => AudioManager.instance.StopSound(soundName);
+
+		private static IEnumerator PlaySoundEffectGradient(string[] data) {
+			string filePath = data[0];
+			AudioMixerGroup mixer = data[0][..3] switch {
+				"sfx" => AudioManager.instance.sfxMixer,
+				"bgm" => AudioManager.instance.musicMixer,
+				"vce" => AudioManager.instance.voiceMixer,
+				_ => null,
+			};
+			var parameters = ConvertParameters(data);
+
+			parameters.TryGetValue("-v", out float volume, defaultValue: 1.0f);
+			parameters.TryGetValue("-p", out float pitch, defaultValue: 1.0f);
+			parameters.TryGetValue("-l", out bool loop, defaultValue: true);
+
+			yield return AudioManager.instance.PlaySoundGradient(filePath, mixer, volume, pitch, loop);
+		}
+
+		private static void StopSoundEffectGradient(string soundName) => AudioManager.instance.StopSoundGradient(soundName);
 	}
 }

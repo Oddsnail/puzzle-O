@@ -50,7 +50,7 @@ namespace origin.tutorial {
 
 		private const float waitBetweenSteps = 0.2f;
 		private const string textKeyPrefix = "tutorial.";
-		private const string prefSawPrefix = "saw.";
+		private const string prefSawPrefix = "SawTutorial.";
 
 		public bool IsRunning => co_tutorial != null;
 		public bool IsOnStep => isOnStep;
@@ -207,6 +207,7 @@ namespace origin.tutorial {
 
 			CleanupTutorialUI();
 			PlayerPrefs.SetInt(prefSawPrefix + set.setID, 1);
+			PlayerPrefs.Save();
 
 			co_tutorial = null;
 		}

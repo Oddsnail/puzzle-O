@@ -5,6 +5,7 @@ using origin.audio;
 using origin.character;
 using origin.command;
 using origin.language;
+using System;
 
 namespace origin.dialogue {
 	public class DialogueLineHandler : ILineHandler {
@@ -32,6 +33,11 @@ namespace origin.dialogue {
 			this.commandExecutor = commandExecutor;
 			dialogueUI.onNextDialogueRequest += OnNextDialogueRequest;
 			LocalizationManager.OnLanguageChanged += OnLanguageChanged;
+		}
+
+		public void Dispose() {
+			dialogueUI.onNextDialogueRequest -= OnNextDialogueRequest;
+			LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
 		}
 
 		private void OnNextDialogueRequest() => nextRequest = true;
@@ -149,7 +155,7 @@ namespace origin.dialogue {
 
 			while (!nextRequest) yield return null;
 
-			AudioManager.instance.PlayPreloadedSFX("nextDialogue", AudioManager.instance.sfxMixer);
+			AudioManager.instance.PlayPreloadedSFX("nextDialogue");
 			dialogueUI.SetPromptVisible(false);
 			nextRequest = false;
 		}

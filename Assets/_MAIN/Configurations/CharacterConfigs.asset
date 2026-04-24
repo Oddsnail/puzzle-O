@@ -15,16 +15,28 @@ MonoBehaviour:
   Characters:
   - ID: yjh
     prefabNormal: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
-    prefabClient: {fileID: 3385085038161331646, guid: f4c755804dca2444bacd62f6373a48d5, type: 3}
-    reactionLocation: {x: 0, y: 0}
-    reactionField: []
+    prefabClient: {fileID: 2739609768114019606, guid: 218733e5051d4f541a5f15068369509a, type: 3}
+    reactionLocation: {x: 200, y: 1400}
+    reactionField:
+    - type: 0
+      setSpriteID: std1-124
+    - type: 1
+      setSpriteID: std1-133
+    - type: 2
+      setSpriteID: std1-112
+    - type: 3
+      setSpriteID: std1-111
+    - type: 4
+      setSpriteID: std1-132
+    - type: 5
+      setSpriteID: std1-122-sweat
   - ID: lde
     prefabNormal: {fileID: 4054991153673449271, guid: 58c3321aa029c1445b014f8bc03d05bd, type: 3}
     prefabClient: {fileID: 7789988086846992241, guid: 93523a827bcf931439652f3d7f48db7b, type: 3}
     reactionLocation: {x: -300, y: 1400}
     reactionField:
     - type: 0
-      setSpriteID: std1_hand-113-sweat
+      setSpriteID: std1-113-sweat
     - type: 1
       setSpriteID: std1-121
     - type: 2

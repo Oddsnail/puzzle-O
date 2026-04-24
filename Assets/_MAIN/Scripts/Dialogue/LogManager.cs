@@ -41,7 +41,7 @@ namespace origin.dialogue {
             isLogOpen = true;
             logContainer.root.SetActive(true);
 
-            AudioManager.instance.PlayPreloadedSFX("openMenu", AudioManager.instance.sfxMixer);
+            AudioManager.instance.PlayPreloadedSFX("openMenu");
         }
 
         public void CloseLog() {
@@ -55,7 +55,7 @@ namespace origin.dialogue {
                 input.SetActionEnabled("NextDialogue", true);
                 input.SetActionEnabled("PuzzleInput", true);
             }
-            AudioManager.instance.PlayPreloadedSFX("closeMenu", AudioManager.instance.sfxMixer);
+            AudioManager.instance.PlayPreloadedSFX("closeMenu");
         }
 
         public void AddLog(string speaker, List<string> content) {

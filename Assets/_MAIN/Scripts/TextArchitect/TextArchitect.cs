@@ -108,12 +108,12 @@ namespace origin.dialogue {
             tmpro.ForceMeshUpdate();
         }
 
-        private IEnumerator Build_Typewriter() {
-            while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount) {
-                tmpro.maxVisibleCharacters += speedUp ? 3 * CharactersPerCycle : CharactersPerCycle;
-                AudioManager.instance.PlayPreloadedSFX("textBuild", AudioManager.instance.sfxMixer, 1.0f + Random.Range(-0.05f, 0.05f));
-                yield return new WaitForSeconds(0.02f / Speed);
-            }
-        }
+		private IEnumerator Build_Typewriter() {
+			while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount) {
+				tmpro.maxVisibleCharacters += speedUp ? 3 * CharactersPerCycle : CharactersPerCycle;
+				AudioManager.instance.PlayPreloadedSFX("textBuild");
+				yield return new WaitForSeconds(0.03f / Speed);
+			}
+		}
     }
 }

@@ -16,14 +16,16 @@ namespace origin.graphic {
         public Graphic hoverTarget;
         public float highlightSize = 1.3f;
 		public float animationSpeed = 6.0f;
+		public RectTransform descriptionText;
 		public TextMeshProUGUI invisibleText;
 
         private bool isHovered = false;
         private Coroutine co_scaling = null;
 
         private PointerEventData pointerData;
-        private readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
+		private readonly List<RaycastResult> raycastResults = new List<RaycastResult>();
 
+		private Coroutine co_soundBuffer = null;
 
         private void Update() {
 			if (GameSettingManager.instance.isMenuOn) return;
@@ -46,33 +48,52 @@ namespace origin.graphic {
 
             if (mouseOver && !isHovered) {
                 isHovered = true;
-                ScaleTo(highlightSize);
+                ScaleTo(true);
             }
             else if (!mouseOver && isHovered) {
                 isHovered = false;
-                ScaleTo(1.0f);
+                ScaleTo(false);
             }
         }
 
-        private void ScaleTo(float targetScale) {
-            if (co_scaling != null) StopCoroutine(co_scaling);
-            co_scaling = StartCoroutine(Scaling(targetScale));
-        }
+		private void ScaleTo(bool larger) {
+			if (co_scaling != null) StopCoroutine(co_scaling);
+			co_scaling = StartCoroutine(Scaling(larger));
+		}
+		
+		private IEnumerator SoundBuffer() {
+			yield return new WaitForSeconds(0.3f);
+			co_soundBuffer = null;
+		}
 
-		private IEnumerator Scaling(float targetScale) {
+		private IEnumerator Scaling(bool larger) {
+
+			float fixedX = descriptionText.anchoredPosition.x;
+
 			float startScale = iconBoxRect.localScale.x;
-			float startTransparency = targetScale != 1.0f ? 0f : 1f;
-			float targetTransparency = targetScale != 1.0f ? 1f : 0f;
+			float startLocationY = descriptionText.anchoredPosition.y;
+			float startTransparency = invisibleText.alpha;
+
+			float targetScale = larger ? highlightSize : 1f;
+			float targetLocationY = larger ? 0f : -70f;
+			float targetTransparency = larger ? 1f : 0f;
 			float percent = 0f;
-			if (targetScale != 1.0f) AudioManager.instance.PlayPreloadedSFX("iconBoxHover", AudioManager.instance.sfxMixer);
+
+			if (targetScale != 1.0f && co_soundBuffer == null) {
+				AudioManager.instance.PlayPreloadedSFX("iconBoxHover");
+				co_soundBuffer = StartCoroutine(SoundBuffer());
+			}
 
 			while (percent < 1f) {
 				percent += Time.deltaTime * animationSpeed;
 				float s = Mathf.Lerp(startScale, targetScale, percent);
 				float a = percent * (2 * percent - 1) * (percent - 1);
+
 				iconBoxRect.localScale = new Vector3(s, s, 1f);
 				iconBoxRect.rotation = Quaternion.Euler(0f, 0f, a * 20);
+				descriptionText.anchoredPosition = new Vector2(fixedX, targetLocationY);
 				invisibleText.alpha = Mathf.Lerp(startTransparency, targetTransparency, percent);
+
 				yield return null;
 			}
 			iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
