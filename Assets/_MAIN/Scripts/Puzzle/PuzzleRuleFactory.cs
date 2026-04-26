@@ -105,7 +105,7 @@ namespace origin.puzzle {
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
-					return guessDigit > answerDigit;
+					return guessDigit < answerDigit;
 				},
 				audioPitch: 0.85f,
 				scoreValue: 2
@@ -120,7 +120,7 @@ namespace origin.puzzle {
 				checkCondition: (answer, guess, position) => {
 					int answerDigit = answer[position] - '0';
 					int guessDigit = guess - '0';
-					return guessDigit < answerDigit;
+					return guessDigit > answerDigit;
 				},
 				audioPitch: 0.85f,
 				scoreValue: 2
@@ -147,6 +147,7 @@ namespace origin.puzzle {
 				case "range-match": return CreateRangeRule(color, subcolor);
 				case "greater-than": return CreateGreaterThanRule(color, subcolor);
 				case "less-than": return CreateLessThanRule(color, subcolor);
+				case "ghost": return CreateGhostRule(color, subcolor);
 				default:
 					Debug.LogWarning($"Unknown rule ID: {id}");
 					return null;

@@ -2505,6 +2505,8 @@ MonoBehaviour:
   paragraphs:
   - {fileID: 4900000, guid: 977143ec28766d846a69a5348b804c5d, type: 3}
   - {fileID: 4900000, guid: 88827051f3c5073469d569a90e5b3011, type: 3}
+  - {fileID: 4900000, guid: 5cb7ecc9cea4916479f860522f72eea5, type: 3}
+  - {fileID: 4900000, guid: a7d8487ecf2fad44a8a3e75a13602f24, type: 3}
   quitEnd: {fileID: 1997477661}
 --- !u!1 &616694126
 GameObject:
@@ -5405,7 +5407,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1231840331}
-  - {fileID: 2135824395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143491160
@@ -11287,51 +11288,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135145104}
   m_CullTransparentMesh: 1
---- !u!1 &2135824394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2135824395}
-  - component: {fileID: 2135824396}
-  m_Layer: 0
-  m_Name: GameFlow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2135824395
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135824394}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1114645883}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2135824396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135824394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2081a44872a17464d9c20676fc37802e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameFlow
-  stage1text: {fileID: 4900000, guid: 88827051f3c5073469d569a90e5b3011, type: 3}
 --- !u!1 &2146383375
 GameObject:
   m_ObjectHideFlags: 0

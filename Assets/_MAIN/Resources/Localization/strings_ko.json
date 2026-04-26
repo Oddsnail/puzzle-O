@@ -67,29 +67,44 @@
     "rule.miss.comment.lde": "\"아니 어깨를 주무르라고 어깨를-\"\n\"아, 이건 그냥 제가 만지고싶은 곳 만지는거에요.\"\n\"?\"",
 
     "rule.strike.title": "해답",
-    "rule.strike.description": "옳은 순서에, 옳은 숫자.",
+    "rule.strike.description": "옳은 위치에, 옳은 숫자.",
     "rule.strike.comment.lde" : "\"완벽하다 이거죠 그냥,\n안마를 거의 아트의 경지로 끌어올려서-\"\n\"호들갑은...\"",
     "rule.strike.comment.yjh" : "\"으윽...읏...하으-\"\n\"제발 조용히 좀 해다오...\"",
 
     "rule.semi-strike.title": "합동",
-    "rule.semi-strike.description": "옳은 순서에, <u><b>5</b></u>만큼 틀린 숫자.",
+    "rule.semi-strike.description": "옳은 위치에, <u><b>5</b></u>만큼 틀린 숫자.",
     "rule.semi-strike.comment.lde" : "\"괜찮죠? 나쁘지 않죠?\"\n\"거기 말고...오른쪽을 해달라고...\"\n\"제 오른쪽 아니였어요?\"",
     "rule.semi-strike.comment.yjh" : "\"완벽히 반대편을 주물렀다는건 사실상 맞췄다고 봐야지.\"\n\"네?\"",
 
     "rule.ball.title": "단서",
-    "rule.ball.description": "틀린 순서에, 옳은 숫자.",
+    "rule.ball.description": "틀린 위치에, 옳은 숫자.",
     "rule.ball.comment.lde" : "\"그, 순서를 어떻게 잘 좀 해봐, 자꾸 왔다갔다 하지 말고.\"\n\"싫어요. 제 맘대로 할꺼에요.\"",
     "rule.ball.comment.yjh" : "\"다 좋은데 좀, 너무 왔다갔다 하시는 느낌이...\"\n\"아 뭐 어때 대충해 그냥.\"\n\"...\"",
 
-    "rule.parity-match.title": "홀짝-동일",
-    "rule.parity-match.description": "옳은 순서에, 옳은 <u><b>홀짝</b></u>.",
+    "rule.parity-match.title": "홀짝성",
+    "rule.parity-match.description": "옳은 위치에, 같은 <u><b>홀짝</b></u>을 가진 숫자.",
     "rule.parity-match.comment.lde" : "\"시원해요?\"\n\"그런 것 같기도 하고, 아닌 것 같기도 하고...\"",
     "rule.parity-match.comment.yjh" : "\"오오...시원해요.\"\n\"그런 것 치곤 반응이 시원찮은데.\"\n\"(역시 눈치는 빠르군)\"",
 
     "rule.range-match.title": "근사치",
-    "rule.range-match.description": "옳은 순서에, <u><b>1</b></u>만큼 틀린 숫자.",
-    "rule.range-match.comment.lde" : "\"\"\n\"\"",
+    "rule.range-match.description": "해당 위치에, <u><b>1</b></u>만큼 틀린 숫자.",
+    "rule.range-match.comment.lde" : "\"\"\n\"\"\n\"\"",
     "rule.range-match.comment.yjh" : "\"아 좀 더 위에요\" \"여기?\" \"아 너무 위 말고\" \"여기?\"",
+
+    "rule.greater-than.title": "하한",
+    "rule.greater-than.description": "해당 위치에, 더 큰 수 요구.",
+    "rule.greater-than.comment.lde" : "\"\"\n\"\"\n\"\"",
+    "rule.greater-than.comment.yjh" : "\"\"\n\"\"\n\"\"",
+
+    "rule.less-than.title": "상한",
+    "rule.less-than.description": "해당 위치에, 더 작은 수 요구.",
+    "rule.less-than.comment.lde" : "\"\"\n\"\"\n\"\"",
+    "rule.less-than.comment.yjh" : "\"\"\n\"\"\n\"\"",
+
+    "rule.ghost.title": "제외",
+    "rule.ghost.description": "정답에 등장하지 않는 숫자.",
+    "rule.ghost.comment.lde" : "\"\"\n\"\"\n\"\"",
+    "rule.ghost.comment.yjh" : "\"\"\n\"\"\n\"\"",
 
     "tutorial.skip":"튜토리얼 넘기기",
     "tutorial.basic.0":"안마의 세계에 오신 것을 환영합니다! \n\n이 튜토리얼에서는 안마의 기본적인 규칙에 대해 알려드립니다.",
