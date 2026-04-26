@@ -143,12 +143,12 @@ namespace origin.dialogue {
 			textArchitect.buildMethod = prev;
 		}
 
-		public void OnConversationEnd() {
-			if (currentLine.Count != 0) {
-				DialogueManager.instance.AddLog(recentCharacter == plainTextID ? plainTextID : charService.GetInfo(recentCharacter).nameKey, currentLine);
-				currentLine.Clear();
-			}
-		}
+		// public void OnConversationEnd() {
+		// 	if (currentLine.Count != 0) {
+		// 		DialogueManager.instance.AddLog(recentCharacter == plainTextID ? plainTextID : charService.GetInfo(recentCharacter).nameKey, currentLine);
+		// 		currentLine.Clear();
+		// 	}
+		// }
 
 		private IEnumerator WaitForRequest() {
 			dialogueUI.SetPromptVisible(true);

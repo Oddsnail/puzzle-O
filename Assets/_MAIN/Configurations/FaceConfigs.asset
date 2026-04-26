@@ -75,9 +75,9 @@ MonoBehaviour:
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -166, y: 1495}
+      localPosition: {x: -172, y: 1495}
     eyebrow:
-      localPosition: {x: -147, y: 1576}
+      localPosition: {x: -153, y: 1576}
     mouth:
       localPosition: {x: -176, y: 1413}
     expressions:

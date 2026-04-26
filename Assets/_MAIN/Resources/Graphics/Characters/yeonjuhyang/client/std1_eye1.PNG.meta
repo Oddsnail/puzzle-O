@@ -3,14 +3,14 @@ guid: 1498ebe7e7af59348822a82ca3deae82
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3165346880219874379
-    second: IMG_4773_0
+      213: -7863100004404910564
+    second: std1_eye1_0
   - first:
-      213: 2735315401769772492
-    second: IMG_4773_1
+      213: 1090769292975833335
+    second: std1_eye1_1
   - first:
-      213: -4794950500252248601
-    second: IMG_4773_2
+      213: 7626147972647398143
+    second: std1_eye1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_4773_0
+      name: std1_eye1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,14 +121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5bb7a9d78cd6214d0800000000000000
-      internalID: -3165346880219874379
+      spriteID: c16a21cd438a0e290800000000000000
+      internalID: -7863100004404910564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4773_1
+      name: std1_eye1_1
       rect:
         serializedVersion: 2
         x: 36
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc564279ddac5f520800000000000000
-      internalID: 2735315401769772492
+      spriteID: 7f08abf84e0332f00800000000000000
+      internalID: 1090769292975833335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_4773_2
+      name: std1_eye1_2
       rect:
         serializedVersion: 2
         x: 200
@@ -165,8 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e512ecbce9e47db0800000000000000
-      internalID: -4794950500252248601
+      spriteID: ffaa6321d2585d960800000000000000
+      internalID: 7626147972647398143
       vertices: []
       indices: 
       edges: []
@@ -185,9 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_4773_0: -3165346880219874379
-      IMG_4773_1: 2735315401769772492
-      IMG_4773_2: -4794950500252248601
+      std1_eye1_0: -7863100004404910564
+      std1_eye1_1: 1090769292975833335
+      std1_eye1_2: 7626147972647398143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

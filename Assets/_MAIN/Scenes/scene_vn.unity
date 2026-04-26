@@ -2502,11 +2502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1442b5a6d67e48419650bcc149d6e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NovelGameFlow
-  stories:
-  - {fileID: 4900000, guid: cfb8f21595cc8a74c912ef25f8a8f82b, type: 3}
-  - {fileID: 4900000, guid: 464b720230afe054495c871dfbd383d6, type: 3}
-  - {fileID: 4900000, guid: 775118a0de4f9d5419911a2cf36ab1c1, type: 3}
-  - {fileID: 4900000, guid: 4ccad04ed3def0e419a5b8c67628650c, type: 3}
+  paragraphs:
+  - {fileID: 4900000, guid: 977143ec28766d846a69a5348b804c5d, type: 3}
+  - {fileID: 4900000, guid: 88827051f3c5073469d569a90e5b3011, type: 3}
   quitEnd: {fileID: 1997477661}
 --- !u!1 &616694126
 GameObject:
@@ -6035,7 +6033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d50ffa6bafb8be44a4e647bd8344fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file1: {fileID: 4900000, guid: 620be1e01c980b84a9b0534043748336, type: 3}
+  file1: {fileID: 4900000, guid: a7d8487ecf2fad44a8a3e75a13602f24, type: 3}
 --- !u!1 &1253416419
 GameObject:
   m_ObjectHideFlags: 0
@@ -9493,7 +9491,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 30
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -11333,7 +11331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2081a44872a17464d9c20676fc37802e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFlow
-  stage1text: {fileID: 4900000, guid: c4e5f88ac2af2d848bb27ae31fc149fb, type: 3}
+  stage1text: {fileID: 4900000, guid: 88827051f3c5073469d569a90e5b3011, type: 3}
 --- !u!1 &2146383375
 GameObject:
   m_ObjectHideFlags: 0

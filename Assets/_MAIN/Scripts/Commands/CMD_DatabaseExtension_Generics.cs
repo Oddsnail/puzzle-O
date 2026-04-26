@@ -24,6 +24,8 @@ namespace origin.command {
 			database.AddCommand("changeCutscene", new Action<string>(ChangeCutscene));
 			database.AddCommand("bgFogOn", new Action(bgFogOn));
 			database.AddCommand("bgFogOff", new Action(bgFogOff));
+			database.AddCommand("manuFogOn", new Func<IEnumerator>(manuFogOn));
+			database.AddCommand("manuFogOff", new Func<IEnumerator>(manuFogOff));
 			database.AddCommand("quitCutscene", new Action(QuitCutscene));
 
 			// Sound relates
@@ -40,6 +42,8 @@ namespace origin.command {
 		private static void QuitCutscene() => BackgroundManager.instance.QuitCutscene();
 		private static void bgFogOn() => BackgroundManager.instance.thinkFogOn(true);
 		private static void bgFogOff() => BackgroundManager.instance.thinkFogOn(false);
+		private static IEnumerator manuFogOn() => BackgroundManager.instance.ManualFogOn(true);
+		private static IEnumerator manuFogOff() => BackgroundManager.instance.ManualFogOn(false);
 
 		// Audio Relates
 

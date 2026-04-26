@@ -45,6 +45,21 @@
 
     "char.yjh.name" : "연주향",
     "char.yjh.subname" : "3급",
+    "yjh.clientline.idle.1" : "부끄러워지셨나요? 귀여우시네요.",
+    "yjh.clientline.idle.2" : "뭐죠 이건? 경치 감상?",
+    "yjh.clientline.best.1" : "아, 시원해요! 거기!",
+    "yjh.clientline.best.2" : "음~ 괜찮네요. 딱 뭉쳐있던 부분인데.",
+    "yjh.clientline.better.1" : "생각보다 잘하시네요!",
+    "yjh.clientline.better.2" : "",
+    "yjh.clientline.good.1" : "아니, 좀 팍팍 해봐요! 갑자기 뭐 그런걸 신경써요?",
+    "yjh.clientline.good.2" : "거기도 시원하긴 한데, 좀 더 위 쪽도 해주세요!",
+    "yjh.clientline.normal.1" : "(열중한 거 좀 귀엽네... 드럽게 못하는 것도 포함해서.)",
+    "yjh.clientline.normal.2" : "(부끄러워 하시는 건가?)",
+    "yjh.clientline.bad.1" : "후후, 마사지 재능은 제가 더 출중한 걸로 하죠.",
+    "yjh.clientline.bad.2" : "기왕 이렇게 된거, 맘껏 연습하시죠~",
+
+    "char.ssa.name" : "선수아",
+    "char.ssa.subname" : "팀장",
 
     "rule.miss.title": "해당 없음",
     "rule.miss.description": "상위 조건에 해당 없음.",
@@ -97,21 +112,6 @@
     "tutorial.basic.17":"각 레벨마다 새로운 규칙의 조합이 기다리고 있습니다.\n새로운 레벨에 도달할 때마다, 규칙 파일을 꼭 확인해보세요!",
     "tutorial.basic.18":"그럼 마저 안마를 완성하러 가봅시다!",
 
-    "loc.temp.1" : "오후 8시, 여자 휴게실.",
-    "loc.temp.2-1" : "(그러고보니...",
-    "loc.temp.2-2" : "최근들어 본 적이 없네.)",
-    "loc.temp.3" : "뭐",
-    "loc.temp.4-1" : "이게 정상이지,",
-    "loc.temp.4-2" : " 워낙 바쁘기도 하고...",
-    "loc.temp.5-1" : "<size=+30>선배!!!!!!!!!!</size>",
-    "loc.temp.5-2" : "",
-    "loc.temp.6-0" : "알겠으니까 소리좀 지르지 마!",
-    "loc.temp.6" : "여전하네,",
-    "loc.temp.7" : " 막 쉬려고 할 때 찾아오는 건...",
-    "loc.temp.8" : "",
-    "loc.temp.9-1" : "쉬어요?",
-    "loc.temp.9-2" : " 남자 휴게실에서?",
-    "loc.temp.10" : "어?",
-    "loc.temp.11" : "여기 남자 휴게실이야?",
-    "loc.temp.12" : "뻥이에요."
+    "paragraph.0.1":""
+
 }

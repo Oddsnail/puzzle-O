@@ -7,6 +7,7 @@ using origin.audio;
 using origin.settings;
 using origin.dialogue;
 using origin.tutorial;
+using origin.puzzle;
 
 namespace origin.graphic {
     public class SideBox : MonoBehaviour {
@@ -46,6 +47,7 @@ namespace origin.graphic {
 		}
 		
 		public void OnClipButtonPressed() {
+            if (!hoverEnabled) return;
 			if (TutorialManager.instance.IsRunning) return;
 
 			clipped = !clipped;
@@ -55,11 +57,9 @@ namespace origin.graphic {
 			
 			if (clipped) {
 				clipOutline.effectColor = Color.white;
-				DisableHover();
 				SlideTo(showXPos);
 			} else {
 				clipOutline.effectColor = Color.black;
-				EnableHover();
 			}
 		}
 

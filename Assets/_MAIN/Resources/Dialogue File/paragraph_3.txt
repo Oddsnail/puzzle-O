@@ -1,0 +1,34 @@
+# initializing
+
+wait-manuFogOn()
+bgFogOn()
+add(lde yjh ssa)
+playGrad(bgm/spaceship_earth -v 0.45 -l true)
+setposX(yjh -300 -i true)
+setposX(lde 300 -i true)
+sp(yjh std2-115)
+sp(lde std2-312)
+uhl(lde)
+uhl(yjh)
+
+# dialogue start
+
+puzzle(lde 4 4 mystery s1 f1)
+
+.s1
+.f1
+
+puzzle(yjh 3 5 undercover s2 f2)
+
+.s2
+.f2
+
+# end of file
+
+remove(lde yjh)
+
+.eof
+end(EOF)
+
+.fail
+end(FAIL)

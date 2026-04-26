@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ef6d3785f4ac14940bcfb70094502a7e
+guid: 63cf34c022d3ca148a78d87c74c760da
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -73,7 +73,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -103,10 +103,10 @@ TextureImporter:
       name: std3_0
       rect:
         serializedVersion: 2
-        x: 457
+        x: 438
         y: 0
-        width: 855
-        height: 1849
+        width: 892
+        height: 1867
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

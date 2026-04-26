@@ -124,6 +124,7 @@ namespace origin.dialogue {
 
 		private IEnumerator Hiding() {
 			showing = false;
+			Empty();
 			yield return DOTween.Sequence()
 				.Join(container.dialogueRoot.DOAnchorPosY(defaultDialogueHideYPos, defaultShowAndHideDuration))
 				.Join(container.upperLetterbox.DOAnchorPosY(container.upperLetterbox.GetComponent<LetterboxLoop>().hideYPos, defaultShowAndHideDuration))

@@ -1,0 +1,250 @@
+# initializing
+
+add(lde yjh)
+setposX(yjh 3000 -i true)
+setposX(lde 3000 -i true)
+sp(yjh std1-112)
+sp(lde std1_equip-112)
+appear(lde yjh)
+
+# dialogue start
+
+[default::] "오후 7:34,{wa:0.4} <i>용병회사 ORIGIN.</i>{wa:0.4}\n사내 여직원 휴게실."
+closeDialogue()
+
+wait(1.8)
+wait-play(sfx/sfx_doorOpen)
+wait(1.4)
+wait-play(sfx/sfx_footstep1)
+wait(1.2)
+wait-play(sfx/sfx_footstep2)
+wait(1.4)
+wait-play(sfx/sfx_footstep1)
+wait(1.2)
+wait-play(sfx/sfx_doorClose)
+wait(1.4)
+wait-play(sfx/sfx_footstep2)
+wait(1.2)
+wait-play(sfx/sfx_footstep1)
+wait(1.4)
+wait-play(sfx/sfx_footstep2)
+wait(1.2)
+
+setposX(lde 2000)
+wait-play(sfx/sfx_footstep1)
+wait(1.4)
+setposX(lde 1200)
+wait-play(sfx/sfx_footstep2)
+wait(1.2)
+setposX(lde 400)
+wait-play(sfx/sfx_footstep1)
+wait(1.4)
+setposX(lde -400)
+wait-play(sfx/sfx_footstep2)
+wait(1.2)
+setposX(lde -1000)
+wait-play(sfx/sfx_footstep1)
+wait(1.4)
+
+openDialogue()
+[lde:_-__1:s] "아이고..."
+
+sp(lde _-__2)
+setposX(lde 0)
+bgFogOn()
+[default::] "이도은,{wa:0.4} 22세.{wa:0.4} <i>용병회사 ORIGIN</i> 소속 2급 용병.{a}\n현재 7일 출장파견 후 퇴근."
+[default::] "전신에 경미한 타박상 다수,{wa:0.6} 허기짐,{wa:0.6} 눈 뻐근함."
+
+setposX(lde -1000)
+bgFogOff()
+wait(0.4)
+
+[lde:_-_21:s] "피곤해 죽겠다{wa:0.5}.{wa:0.5}.{wa:0.5}."
+[:_-__2:] "(한 시간 뒤에 작전 종료 보고 참석하면, {wa:0.4}아무리 일찍 끝나도 9시...)"
+[::s] "(이러고 내일 하루 쉬면 다시 출근인가...)"
+[::] "(일단 지금은...{wa:0.5}휴게실에서 눈만 좀 붙이자...)"
+
+wait(0.4)
+
+[:_-_11:c] "하{wa:0.5}.{wa:0.5}.{wa:0.5}."
+[:_-_2_:s] "때려칠까{wa:0.5}.{wa:0.5}.{wa:0.5}."
+
+wait(0.3)
+wait-play(sfx/sfx_footstep1 -v 0.4)
+sp(lde _-212)
+h(lde)
+wait(0.3)
+wait-play(sfx/sfx_footstep1 -v 0.4)
+wait(0.3)
+wait-play(sfx/sfx_footstep1 -v 0.6)
+wait(0.3)
+wait-play(sfx/sfx_footstep1 -v 0.6)
+wait(0.3)
+wait-play(sfx/sfx_footstep1 -v 0.8)
+wait(0.3)
+wait-play(sfx/sfx_doorOpen)
+
+wait(1)
+setposX(yjh 1500)
+sp(lde _-211-sweat)
+h(lde)
+[yjh::h] "<size=+30>선배애!!!</size>"
+playGrad(bgm/bgm_happy -v 0.7 -l true)
+wait(0.5)
+uhl(lde)
+setposX(yjh 0)
+setposX(lde -1800)
+bgFogOn()
+
+[default::] "연주향,{wa:0.4} <i>용병회사 ORIGIN</i> 소속 3급 용병."
+[default::] "마찬가지로 7일 출장파견 후 퇴근."
+[default::] "작전 중 복수의 타박상 및 골절상을 입었으나,{a} 전부 부상 3일 이내로 회복 완료."
+
+hl(lde)
+setposX(yjh 1500)
+setposX(lde -1000)
+bgFogOff()
+
+wait(0.3)
+wait(0.3)
+[lde:_-221-_-sweat:s] "아...뭔데 또.{a} 나 잠시 쉴꺼야."
+wait(0.8)
+sp(yjh std2-113)
+setposX(yjh 1700)
+
+wait(0.8)
+sp(yjh std1-114)
+setposX(yjh 1300)
+play(sfx/emotion_surprise -v 0.7)
+[yjh::] "남직원 휴게실에서요?"
+[lde:_-221-sweat:h] "어?{wa:0.3} 여기 남자 휴게실이야?"
+setposX(yjh 900)
+
+play(sfx/emotion_tada -v 0.4)
+[yjh:std1-112:h] "뻥이에요."
+stopGrad(bgm_happy)
+[lde:_-222:s] ".{wa:0.5}.{wa:0.5}.{wa:0.5}."
+setposX(yjh 1000)
+[yjh:std2-112:h] "근데 진짜 왜 여기 계세요? {wa:0.5}곧 보고하러 가셔야 하는거 아니에요?"
+
+[lde:_-111:c] "바로 하겠냐, {wa:0.4}보나마나 3급 따리들 장비 수량 확인하고,{wa:0.4}\n인원 점검하고...{wa:0.4} 지들 할꺼 다 하고 느지감치 퇴근시켜주겠지."
+
+[lde:_-321:s] "하여간에 빠져가지고.{wa:0.3}.{wa:0.3}.{wa:0.3} 나때는 오는 길에 수량 확인 안 해놓으면-"
+setposX(yjh 400)
+sp(yjh std1-115)
+h(yjh)
+play(sfx/emotion_surprise -v 0.7)
+[yjh:_-114:h] "헉, {wa:0.5}맞았어요?"
+[lde:_-211-sweat:h] "어.{wa:0.3}.{wa:0.3}.{wa:0.3} 아니,{wa:0.4} 그건 아닌데..."
+
+setposX(yjh 000)
+[yjh:_-124:] "그런데 선배,{wa:0.4} 혹시 아직도 안 씻었어요?"
+[lde:_-211-sweat:h] "당연...{wa:0.3} 어?{wa:0.3} 너 왜 벌써 이렇게 말끔하냐?"
+[yjh:_-114:h] "선배가 느린거에요. {wa:0.3}전 오자마자 씻었는데... {wa:0.3}장비도 좀 벗으시고 대충 세수라도 하세요."
+[yjh:_-123:c] "아니다, 아니지..."
+
+sp(lde _-221-sweat)
+h(lde)
+setposX(lde -1100)
+setposX(yjh -500)
+play(bgm/bgm_happy -v 0.7 -l true)
+[yjh:_-142:h] "제가 닦아드릴게요!"
+
+setposX(lde -3000)
+setposX(yjh -3000)
+play(sfx/emotion_surprise -v 0.7)
+[lde::] "야, 잠시만...!{wa:0.4} 내가 벗을게!{wa:0.3} 알아서!"
+wait(0.3)
+play(sfx/sfx_eqDrop2 -v 0.3 -p 0.8)
+wait(0.3)
+play(sfx/sfx_eqDrop3 -v 0.3 -p 1.2)
+[yjh::] "<size=+10>으흐흐 일루와잇!!!</size>"
+
+disappear(lde yjh)
+
+play(sfx/sfx_eqDrop1)
+play(sfx/emotion_surprise -v 0.7)
+[lde::] "야, {wa:0.3}뭔 사람 몸을 행주로 닦아...!"
+play(sfx/sfx_wipe1)
+[yjh::] "행주라뇨! {wa:0.3}제 개인 수건이라 깨끗한거에요!"
+play(sfx/sfx_wipe2)
+
+setposX(lde 400 -i true)
+setposX(yjh -400 -i true)
+sp(lde std2-321-blsh-sweat)
+sp(yjh std2-111)
+
+[lde::] "아오...!{wa:0.3} 내가 할게, 내가!"
+
+wait-manuFogOn()
+
+wait(4)
+stopGrad(bgm_happy)
+
+appear(lde yjh)
+manuFogOff()
+[lde::] ".{wa:0.5}.{wa:0.5}.{wa:0.5}."
+play(sfx/emotion_tada -v 0.4)
+[yjh:_-__2:h] "말끔해지셨네요!"
+s(lde)
+wait(1)
+
+[lde:std1-311:c] "그래, 고맙다 고마워.{a} 난 이제 진짜 좀만 쉬련다..."
+
+sp(lde std1-312)
+setposX(lde -200)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+h(yjh)
+sp(yjh std1-115)
+setposX(yjh -300)
+setposX(lde -800)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+setposX(lde -1500)
+wait(1)
+play(sfx/ui_on)
+c(lde)
+bgFogOn()
+sp(lde _-__2)
+uhl(lde)
+wait(3)
+setposX(yjh -900)
+[yjh:_-__4:c] "진짜 쉬시게요?"
+[lde:_-__1:h] "그럼 가짜로 쉬냐...{wa:0.4} 나가라고는 안 할 테니까 방해만 하지 마..."
+[yjh:_-__5:] "..."
+
+closeDialogue()
+wait(3)
+setposX(yjh -800)
+sp(yjh std2-113)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+setposX(yjh -150)
+c(yjh)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+setposX(yjh 500)
+c(yjh)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(3)
+setposX(yjh 100)
+sp(yjh std1-115)
+c(yjh)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+setposX(yjh 700)
+sp(yjh std2-113)
+play(sfx/sfx_footstep1 -v 0.7)
+wait(1.4)
+setposX(yjh 3000)
+c(yjh)
+play(sfx/sfx_footstep1 -v 0.7)
+
+wait-manuFogOn()
+remove(lde yjh)
+wait(1)
+
+# end of file
+
+end(EOF)

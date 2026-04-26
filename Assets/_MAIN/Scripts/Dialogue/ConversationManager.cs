@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using origin.settings;
 using UnityEngine;
 
 namespace origin.dialogue {
@@ -51,6 +52,8 @@ namespace origin.dialogue {
 
 			foreach (string line in conversation) {
 				if (string.IsNullOrWhiteSpace(line) || line[0] == noteID) continue;
+				while (DialogueManager.instance.IsLogOpen
+						|| GameSettingManager.instance.isMenuOn) yield return null;
 
 				// ===== In choice / dot label logic =====
 				if (jumping) {
@@ -75,8 +78,8 @@ namespace origin.dialogue {
 				if (endBool) break;
 			}
 
-			foreach (ILineHandler handler in handlers)
-				handler.OnConversationEnd();
+			// foreach (ILineHandler handler in handlers)
+			// 	handler.OnConversationEnd();
 
 			dialogueUI.ChangeLetterBoxTheme(plainTextID);
 			dialogueUI.Hide();

@@ -4,11 +4,12 @@ using UnityEngine;
 
 using origin.IO;
 using origin.dialogue;
-using origin.audio;
 
 public class NovelGameFlow : MonoBehaviour
 {
-	[SerializeField] private TextAsset[] stories;
+	// paragraph_0 (start) => paragraph_1 ~ 4 (stages) => paragraph_5 (end) 
+
+	[SerializeField] private TextAsset[] paragraphs;
 	[SerializeField] SceneTransitionButton quitEnd;
 	private const string storySawPrefix = "SawStory.";
 
@@ -19,13 +20,15 @@ public class NovelGameFlow : MonoBehaviour
     }
 
     private IEnumerator Flow(int startingIndex) {
-		for (int i = startingIndex; i < stories.Length; i++) {
+		for (int i = startingIndex; i < paragraphs.Length; i++) {
 
-			List<string> conversation = FileManager.ReadTextAsset(stories[i]);
+			List<string> conversation = FileManager.ReadTextAsset(paragraphs[i]);
 			string result = "";
 
 			yield return new WaitForSeconds(0.2f);
 			yield return DialogueManager.instance.Say(conversation, endTag => result = endTag);
+
+			// end logics here
 
 			if (result != "EOF") {
 				Debug.Log($"Unexpected ending with story {i}.");
@@ -34,8 +37,8 @@ public class NovelGameFlow : MonoBehaviour
 
 			PlayerPrefs.SetInt(storySawPrefix + $"{i}", 1);
 			PlayerPrefs.Save();
+			yield return new WaitForSeconds(3.5f);
 		}
-
 		quitEnd.OnButtonPressed();
 	}
 }

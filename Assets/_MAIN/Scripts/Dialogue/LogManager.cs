@@ -37,9 +37,9 @@ namespace origin.dialogue {
                 input.SetActionEnabled("PuzzleInput", false);
             }
 
-            logContainer.root.GetComponentInChildren<ScrollRect>().verticalNormalizedPosition = 0f;
             isLogOpen = true;
             logContainer.root.SetActive(true);
+            logContainer.root.GetComponentInChildren<ScrollRect>().verticalNormalizedPosition = 0f;
 
             AudioManager.instance.PlayPreloadedSFX("openMenu");
         }
