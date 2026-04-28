@@ -18,7 +18,7 @@ namespace origin.command {
 		private static IEnumerator Puzzle(string[] data) {
 			IDialogueUI ui = DialogueManager.instance;
 			IConversationControl conv = DialogueManager.instance;
-
+			DialogueManager.instance.ChangeLetterBoxTheme(data[0]);
 			int.TryParse(data[1], out int digitCount);
 			int.TryParse(data[2], out int difficulty);
 			ui.Hide();
@@ -33,7 +33,7 @@ namespace origin.command {
 		private static IEnumerator PuzzleWithTutorial(string[] data) {
 			IDialogueUI ui = DialogueManager.instance;
 			IConversationControl conv = DialogueManager.instance;
-
+			DialogueManager.instance.ChangeLetterBoxTheme(data[0]);
 			ui.Hide();
 			bool successed = false;
 			yield return PuzzleManager.instance.StartPuzzleWithTutorial(data[0], data[1], success => successed = success);

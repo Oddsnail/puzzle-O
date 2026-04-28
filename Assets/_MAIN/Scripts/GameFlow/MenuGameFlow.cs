@@ -20,8 +20,8 @@ public class MenuGameFlow : MonoBehaviour
 	}
 
 	public void RefreshContinueButton() {
-		continueButton.gameObject.SetActive(PlayerPrefs.GetInt(storySawPrefix + "0", 0) == 1);
-		int i = 0;
+		continueButton.gameObject.SetActive(PlayerPrefs.GetInt(storySawPrefix + "1", 0) == 1);
+		int i = 1;
 		foreach (Button button in storyButtons) {
 			button.interactable = PlayerPrefs.GetInt(storySawPrefix + $"{i}", 0) == 1;
 			i++;

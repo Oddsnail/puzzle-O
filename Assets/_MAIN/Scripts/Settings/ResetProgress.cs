@@ -3,11 +3,13 @@ using origin.language;
 using System.Collections;
 using UnityEngine.UI;
 using origin.audio;
+using origin.graphic;
 
 namespace origin.IO {
 	public class ResetProgress : MonoBehaviour {
 
 		public MenuGameFlow menuGameFlow;
+		public MainScreenSelector mainMenuBG;
 
 		private bool forReal = false;
 		private const string keyQuestion = "ui.settings.resetProgress";
@@ -31,6 +33,7 @@ namespace origin.IO {
 				PlayerPrefs.DeleteAll();
 				forReal = false;
 				menuGameFlow.RefreshContinueButton();
+				mainMenuBG.RefreshMainMenuBackground();
 				text.SetKey(keyReseted);
 				co_waiting = StartCoroutine(waitAndReset());
 			}

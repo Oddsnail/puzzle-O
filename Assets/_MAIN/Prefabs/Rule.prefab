@@ -513,6 +513,7 @@ MonoBehaviour:
   highlightSize: 1.2
   animationSpeed: 8
   descriptionText: {fileID: 8188315497460744368}
+  outline: {fileID: 4085288151326583560}
   invisibleText: {fileID: 3194962962552657705}
 --- !u!1 &3226887117121299409
 GameObject:

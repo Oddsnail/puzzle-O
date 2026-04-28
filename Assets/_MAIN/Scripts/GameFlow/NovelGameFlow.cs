@@ -22,6 +22,9 @@ public class NovelGameFlow : MonoBehaviour
     private IEnumerator Flow(int startingIndex) {
 		for (int i = startingIndex; i < paragraphs.Length; i++) {
 
+			PlayerPrefs.SetInt(storySawPrefix + $"{i}", 1);
+			PlayerPrefs.Save();
+			
 			List<string> conversation = FileManager.ReadTextAsset(paragraphs[i]);
 			string result = "";
 
@@ -34,9 +37,11 @@ public class NovelGameFlow : MonoBehaviour
 				Debug.Log($"Unexpected ending with story {i}.");
 				break;
 			}
+			if (i == paragraphs.Length - 1) {	
+				PlayerPrefs.SetInt("Saw.Ending", 1);
+				PlayerPrefs.Save();
+			}
 
-			PlayerPrefs.SetInt(storySawPrefix + $"{i}", 1);
-			PlayerPrefs.Save();
 			yield return new WaitForSeconds(3.5f);
 		}
 		quitEnd.OnButtonPressed();

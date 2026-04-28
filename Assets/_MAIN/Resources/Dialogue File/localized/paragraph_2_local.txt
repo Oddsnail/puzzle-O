@@ -1,0 +1,152 @@
+# initializing
+
+wait-manuFogOn()
+bgFogOn()
+add(lde yjh)
+playGrad(bgm/spaceship_earth -v 0.7 -l true)
+setposX(yjh -300 -i true)
+setposX(lde 300 -i true)
+sp(yjh std2-113)
+sp(lde std2-311)
+uhl(lde)
+uhl(yjh)
+
+# dialogue start
+
+manuFogOff()
+[default::] "@p2.0.0{wa:0.4}@p2.0.1"
+closeDialogue()
+
+wait(2)
+play(sfx/sfx_cloth1 -v 0.4)
+wait(2.5)
+play(sfx/sfx_cloth2 -v 0.4)
+wait(2.2)
+play(sfx/sfx_cloth1 -v 0.4)
+wait(3)
+
+appear(lde yjh)
+openDialogue()
+[lde:std2-411-sweat:c] "..."
+play(sfx/sfx_cloth1 -v 0.4)
+[yjh::c]"..."
+hl(lde)
+[lde:std2-311-blsh-sweat:c] "@p2.3.0"
+[lde::c] "@p2.4.0{wa:0.4}@p2.4.1{wa:0.4}@p2.4.2"
+bgFogOff()
+hl(yjh)
+[yjh::c] "..."
+[lde::c] "..."
+stopGrad(spaceship_earth)
+[yjh:std2-112:c] "@p2.7.0"
+[lde:std2-432-blsh-sweat:c] "@p2.8.0"
+[yjh::c] "@p2.9.0"
+[lde:std2-111-blsh:c] "..."
+[yjh::] "@p2.11.0"
+[lde::] "..."
+playGrad(bgm/bgm_happy -v 0.7 -l true)
+[yjh:std2-122:] "@p2.13.0"
+[lde:std2-323-blsh:h] "@p2.14.0{wa:0.4}@p2.14.1{wa:0.4}@p2.14.2"
+[yjh:std2-112:c] "@p2.15.0"
+[lde:std2-323-blsh:h] "@p2.16.0"
+play(sfx/sfx_cloth2 -v 0.4)
+[yjh:std1-112:h] "@p2.17.0{wa:0.4}@p2.17.1"
+
+stopGrad(bgm_happy)
+playGrad(bgm/mpk_plaza -v 0.7 -l true)
+wait-manuFogOn()
+disappear(yjh lde)
+setposX(lde 200)
+setposX(yjh -600)
+sp(lde std2-422)
+sp(yjh std1-115)
+
+puzzle(yjh 4 5 oddeven pS pF)
+
+.pF
+
+wait-appear(yjh lde)
+stopGrad(mpk_plaza)
+[yjh:std1-115:c] "..."
+play(sfx/sfx_cloth1 -v 0.4)
+[lde:std2-422-sweat:c] "@p2.19.0{wa:0.4}@p2.19.1"
+play(sfx/sfx_cloth1 -v 0.4)
+[yjh:std1-115:] "..."
+setposX(yjh -800)
+[yjh:std2-112:c] "@p2.21.0"
+[lde:std2-433-sweat:h] "@p2.22.0{wa:0.4}@p2.22.1"
+[yjh:std2-112:c] "@p2.23.0"
+playGrad(bgm/bgm_happy -v 0.7 -l true)
+[yjh:std2-121-blsh:c] "@p2.24.0"
+setposX(lde 300)
+[lde:std2-323-blsh-sweat:] "???"
+[yjh:std1-124-blsh:h] "@p2.26.0{wa:0.4}@p2.26.1{wa:0.4}@p2.26.2"
+setposX(yjh -500)
+[yjh:std2-121-blsh:h] "@p2.27.0"
+[lde:std2-321-blsh:s] "..."
+[yjh:std1-114:h] "@p2.29.0{wa:0.4}@p2.29.1{wa:0.4}@p2.29.2"
+
+setposX(yjh -400)
+setposX(lde 400)
+[lde:std2-323-blsh:s] "@p2.30.0"
+setposX(yjh -200)
+setposX(lde -800)
+[lde:std3-221-blsh-sweat:c] "@p2.31.0{wa:0.5}@p2.31.1"
+setposX(yjh 200)
+setposX(lde -400)
+wait(0.4)
+setposX(yjh 600)
+setposX(lde 0)
+[yjh:std1-123:h] "@p2.32.0{wa:0.4}@p2.32.1"
+[lde:std3-221-blsh-sweat:s] "@p2.33.0"
+uhl(yjh)
+uhl(lde)
+bgFogOn()
+wait(0.4)
+disappear(yjh lde)
+wait(0.8)
+[yjh::] "@p2.34.0"
+[lde::] "@p2.35.0{wa:0.4}@p2.35.1{wa:0.4}@p2.35.2{wa:0.4}@p2.35.3{wa:0.4}@p2.35.4"
+stopGrad(bgm_happy)
+wait-manuFogOn()
+remove(lde yjh)
+
+j(fail)
+
+.pS
+
+wait-appear(yjh lde)
+stopGrad(mpk_plaza)
+[yjh:std1-115:c] "..."
+play(sfx/sfx_cloth1 -v 0.4)
+[lde:std2-422-sweat:c] "@p2.37.0{wa:0.4}@p2.37.1"
+play(sfx/sfx_cloth1 -v 0.4)
+[yjh:std1-115:] "..."
+[lde:std2-422-sweat:c] "@p2.39.0{wa:0.4}@p2.39.1"
+playGrad(bgm/bgm_happy -v 0.7 -l true)
+[yjh:std2-112:] "@p2.40.0"
+[lde:std2-313:h] "@p2.41.0{wa:0.4}@p2.41.1"
+[yjh:std2-112:h] "@p2.42.0{wa:0.4}@p2.42.1{wa:0.4}@p2.42.2"
+[yjh:std2-112:c] "@p2.43.0"
+[lde:std2-312:h] "@p2.44.0"
+setposX(yjh 500)
+setposX(lde -100)
+[yjh:std1-142:h] "@p2.45.0{wa:0.4}@p2.45.1"
+setposX(yjh 0)
+setposX(lde -600)
+[lde:std1-221-sweat:] "@p2.46.0{wa:0.4}@p2.46.1"
+setposX(yjh -500)
+setposX(lde -1100)
+[yjh:std1-112:h] "@p2.47.0{wa:0.4}@p2.47.1"
+stopGrad(bgm_happy)
+
+wait-manuFogOn()
+remove(lde yjh)
+
+# end of file
+
+.eof
+end(EOF)
+
+.fail
+end(FAIL)

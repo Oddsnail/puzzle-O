@@ -1849,7 +1849,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 616865937}
   m_HandleRect: {fileID: 616865936}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2474,7 +2474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &562584784
 Transform:
   m_ObjectHideFlags: 0
@@ -2503,10 +2503,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NovelGameFlow
   paragraphs:
-  - {fileID: 4900000, guid: 977143ec28766d846a69a5348b804c5d, type: 3}
-  - {fileID: 4900000, guid: 88827051f3c5073469d569a90e5b3011, type: 3}
-  - {fileID: 4900000, guid: 5cb7ecc9cea4916479f860522f72eea5, type: 3}
-  - {fileID: 4900000, guid: a7d8487ecf2fad44a8a3e75a13602f24, type: 3}
+  - {fileID: 4900000, guid: fb97a36ea079fe846afb515e3a6e3293, type: 3}
+  - {fileID: 4900000, guid: 9db51b9c2d45d0e468b071165242fdda, type: 3}
+  - {fileID: 4900000, guid: 3296afd3db2a4d245bc396eb8941468d, type: 3}
+  - {fileID: 4900000, guid: d6a0c7e761412a04cad08c152e0816bd, type: 3}
   quitEnd: {fileID: 1997477661}
 --- !u!1 &616694126
 GameObject:
@@ -5392,7 +5392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1114645883
 Transform:
   m_ObjectHideFlags: 0
@@ -6034,7 +6034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d50ffa6bafb8be44a4e647bd8344fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file1: {fileID: 4900000, guid: a7d8487ecf2fad44a8a3e75a13602f24, type: 3}
+  file1: {fileID: 4900000, guid: 9db51b9c2d45d0e468b071165242fdda, type: 3}
 --- !u!1 &1253416419
 GameObject:
   m_ObjectHideFlags: 0
@@ -10484,7 +10484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: _testtext_
+  m_text: Yeon Ju-Hyang
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30c9055b7efe6cd41a005bb0c6a56a6a, type: 2}
   m_sharedMaterial: {fileID: -7412349184653657314, guid: 30c9055b7efe6cd41a005bb0c6a56a6a, type: 2}
@@ -10511,8 +10511,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
-  m_fontSizeBase: 65
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10549,7 +10549,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -23.34022, y: -4.975792, z: -22.359726, w: -5.2877693}
+  m_margin: {x: -58.793304, y: -4.975792, z: -72.167694, w: -5.2877693}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

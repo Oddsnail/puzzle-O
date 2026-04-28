@@ -1,0 +1,188 @@
+# initializing
+
+wait-manuFogOn()
+bgFogOn()
+add(lde yjh ssa)
+playGrad(bgm/spaceship_earth -v 0.45 -l true)
+setposX(yjh 300 -i true)
+setposX(lde -300 -i true)
+sp(yjh std1-113)
+sp(lde std1-322)
+
+# dialogue start
+
+manuFogOff()
+[default::] "@p3.0.0{wa:0.4}@p3.0.1{wa:0.4}@p3.0.2"
+closeDialogue()
+bgFogOff()
+
+puzzle(lde 4 4 classic s1 ldef)
+
+.s1
+appear(yjh lde)
+[yjh::c] "@p3.1.0{wa:0.4}@p3.1.1"
+play(sfx/sfx_cloth1 -v 0.4)
+[lde:std1-321:s] "@p3.2.0"
+play(sfx/sfx_cloth1 -v 0.4)
+[yjh:_-_42:c] "@p3.3.0{wa:0.4}@p3.3.1{wa:0.4}@p3.3.2"
+play(sfx/sfx_cloth1 -v 0.4)
+[lde:std1-321-blsh-sweat:s] "@p3.4.0{wa:0.4}@p3.4.1"
+disappear(yjh lde)
+
+puzzle(yjh 4 5 oddeven s2 yjhf)
+
+.s2
+setposX(lde 300 -i true)
+setposX(yjh -300 -i true)
+sp(lde std2-332)
+sp(yjh std1-145-sweat)
+appear(yjh lde)
+[lde::c] "@p3.5.0"
+[yjh:_-114-sweat:c] "@p3.6.0{wa:0.4}@p3.6.1"
+setposX(lde 400)
+[lde:std2-143-blsh-sweat:h] "@p3.7.0"
+[yjh:std2-111:c] "@p3.8.0{wa:0.4}@p3.8.1"
+disappear(yjh lde)
+
+puzzle(lde 4 6 mystery s3 ldef)
+
+.s3
+setposX(lde -300 -i true)
+setposX(yjh 300 -i true)
+sp(lde std1-321-sweat)
+sp(yjh std1-111-sweat)
+appear(yjh lde)
+[lde::s] "@p3.9.0{wa:0.4}@p3.9.1"
+[yjh:std1-143:c] "@p3.10.0"
+[lde::s] "@p3.11.0{wa:0.4}@p3.11.1{wa:0.4}@p3.11.2"
+[yjh:std1-143-sweat:c] "@p3.12.0{wa:0.4}@p3.12.1"
+[lde::s] "@p3.13.0"
+disappear(yjh lde)
+
+puzzle(yjh 3 5 undercover s4 yjhf)
+
+.s4
+setposX(lde 300 -i true)
+setposX(yjh -300 -i true)
+sp(lde std1-322-sweat)
+sp(yjh std2-111-sweat)
+appear(yjh lde)
+stopGrad(spaceship_earth)
+[lde::] "..."
+[yjh::] "..."
+[lde:_-__1-sweat:s] "@p3.16.0"
+[yjh:_-122-sweat:s] "@p3.17.0"
+[lde:std2-313-sweat:c] "@p3.18.0{wa:0.4}@p3.18.1"
+[yjh:_-112:c] "@p3.19.0{wa:0.4}@p3.19.1{wa:0.4}@p3.19.2"
+[lde:_-_2_-sweat:s] "@p3.20.0{wa:0.4}@p3.20.1{wa:0.4}@p3.20.2"
+setposX(yjh -700)
+[yjh:std1-114-sweat:h] "@p3.21.0{wa:0.4}@p3.21.1{wa:0.6}@p3.21.2"
+[yjh:std2-122-sweat:h] "@p3.22.0"
+play(sfx/emotion_surprise)
+setposX(lde 400)
+[lde:std2-312-sweat:h] "@p3.23.0{wa:0.4}@p3.23.1{wa:0.4}@p3.23.2{wa:0.4}@p3.23.3"
+[yjh:std1-114-sweat:c] "@p3.24.0{wa:0.7}@p3.24.1"
+[yjh::] "@p3.25.0"
+[yjh:std2-122-sweat:c] "@p3.26.0{wa:0.4}@p3.26.1"
+[lde:std1-321-sweat:h] "@p3.27.0"
+[yjh:std2-111:h] "@p3.28.0{wa:0.4}@p3.28.1"
+[lde::s] "@p3.29.0"
+[yjh:std2-112:h] "@p3.30.0{wa:0.4}@p3.30.1"
+[lde:std2-323-sweat:h] "@p3.31.0{wa:0.4}@p3.31.1"
+setposX(yjh 0)
+[yjh:std2-112:h] "@p3.32.0{wa:0.4}@p3.32.1"
+[lde:std2-323-sweat:s] "@p3.33.0"
+uhl(yjh)
+uhl(lde)
+bgFogOn()
+wait(0.4)
+disappear(yjh lde)
+wait(0.8)
+[default::] "@p3.34.0"
+[lde::] "@p3.35.0{wa:0.6}@p3.35.1{wa:0.4}@p3.35.2"
+[yjh::] "@p3.36.0{wa:0.4}@p3.36.1{wa:0.4}@p3.36.2"
+[lde::] "@p3.37.0{wa:0.4}@p3.37.1"
+[yjh::] "@p3.38.0{wa:0.5}@p3.38.1{wa:0.5}@p3.38.2"
+stopGrad(bgm_happy)
+
+wait-manuFogOn()
+remove(lde yjh ssa)
+
+# end of file
+
+.eof
+end(EOF)
+
+.ldef
+
+setposX(lde 300 -i true)
+setposX(yjh -300 -i true)
+sp(lde std1-311-sweat)
+sp(yjh std2-123-sweat)
+appear(yjh lde)
+stopGrad(spaceship_earth)
+
+[lde::s] "@p3.39.0{wa:0.6}@p3.39.1{wa:0.6}@p3.39.2"
+[yjh:_-__2-sweat:s] "@p3.40.0{wa:0.6}@p3.40.1"
+[yjh:_-_32-sweat:s] "@p3.41.0{wa:0.4}@p3.41.1"
+[lde:_-122-sweat:h] "?"
+[yjh:_-_22-sweat:s] "@p3.43.0{wa:0.4}@p3.43.1"
+[yjh:_-_12-sweat:c] "@p3.44.0{wa:0.4}@p3.44.1"
+[lde:_-121-sweat:s] "@p3.45.0{wa:0.4}@p3.45.1"
+
+j(commonFail)
+
+.yjhf
+
+setposX(lde -300 -i true)
+setposX(yjh 300 -i true)
+sp(lde std1-311-sweat)
+sp(yjh std1-113-sweat)
+appear(yjh lde)
+stopGrad(spaceship_earth)
+
+[yjh:_-__2-sweat:h] "@p3.46.0{wa:0.4}@p3.46.1"
+[lde::] "@p3.47.0{wa:0.4}@p3.47.1"
+[yjh:_-__3-sweat:h] "@p3.48.0{wa:0.4}@p3.48.1"
+[lde::s] "@p3.49.0{wa:0.4}@p3.49.1"
+[yjh:_-_24-sweat:c] "@p3.50.0{a}@p3.50.1"
+
+.commonFail
+
+play(sfx/sfx_doorOpen)
+setposX(lde -1200)
+setposX(yjh -500)
+wait(1)
+play(sfx/emotion_surprise)
+sp(lde std2-231-sweat)
+sp(yjh std2-113)
+h(yjh)
+h(lde)
+[yjh:_-__2:h] "@p3.51.0{wa:0.4}@p3.51.1"
+[ssa::] "@p3.52.0{wa:0.4}@p3.52.1{wa:0.5}@p3.52.2"
+[yjh:_-__2:h] "@p3.53.0{wa:0.4}@p3.53.1"
+wait(1.4)
+setposX(yjh 500)
+setposX(lde -500)
+play(sfx/sfx_doorClose)
+wait(1.4)
+[lde:std2-232:h] "@p3.54.0{wa:0.4}@p3.54.1"
+[yjh:std1-113:h] "@p3.55.0{wa:0.3}@p3.55.1{wa:0.4}@p3.55.2"
+[lde:std2-232:h] "@p3.56.0{wa:0.4}@p3.56.1"
+[yjh:std1-113:h] "@p3.57.0"
+[lde:std2-232:h] "@p3.58.0"
+uhl(yjh)
+uhl(lde)
+wait(0.2)
+bgFogOn()
+disappear(yjh lde)
+wait(0.6)
+[default::] "@p3.59.0"
+[lde::] "@p3.60.0"
+[yjh::] "@p3.61.0{wa:0.4}@p3.61.1"
+[lde::] "@p3.62.0"
+stopGrad(mpk_plaza)
+wait-manuFogOn()
+remove(lde yjh ssa)
+
+end(FAIL)

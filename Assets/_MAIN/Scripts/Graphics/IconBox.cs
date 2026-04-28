@@ -17,6 +17,7 @@ namespace origin.graphic {
         public float highlightSize = 1.3f;
 		public float animationSpeed = 6.0f;
 		public RectTransform descriptionText;
+		public Outline outline;
 		public TextMeshProUGUI invisibleText;
 
         private bool isHovered = false;
@@ -77,6 +78,7 @@ namespace origin.graphic {
 			float targetScale = larger ? highlightSize : 1f;
 			float targetLocationY = larger ? 0f : -70f;
 			float targetTransparency = larger ? 1f : 0f;
+			Color targetOutlineColor = larger ? Color.white : Color.black;
 			float percent = 0f;
 
 			if (targetScale != 1.0f && co_soundBuffer == null) {
@@ -99,6 +101,7 @@ namespace origin.graphic {
 			iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
 			iconBoxRect.rotation = Quaternion.identity;
 			invisibleText.alpha = targetTransparency;
+			outline.effectColor = targetOutlineColor;
 
 			iconBoxRect.localScale = new Vector3(targetScale, targetScale, 1f);
 			co_scaling = null;

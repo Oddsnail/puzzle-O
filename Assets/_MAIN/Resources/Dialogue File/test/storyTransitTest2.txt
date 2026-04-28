@@ -1,3 +1,0 @@
-[default::] "Test Scene 2"
-[default::] "ESCAPE NOW!"
-end(EOF)

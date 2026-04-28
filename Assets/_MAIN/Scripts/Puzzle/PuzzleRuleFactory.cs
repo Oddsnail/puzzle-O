@@ -34,7 +34,7 @@ namespace origin.puzzle {
 				checkCondition: (answer, guess, position) => {
 					int answerIndex = TABLE.IndexOf(answer[position]);
 					int guessIndex = TABLE.IndexOf(guess);
-					return answerIndex != -1 && guessIndex != -1 && answerIndex % 5 == guessIndex % 5;
+					return answerIndex != -1 && guessIndex != -1 && answerIndex % 5 == guessIndex % 5 && answerIndex != guessIndex;
 				},
 				audioPitch: 1.0f,
 				scoreValue: 4,
@@ -47,7 +47,7 @@ namespace origin.puzzle {
 				id: "ball",
 				color: color,
 				subcolor: subcolor,
-				checkCondition: (answer, guess, position) => answer.Contains(guess),
+				checkCondition: (answer, guess, position) => answer.Contains(guess) && answer[position] != guess,
 				audioPitch: 0.7f,
 				scoreValue: 3,
 				characterEffect: "crouch"

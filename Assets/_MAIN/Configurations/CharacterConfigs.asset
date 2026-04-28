@@ -25,7 +25,7 @@ MonoBehaviour:
     - type: 2
       setSpriteID: std1-112
     - type: 3
-      setSpriteID: std1-111
+      setSpriteID: std1-131
     - type: 4
       setSpriteID: std1-132
     - type: 5
