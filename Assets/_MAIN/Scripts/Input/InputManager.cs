@@ -54,7 +54,6 @@ namespace origin.IO {
 		public void OnPuzzleChoice(InputAction.CallbackContext c) {
 			if (TutorialManager.instance != null && TutorialManager.instance.IsRunning) {
 				if (!TutorialManager.instance.ShouldAllowInput("PuzzleGuess")) return;
-				Debug.Log("shoudallowinp[ut pass]");
 				TutorialManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
 				return;
 			}

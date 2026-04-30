@@ -47,7 +47,6 @@ namespace origin.dialogue {
 		public IEnumerator Handle(LINE_DATA data) => ReadingDialogue(data.dialogue);
 
 		private IEnumerator ReadingDialogue(LINE_DIALOGUE data) {
-			Debug.Log(data.ToString());
 
 			if (currentLine.Count != 0) {
 				DialogueManager.instance.AddLog(recentCharacter == plainTextID ? plainTextID : charService.GetInfo(recentCharacter).nameKey, currentLine);

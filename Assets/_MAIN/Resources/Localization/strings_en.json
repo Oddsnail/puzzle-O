@@ -58,10 +58,10 @@
     "char.ssa.name": "Seon Su-a",
     "char.ssa.subname": "\nTeam Lead",
 
-    "rule.miss.title": "Miss",
+    "rule.miss.title": "Ambiguity",
     "rule.miss.description": "Fails any of the above conditions.",
-    "rule.miss.comment.yjh": "\"Oh.\"\n\"Well? Feel any better?\"\n\"Not even a little bit.\"",
-    "rule.miss.comment.lde": "\"The shoulder — I said massage the shoulder-\"\n\"Oh, I'm just touching wherever I feel like.\"\n\"?\"",
+    "rule.miss.comment.yjh": "\"Wow...\"\n\"Well? How is it? Feel any better?\"\n\"idk...\"",
+    "rule.miss.comment.lde": "\"The shoulder — I said massage the shoulder-\"\n\"Oh, I'm just touching wherever I feel like.\"\n\"??\"",
     "rule.strike.title": "Answer",
     "rule.strike.description": "Right position, right number.",
     "rule.strike.comment.lde": "\"This is just perfect,\nI've basically elevated massage to an art form-\"\n\"Calm down...\"",

@@ -22,8 +22,6 @@ namespace origin.dialogue {
 		}
 
 		private IEnumerator ReadingCommand(LINE_COMMAND data) {
-			Debug.Log(data.ToString());
-
 			foreach (LINE_COMMAND.COMMAND command in data.commands) {
 				if (command.waitForCompletion || autoWaitCommands.Contains(command.name))
 					yield return commandExecutor.Execute(command.name, command.arguments);

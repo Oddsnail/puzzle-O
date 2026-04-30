@@ -47,7 +47,6 @@ namespace origin.command {
                         }
 
                         extendMethod.Invoke(null, new object[] { database });
-                        Debug.Log($"[INFO] Loaded command extension: {extension.Name}");
                     }
                     catch (Exception ex) {
                         Debug.LogError($"[ERROR] Failed to load extension {extension.Name}: {ex.Message}");

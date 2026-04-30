@@ -33,10 +33,7 @@ public class NovelGameFlow : MonoBehaviour
 
 			// end logics here
 
-			if (result != "EOF") {
-				Debug.Log($"Unexpected ending with story {i}.");
-				break;
-			}
+			if (result != "EOF") break;
 			if (i == paragraphs.Length - 1) {	
 				PlayerPrefs.SetInt("Saw.Ending", 1);
 				PlayerPrefs.Save();

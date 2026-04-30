@@ -50,7 +50,6 @@ namespace origin.character {
 			}
 			CHARACTER character = new(ID, configSO.GetConfig(ID));
 			characters.Add(key, character);
-			Debug.Log($"character {ID} added to dictionary");
 			return character;
 		}
 
@@ -62,7 +61,6 @@ namespace origin.character {
 			}
 			CHARACTER character = new(ID, configSO.GetConfig(ID), true);
 			characters.Add(key, character);
-			Debug.Log($"character {ID}-client added to dictionary");
 			return character;
 		}
 

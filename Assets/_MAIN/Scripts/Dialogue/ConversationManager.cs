@@ -57,7 +57,6 @@ namespace origin.dialogue {
 
 				// ===== In choice / dot label logic =====
 				if (jumping) {
-					Debug.Log("...jumped a line");
 					if (line != $".{jumpingCode}") continue;
 					jumping = false;
 					continue;
@@ -65,7 +64,6 @@ namespace origin.dialogue {
 				else if (line.StartsWith('.')) continue;
 				// ===========================
 
-				Debug.Log(line);
 				LINE_DATA data = new(line);
 
 				foreach (ILineHandler handler in handlers) {
