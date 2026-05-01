@@ -42,7 +42,7 @@ namespace origin.dialogue {
 
 		private void OnNextDialogueRequest() {
 			if(!DialogueManager.instance.showing && !DialogueManager.instance.manualShowLock) {
-				DialogueManager.instance.Show();
+				DialogueManager.instance.ManualShow();
 			}
 			else nextRequest = true;
 		} 
