@@ -77,7 +77,7 @@ namespace origin.dialogue {
 			}
 
 			// foreach (ILineHandler handler in handlers)
-			// 	handler.OnConversationEnd();
+			// handler.OnConversationEnd();
 
 			dialogueUI.ChangeLetterBoxTheme(plainTextID);
 			dialogueUI.Hide();

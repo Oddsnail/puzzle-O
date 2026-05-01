@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: c8a948c3f9cebbd498e500ed46bfc69a
+guid: ec045d37f890a4844aa03141f3c30d74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1685962484534430897
-    second: IMG_4659_0
+      213: -1244869982206239135
+    second: IMG_4867_0
+  - first:
+      213: -9217438127782076610
+    second: IMG_4867_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,8 +75,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
-    resizeAlgorithm: 1
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_4659_0
+      name: IMG_4867_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 9
         y: 0
-        width: 20
-        height: 25
+        width: 848
+        height: 674
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1bc4f4372fdb56710800000000000000
-      internalID: 1685962484534430897
+      spriteID: 16edc07c85559bee0800000000000000
+      internalID: -1244869982206239135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4867_1
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 237
+        width: 193
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3f586edbd4151080800000000000000
+      internalID: -9217438127782076610
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_4659_0: 1685962484534430897
+      IMG_4867_0: -1244869982206239135
+      IMG_4867_1: -9217438127782076610
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

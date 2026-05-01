@@ -2,9 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
-using TMPro;
 using origin.graphic;
 using origin.language;
 
@@ -18,8 +16,9 @@ namespace origin.dialogue {
 		private Coroutine co_name_transitioning = null;
 		public bool isTransitioning => co_transitioning != null;
 		public bool isNameTransitioning => co_name_transitioning != null;
-
-		private bool showing = false;
+		
+		public bool manualShowLock = false;
+		public bool showing = false;
 
 		private const float defaultChangeNameDuration = 0.1f;
 		private const float defaultNameAnimOffset = 100.0f;
@@ -89,10 +88,28 @@ namespace origin.dialogue {
 			co_name_transitioning = null;
 		}
 
+		public void ManualShow() {
+			if (showing) return;
+			if (manualShowLock) return;
+			if (isTransitioning) runner.StopCoroutine(co_transitioning);
+
+			SetLetterboxSpeed(0.45f);
+			co_transitioning = runner.StartCoroutine(Showing());
+		}
+
+		public void ManualHide() {
+			if (!showing) return;
+			if (isTransitioning) runner.StopCoroutine(co_transitioning);
+
+			SetLetterboxSpeed(0.15f);
+			co_transitioning = runner.StartCoroutine(Hiding(false));
+		}
+
 		public void Show() {
 			if (showing) return;
 			if (isTransitioning) runner.StopCoroutine(co_transitioning);
 
+			manualShowLock = false;
 			SetLetterboxSpeed(0.45f);
 			co_transitioning = runner.StartCoroutine(Showing());
 		}
@@ -101,8 +118,9 @@ namespace origin.dialogue {
 			if (!showing) return;
 			if (isTransitioning) runner.StopCoroutine(co_transitioning);
 
+			manualShowLock = true;
 			SetLetterboxSpeed(0.15f);
-			co_transitioning = runner.StartCoroutine(Hiding());
+			co_transitioning = runner.StartCoroutine(Hiding(true));
 		}
 
 		public void SetLetterboxSpeed(float speed) {
@@ -122,9 +140,9 @@ namespace origin.dialogue {
 			co_transitioning = null;
 		}
 
-		private IEnumerator Hiding() {
+		private IEnumerator Hiding(bool empty) {
 			showing = false;
-			Empty();
+			if(empty) Empty();
 			yield return DOTween.Sequence()
 				.Join(container.dialogueRoot.DOAnchorPosY(defaultDialogueHideYPos, defaultShowAndHideDuration))
 				.Join(container.upperLetterbox.DOAnchorPosY(container.upperLetterbox.GetComponent<LetterboxLoop>().hideYPos, defaultShowAndHideDuration))

@@ -110,9 +110,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
+        y: 35
         width: 107
-        height: 63
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,10 +131,10 @@ TextureImporter:
       name: std3_eye3_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 87
-        width: 54
-        height: 16
+        x: 41
+        y: 83
+        width: 60
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: std3_eye3_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 0
-        width: 96
-        height: 71
+        x: 158
+        y: 10
+        width: 85
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -17,110 +17,92 @@ MonoBehaviour:
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -195, y: 1558}
+      localPosition: {x: -201, y: 1563}
     eyebrow:
-      localPosition: {x: -195, y: 1651}
+      localPosition: {x: -205, y: 1644}
     mouth:
-      localPosition: {x: -195, y: 1450}
+      localPosition: {x: -196, y: 1451}
     expressions:
     - name: blsh
       layer: 0
       data:
-        localPosition: {x: -184, y: 1451}
+        localPosition: {x: -170, y: 1481}
     - name: sweat
       layer: 1
       data:
-        localPosition: {x: -104, y: 1477}
+        localPosition: {x: -109, y: 1498}
   - poseID: yjh-std2
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -71, y: 1583}
+      localPosition: {x: -74, y: 1613}
     eyebrow:
-      localPosition: {x: -63, y: 1678}
+      localPosition: {x: -65, y: 1648}
     mouth:
-      localPosition: {x: -77, y: 1493}
+      localPosition: {x: -74, y: 1496}
     expressions:
     - name: blsh
       layer: 0
       data:
-        localPosition: {x: -95, y: 1488}
+        localPosition: {x: -77, y: 1511}
     - name: sweat
       layer: 1
       data:
-        localPosition: {x: -167, y: 1521}
-  - poseID: yjh-std3
-    root:
-      localPosition: {x: 0, y: 0}
-    eye:
-      localPosition: {x: -63, y: 1603}
-    eyebrow:
-      localPosition: {x: -58, y: 1673}
-    mouth:
-      localPosition: {x: -44, y: 1492}
-    expressions:
-    - name: blsh
-      layer: 0
-      data:
-        localPosition: {x: -82, y: 1511}
-    - name: sweat
-      layer: 1
-      data:
-        localPosition: {x: -137, y: 1502}
-    - name: finger
-      layer: 2
-      data:
-        localPosition: {x: -23, y: 1429}
+        localPosition: {x: -148.7, y: 1511}
   - poseID: lde-std1
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -164, y: 1495}
+      localPosition: {x: -166, y: 1496}
     eyebrow:
-      localPosition: {x: -145, y: 1576}
+      localPosition: {x: -166, y: 1593}
     mouth:
-      localPosition: {x: -176, y: 1413}
+      localPosition: {x: -178, y: 1415}
     expressions:
+    - name: blsh
+      layer: 0
+      data:
+        localPosition: {x: -148, y: 1420}
     - name: sweat
       layer: 1
       data:
-        localPosition: {x: -72, y: 1435}
+        localPosition: {x: -83.7, y: 1441}
   - poseID: lde-std2
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: -28, y: 1500}
+      localPosition: {x: -25, y: 1498}
     eyebrow:
-      localPosition: {x: -38, y: 1560}
+      localPosition: {x: -39, y: 1565}
     mouth:
-      localPosition: {x: -12, y: 1414}
+      localPosition: {x: -12, y: 1421}
     expressions:
     - name: blsh
       layer: 0
       data:
-        localPosition: {x: 20, y: 1397}
+        localPosition: {x: 37, y: 1402}
     - name: sweat
       layer: 1
       data:
-        localPosition: {x: 78, y: 1443}
+        localPosition: {x: 83, y: 1448}
   - poseID: lde-std3
     root:
       localPosition: {x: 0, y: 0}
     eye:
-      localPosition: {x: 108, y: 1496}
+      localPosition: {x: 104, y: 1500}
     eyebrow:
       localPosition: {x: 122, y: 1568}
     mouth:
-      localPosition: {x: 90, y: 1397}
+      localPosition: {x: 86, y: 1395}
     expressions:
     - name: blsh
       layer: 0
       data:
-        localPosition: {x: 50, y: 1405}
+        localPosition: {x: 96, y: 1428}
     - name: sweat
       layer: 1
       data:
-        localPosition: {x: 4, y: 1447}
+        localPosition: {x: 5, y: 1448}
   - poseID: lde-client-std1
     root:
       localPosition: {x: 0, y: 0}
@@ -141,7 +123,7 @@ MonoBehaviour:
     eye:
       localPosition: {x: -1004, y: 1365}
     eyebrow:
-      localPosition: {x: -1015, y: 1477}
+      localPosition: {x: -1021, y: 1463}
     mouth:
       localPosition: {x: -998, y: 1147}
     expressions:

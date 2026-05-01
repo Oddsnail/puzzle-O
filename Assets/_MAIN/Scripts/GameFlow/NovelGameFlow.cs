@@ -20,6 +20,7 @@ public class NovelGameFlow : MonoBehaviour
     }
 
     private IEnumerator Flow(int startingIndex) {
+		// story mode
 		for (int i = startingIndex; i < paragraphs.Length; i++) {
 
 			PlayerPrefs.SetInt(storySawPrefix + $"{i}", 1);

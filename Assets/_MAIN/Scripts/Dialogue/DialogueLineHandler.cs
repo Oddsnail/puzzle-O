@@ -40,7 +40,12 @@ namespace origin.dialogue {
 			LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
 		}
 
-		private void OnNextDialogueRequest() => nextRequest = true;
+		private void OnNextDialogueRequest() {
+			if(!DialogueManager.instance.showing && !DialogueManager.instance.manualShowLock) {
+				DialogueManager.instance.Show();
+			}
+			else nextRequest = true;
+		} 
 
 		public bool CanHandle(LINE_DATA data) => data.isDialogue;
 

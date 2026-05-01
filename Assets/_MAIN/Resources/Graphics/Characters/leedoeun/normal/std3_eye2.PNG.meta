@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 5399959143764488913
     second: std3_eye2_1
+  - first:
+      213: 6218533929925183884
+    second: std3_eye2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,10 +109,10 @@ TextureImporter:
       name: std3_eye2_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 51
-        width: 85
-        height: 49
+        x: 10
+        y: 50
+        width: 90
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +131,10 @@ TextureImporter:
       name: std3_eye2_1
       rect:
         serializedVersion: 2
-        x: 155
-        y: 5
-        width: 74
-        height: 45
+        x: 163
+        y: 46
+        width: 28
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,6 +145,28 @@ TextureImporter:
       bones: []
       spriteID: 1d274b52b3280fa40800000000000000
       internalID: 5399959143764488913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: std3_eye2_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 73
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8987ec79abac4650800000000000000
+      internalID: 6218533929925183884
       vertices: []
       indices: 
       edges: []
@@ -162,6 +187,7 @@ TextureImporter:
     nameFileIdTable:
       std3_eye2_0: 8382459593955581717
       std3_eye2_1: 5399959143764488913
+      std3_eye2_2: 6218533929925183884
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

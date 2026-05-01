@@ -17,13 +17,13 @@ manuFogOff()
 [default::] "@p1.0.0{wa:0.4}@p1.0.1"
 closeDialogue()
 
-wait(2)
+wait(1.8)
 play(sfx/sfx_cloth1 -v 0.4)
-wait(2.5)
+wait(1.6)
 play(sfx/sfx_cloth2 -v 0.4)
-wait(2.2)
+wait(1.8)
 play(sfx/sfx_cloth1 -v 0.4)
-wait(3)
+wait(1.6)
 
 appear(lde yjh)
 openDialogue()
@@ -75,7 +75,7 @@ setposX(yjh -100)
 
 setposX(yjh -200)
 [yjh:_-142:h] "@p1.26.0"
-[lde:std1-211-blsh:s] "@p1.27.0"
+[lde:std1-221-blsh-sweat:s] "@p1.27.0"
 
 wait-manuFogOn()
 disappear(yjh lde)
@@ -138,7 +138,7 @@ j(fail)
 .tutoPass
 
 appear(yjh lde)
-[lde:std2-411:s] "..."
+[lde:std2-411-blsh:s] "..."
 play(sfx/sfx_cloth2 -v 0.4)
 [yjh:std1-114:h] "@p1.46.0"
 play(sfx/sfx_cloth1 -v 0.4)

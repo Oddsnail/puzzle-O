@@ -106,10 +106,10 @@ TextureImporter:
       name: std3_eyebrow3_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 52
-        width: 122
-        height: 19
+        x: 1
+        y: 51
+        width: 111
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +128,10 @@ TextureImporter:
       name: std3_eyebrow3_1
       rect:
         serializedVersion: 2
-        x: 167
+        x: 155
         y: 0
         width: 73
-        height: 58
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

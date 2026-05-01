@@ -13,28 +13,6 @@ MonoBehaviour:
   m_Name: RuleSetPalette
   m_EditorClassIdentifier: Assembly-CSharp::origin.graphic.RuleSetPalette
   rulePalettes:
-  - ruleSetCode: classic
-    palettes:
-    - ID: strike
-      primary: {r: 0.4528302, g: 0.24136703, b: 0.24136703, a: 1}
-      secondary: {r: 0.5849056, g: 0.2896938, b: 0.2896938, a: 1}
-    - ID: semi-strike
-      primary: {r: 0.4141527, g: 0.2804379, b: 0.4339623, a: 1}
-      secondary: {r: 0.5424528, g: 0.27634388, b: 0.53660834, a: 1}
-    - ID: ball
-      primary: {r: 0.22917409, g: 0.25715762, b: 0.4716981, a: 1}
-      secondary: {r: 0.32645074, g: 0.3458823, b: 0.6179246, a: 1}
-  - ruleSetCode: oddeven
-    palettes:
-    - ID: strike
-      primary: {r: 0.5, g: 0.42271057, b: 0.18632075, a: 1}
-      secondary: {r: 0.8018868, g: 0.6759854, b: 0.26099145, a: 1}
-    - ID: parity-match
-      primary: {r: 0.5801887, g: 0.27233922, b: 0.16967781, a: 1}
-      secondary: {r: 0.7122642, g: 0.4129505, b: 0.30573604, a: 1}
-    - ID: range-match
-      primary: {r: 0.5424528, g: 0.21237539, b: 0.3600895, a: 1}
-      secondary: {r: 0.7877358, g: 0.41987804, b: 0.5880426, a: 1}
   - ruleSetCode: undercover
     palettes:
     - ID: semi-strike
@@ -57,3 +35,41 @@ MonoBehaviour:
     - ID: less-than
       primary: {r: 0.28235295, g: 0.43529412, b: 0.29196182, a: 1}
       secondary: {r: 0.27678922, g: 0.5411765, b: 0.27450982, a: 1}
+  - ruleSetCode: classic
+    palettes:
+    - ID: strike
+      primary: {r: 0.4528302, g: 0.24136703, b: 0.24136703, a: 1}
+      secondary: {r: 0.5849056, g: 0.2896938, b: 0.2896938, a: 1}
+    - ID: semi-strike
+      primary: {r: 0.4141527, g: 0.2804379, b: 0.4339623, a: 1}
+      secondary: {r: 0.5424528, g: 0.27634388, b: 0.53660834, a: 1}
+    - ID: ball
+      primary: {r: 0.22917409, g: 0.25715762, b: 0.4716981, a: 1}
+      secondary: {r: 0.32645074, g: 0.3458823, b: 0.6179246, a: 1}
+  - ruleSetCode: classic2
+    palettes:
+    - ID: semi-strike
+      primary: {r: 0.4141527, g: 0.2804379, b: 0.4339623, a: 1}
+      secondary: {r: 0.5424528, g: 0.27634388, b: 0.53660834, a: 1}
+    - ID: ball
+      primary: {r: 0.22917409, g: 0.25715762, b: 0.4716981, a: 1}
+      secondary: {r: 0.32645074, g: 0.3458823, b: 0.6179246, a: 1}
+  - ruleSetCode: oddeven
+    palettes:
+    - ID: strike
+      primary: {r: 0.5, g: 0.42271057, b: 0.18632075, a: 1}
+      secondary: {r: 0.8018868, g: 0.6759854, b: 0.26099145, a: 1}
+    - ID: parity-match
+      primary: {r: 0.5801887, g: 0.27233922, b: 0.16967781, a: 1}
+      secondary: {r: 0.7122642, g: 0.4129505, b: 0.30573604, a: 1}
+    - ID: range-match
+      primary: {r: 0.5424528, g: 0.21237539, b: 0.3600895, a: 1}
+      secondary: {r: 0.7877358, g: 0.41987804, b: 0.5880426, a: 1}
+  - ruleSetCode: oddeven2
+    palettes:
+    - ID: parity-match
+      primary: {r: 0.5801887, g: 0.27233922, b: 0.16967781, a: 1}
+      secondary: {r: 0.7122642, g: 0.4129505, b: 0.30573604, a: 1}
+    - ID: range-match
+      primary: {r: 0.5424528, g: 0.21237539, b: 0.3600895, a: 1}
+      secondary: {r: 0.7877358, g: 0.41987804, b: 0.5880426, a: 1}

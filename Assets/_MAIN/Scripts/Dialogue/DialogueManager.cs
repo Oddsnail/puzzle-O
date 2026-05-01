@@ -71,10 +71,15 @@ namespace origin.dialogue {
 		public void ChangeLetterBoxTheme(string ID) => dialogueUIManager.ChangeLetterBoxTheme(colorPalette.Getcolor(ID));
 		public void SetPromptVisible(bool visible) => dialogueContainer.promptIcon.SetActive(visible);
 
+		public void ManualShow() => dialogueUIManager.ManualShow();
+		public void ManualHide() => dialogueUIManager.ManualHide();
 		public void Show() => dialogueUIManager.Show();
 		public void Hide() => dialogueUIManager.Hide();
 
 		public void SetLetterboxSpeed(float speed) => dialogueUIManager.SetLetterboxSpeed(speed);
+
+		public bool manualShowLock => dialogueUIManager.manualShowLock;
+		public bool showing => dialogueUIManager.showing;
 
 		public bool IsLogOpen => logManager.IsLogOpen;
 		public void ToggleLog() => logManager.ToggleLog();

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e8557a71980c36849834ac6e120695b1
+guid: 5a19d00d30691e9409644cab78aebb14
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1885003711856960554
-    second: sweat_0
+      213: -1532184349185188250
+    second: std2_mouth4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -73,7 +73,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sweat_0
+      name: std2_mouth4_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 20
+        x: 3
+        y: 4
+        width: 60
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a24e68583e0e82a10800000000000000
-      internalID: 1885003711856960554
+      spriteID: 66e5768c3769cbae0800000000000000
+      internalID: -1532184349185188250
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sweat_0: 1885003711856960554
+      std2_mouth4_0: -1532184349185188250
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

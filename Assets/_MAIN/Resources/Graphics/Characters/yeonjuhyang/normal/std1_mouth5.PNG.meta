@@ -73,7 +73,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -103,10 +103,10 @@ TextureImporter:
       name: std1_mouth5_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 27
-        width: 25
-        height: 9
+        x: 9
+        y: 32
+        width: 29
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

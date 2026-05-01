@@ -76,7 +76,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -106,10 +106,10 @@ TextureImporter:
       name: std1_eyebrow3_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 12
+        x: 3
+        y: 0
         width: 93
-        height: 25
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +128,10 @@ TextureImporter:
       name: std1_eyebrow3_1
       rect:
         serializedVersion: 2
-        x: 138
-        y: 28
-        width: 114
-        height: 12
+        x: 141
+        y: 17
+        width: 116
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

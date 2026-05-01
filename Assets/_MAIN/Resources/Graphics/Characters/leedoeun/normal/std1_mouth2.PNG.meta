@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -817719312766581467
     second: std1_mouth2_0
+  - first:
+      213: 7584759566208373950
+    second: std1_mouth2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -73,7 +76,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -103,10 +106,10 @@ TextureImporter:
       name: std1_mouth2_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 6
-        width: 36
-        height: 9
+        x: 0
+        y: 8
+        width: 13
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,6 +120,28 @@ TextureImporter:
       bones: []
       spriteID: 52542941e90e6a4f0800000000000000
       internalID: -817719312766581467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: std1_mouth2_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 9
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb49892c3aa724960800000000000000
+      internalID: 7584759566208373950
       vertices: []
       indices: 
       edges: []
@@ -136,6 +161,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       std1_mouth2_0: -817719312766581467
+      std1_mouth2_1: 7584759566208373950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

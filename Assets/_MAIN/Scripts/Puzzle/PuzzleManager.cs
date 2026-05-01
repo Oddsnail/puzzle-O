@@ -65,7 +65,8 @@ namespace origin.puzzle {
 		}
 
 		private readonly Dictionary<string, (int, int, string, string)> tutorialIDdict = new() {
-			{"basic", (4, 6, "classic", "6537")}
+			{"basic", (4, 6, "classic", "6537") },
+			{"gray", (4, 6, "mystery", "_")}
 		};
 
 		public IEnumerator StartPuzzleWithTutorial(string charID, string tutorialID, Action<bool> onResult) {

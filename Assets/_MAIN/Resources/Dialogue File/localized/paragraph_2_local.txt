@@ -17,13 +17,13 @@ manuFogOff()
 [default::] "@p2.0.0{wa:0.4}@p2.0.1"
 closeDialogue()
 
-wait(2)
+wait(1.8)
 play(sfx/sfx_cloth1 -v 0.4)
-wait(2.5)
+wait(1.6)
 play(sfx/sfx_cloth2 -v 0.4)
-wait(2.2)
+wait(1.8)
 play(sfx/sfx_cloth1 -v 0.4)
-wait(3)
+wait(1.6)
 
 appear(lde yjh)
 openDialogue()
@@ -88,7 +88,7 @@ setposX(yjh -500)
 
 setposX(yjh -400)
 setposX(lde 400)
-[lde:std2-323-blsh:s] "@p2.30.0"
+[lde:std2-323-blsh:] "@p2.30.0"
 setposX(yjh -200)
 setposX(lde -800)
 [lde:std3-221-blsh-sweat:c] "@p2.31.0{wa:0.5}@p2.31.1"
@@ -130,6 +130,7 @@ playGrad(bgm/bgm_happy -v 0.7 -l true)
 [yjh:std2-112:c] "@p2.43.0"
 [lde:std2-312:h] "@p2.44.0"
 setposX(yjh 500)
+sp(lde std1-221-sweat)
 setposX(lde -100)
 [yjh:std1-142:h] "@p2.45.0{wa:0.4}@p2.45.1"
 setposX(yjh 0)

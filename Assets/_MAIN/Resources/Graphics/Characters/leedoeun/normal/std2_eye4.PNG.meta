@@ -14,9 +14,6 @@ TextureImporter:
   - first:
       213: 4083535952374584243
     second: std2_eye4_3
-  - first:
-      213: -7838072138335070942
-    second: std2_eye4_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -85,7 +82,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -116,9 +113,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 141
-        y: 29
-        width: 109
-        height: 55
+        y: 34
+        width: 104
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +134,10 @@ TextureImporter:
       name: std2_eye4_1
       rect:
         serializedVersion: 2
-        x: 149
-        y: 72
+        x: 146
+        y: 75
         width: 69
-        height: 15
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,9 +157,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 90
-        height: 48
+        y: 14
+        width: 86
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +178,10 @@ TextureImporter:
       name: std2_eye4_3
       rect:
         serializedVersion: 2
-        x: 26
-        y: 51
-        width: 53
-        height: 16
+        x: 94
+        y: 0
+        width: 10
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,28 +192,6 @@ TextureImporter:
       bones: []
       spriteID: 3b3d2dc2052aba830800000000000000
       internalID: 4083535952374584243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: std2_eye4_4
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 225d6a60be2993390800000000000000
-      internalID: -7838072138335070942
       vertices: []
       indices: 
       edges: []
@@ -239,7 +214,6 @@ TextureImporter:
       std2_eye4_1: -1997295282489178507
       std2_eye4_2: 1639819893445112769
       std2_eye4_3: 4083535952374584243
-      std2_eye4_4: -7838072138335070942
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

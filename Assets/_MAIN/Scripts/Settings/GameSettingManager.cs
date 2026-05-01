@@ -67,6 +67,7 @@ namespace origin.settings {
 		private void Start() {
 			currentLanguageIndex = System.Array.IndexOf(languageCodes, LocalizationManager.instance.currentLanguageCode);
 			UpdateLanguageLabel();
+			UpdateColorblindModeLabel();
 		}
 
 		private void OnDestroy() {

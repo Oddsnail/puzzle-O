@@ -5,9 +5,6 @@ TextureImporter:
   - first:
       213: 4025407219134060700
     second: std3_blsh_0
-  - first:
-      213: -2352694411311188443
-    second: std3_blsh_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -76,7 +73,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -107,9 +104,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 106
-        width: 26
-        height: 100
+        y: 0
+        width: 406
+        height: 214
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,28 +117,6 @@ TextureImporter:
       bones: []
       spriteID: c9857ccc98e1dd730800000000000000
       internalID: 4025407219134060700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: std3_blsh_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 279
-        height: 246
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 526ffb4e5ec895fd0800000000000000
-      internalID: -2352694411311188443
       vertices: []
       indices: 
       edges: []
@@ -161,7 +136,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       std3_blsh_0: 4025407219134060700
-      std3_blsh_1: -2352694411311188443
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

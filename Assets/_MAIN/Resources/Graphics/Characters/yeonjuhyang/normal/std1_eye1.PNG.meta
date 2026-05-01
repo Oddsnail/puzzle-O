@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: -4076846330051685658
     second: std1_eye1_3
+  - first:
+      213: -1936305483297249599
+    second: std1_eye1_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -82,7 +85,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 512
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -112,10 +115,10 @@ TextureImporter:
       name: std1_eye1_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 34
-        width: 93
-        height: 22
+        x: 154
+        y: 36
+        width: 104
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +137,10 @@ TextureImporter:
       name: std1_eye1_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 50
-        width: 54
-        height: 15
+        x: 163
+        y: 59
+        width: 55
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +159,10 @@ TextureImporter:
       name: std1_eye1_2
       rect:
         serializedVersion: 2
-        x: 157
-        y: 39
-        width: 103
-        height: 29
+        x: 0
+        y: 25
+        width: 98
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +181,10 @@ TextureImporter:
       name: std1_eye1_3
       rect:
         serializedVersion: 2
-        x: 104
-        y: 0
-        width: 6
-        height: 12
+        x: 42
+        y: 47
+        width: 48
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,6 +195,28 @@ TextureImporter:
       bones: []
       spriteID: 6e21a65ecd12c67c0800000000000000
       internalID: -4076846330051685658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: std1_eye1_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c62d630c6cd025e0800000000000000
+      internalID: -1936305483297249599
       vertices: []
       indices: 
       edges: []
@@ -214,6 +239,7 @@ TextureImporter:
       std1_eye1_1: 1090769292975833335
       std1_eye1_2: 7626147972647398143
       std1_eye1_3: -4076846330051685658
+      std1_eye1_4: -1936305483297249599
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

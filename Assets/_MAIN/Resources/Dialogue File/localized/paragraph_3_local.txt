@@ -44,7 +44,7 @@ setposX(lde 400)
 [yjh:std2-111:c] "@p3.8.0{wa:0.4}@p3.8.1"
 disappear(yjh lde)
 
-puzzle(lde 4 6 mystery s3 ldef)
+puzzleT(lde gray s3 ldef)
 
 .s3
 setposX(lde -300 -i true)
@@ -142,7 +142,7 @@ appear(yjh lde)
 stopGrad(spaceship_earth)
 
 [yjh:_-__2-sweat:h] "@p3.46.0{wa:0.4}@p3.46.1"
-[lde::] "@p3.47.0{wa:0.4}@p3.47.1"
+[lde::s] "@p3.47.0{wa:0.4}@p3.47.1"
 [yjh:_-__3-sweat:h] "@p3.48.0{wa:0.4}@p3.48.1"
 [lde::s] "@p3.49.0{wa:0.4}@p3.49.1"
 [yjh:_-_24-sweat:c] "@p3.50.0{a}@p3.50.1"
@@ -154,7 +154,7 @@ setposX(lde -1200)
 setposX(yjh -500)
 wait(1)
 play(sfx/emotion_surprise)
-sp(lde std2-231-sweat)
+sp(lde std1-212-sweat)
 sp(yjh std2-113)
 h(yjh)
 h(lde)
@@ -166,11 +166,11 @@ setposX(yjh 500)
 setposX(lde -500)
 play(sfx/sfx_doorClose)
 wait(1.4)
-[lde:std2-232:h] "@p3.54.0{wa:0.4}@p3.54.1"
+[lde:std1-111:h] "@p3.54.0{wa:0.4}@p3.54.1"
 [yjh:std1-113:h] "@p3.55.0{wa:0.3}@p3.55.1{wa:0.4}@p3.55.2"
-[lde:std2-232:h] "@p3.56.0{wa:0.4}@p3.56.1"
+[lde:std1-211:h] "@p3.56.0{wa:0.4}@p3.56.1"
 [yjh:std1-113:h] "@p3.57.0"
-[lde:std2-232:h] "@p3.58.0"
+[lde:std1-311:s] "@p3.58.0"
 uhl(yjh)
 uhl(lde)
 wait(0.2)

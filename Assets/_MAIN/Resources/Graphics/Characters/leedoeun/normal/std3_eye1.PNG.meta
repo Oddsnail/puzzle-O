@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -2524303135424285135
     second: std3_eye1_2
+  - first:
+      213: 719073568786438621
+    second: std3_eye1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,10 +112,10 @@ TextureImporter:
       name: std3_eye1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 42
-        width: 106
-        height: 58
+        x: 1
+        y: 41
+        width: 114
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,10 +134,10 @@ TextureImporter:
       name: std3_eye1_1
       rect:
         serializedVersion: 2
-        x: 146
-        y: 0
-        width: 96
-        height: 63
+        x: 41
+        y: 79
+        width: 64
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +156,10 @@ TextureImporter:
       name: std3_eye1_2
       rect:
         serializedVersion: 2
-        x: 168
-        y: 50
-        width: 58
-        height: 19
+        x: 158
+        y: 10
+        width: 85
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,6 +170,28 @@ TextureImporter:
       bones: []
       spriteID: 13671a33cafd7fcd0800000000000000
       internalID: -2524303135424285135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: std3_eye1_3
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 50
+        width: 63
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd953ead999aaf900800000000000000
+      internalID: 719073568786438621
       vertices: []
       indices: 
       edges: []
@@ -188,6 +213,7 @@ TextureImporter:
       std3_eye1_0: 8970480241549904146
       std3_eye1_1: -3464900562071806981
       std3_eye1_2: -2524303135424285135
+      std3_eye1_3: 719073568786438621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
