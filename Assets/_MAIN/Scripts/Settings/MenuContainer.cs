@@ -15,11 +15,6 @@ namespace origin.settings {
 		public Button languageButtonL;
 		public TextMeshProUGUI currentLanguageText;
 
-		[Header("Screen Mode Menu")]
-		public Button screenModeButtonR;
-		public Button screenModeButtonL;
-		public LocalizedText currentScreenModeText;
-
 		[Header("Colorblind Mode")]
 		public Button colorblindButtonR;
 		public Button colorblindButtonL;

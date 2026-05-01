@@ -4,7 +4,6 @@ using origin.IO;
 using origin.language;
 using origin.audio;
 using origin.dialogue;
-using System.Collections.Generic;
 
 namespace origin.settings {
 	public class GameSettingManager : MonoBehaviour {
@@ -22,23 +21,6 @@ namespace origin.settings {
 		private readonly string[] languageLabels = { "한국어", "ENGLISH" };
 		private int currentLanguageIndex;
 
-		private struct ScreenModeOption {
-			public int width, height;
-			public bool isFullscreen;
-			public string labelKey;
-		}
-
-		// Ordered from largest to smallest; all are 16:9
-		private static readonly (int width, int height, string labelKey)[] standardResolutions = {
-			(3840, 2160, "ui.settings.screen.uhd"),
-			(2560, 1440, "ui.settings.screen.qhd"),
-			(1920, 1080, "ui.settings.screen.fhd"),
-			(1280,  720, "ui.settings.screen.hd"),
-		};
-
-		private readonly List<ScreenModeOption> availableScreenModes = new();
-		private int currentScreenModeIndex;
-
 		private void Awake() {
 			if (instance == null) instance = this;
 			else { DestroyImmediate(gameObject); return; }
@@ -49,19 +31,17 @@ namespace origin.settings {
 			}
 			else {
 				PlayerPrefs.SetInt("ColorblindMode", 0);
+				PlayerPrefs.Save();
 				isColorblindModeOn = false;
 			}
 			menuContainer.containerRoot.SetActive(false);
 
 			menuContainer.languageButtonR.onClick.AddListener(() => CycleLanguage(true));
 			menuContainer.languageButtonL.onClick.AddListener(() => CycleLanguage(false));
-			menuContainer.screenModeButtonR.onClick.AddListener(() => CycleScreenMode(true));
-			menuContainer.screenModeButtonL.onClick.AddListener(() => CycleScreenMode(false));
 			menuContainer.colorblindButtonR.onClick.AddListener(ToggleColorblindMode);
 			menuContainer.colorblindButtonL.onClick.AddListener(ToggleColorblindMode);
 
 			menuContainer.versionText.text = $"v{Application.version}";
-			InitializeScreenModes();
 		}
 
 		private void Start() {
@@ -74,8 +54,6 @@ namespace origin.settings {
 			if (instance == this) {
 				menuContainer.languageButtonR.onClick.RemoveListener(() => CycleLanguage(true));
 				menuContainer.languageButtonL.onClick.RemoveListener(() => CycleLanguage(false));
-				menuContainer.screenModeButtonR.onClick.RemoveListener(() => CycleScreenMode(true));
-				menuContainer.screenModeButtonL.onClick.RemoveListener(() => CycleScreenMode(false));
 				menuContainer.colorblindButtonR.onClick.RemoveListener(ToggleColorblindMode);
 				menuContainer.colorblindButtonL.onClick.RemoveListener(ToggleColorblindMode);
 			}
@@ -129,74 +107,11 @@ namespace origin.settings {
 			menuContainer.currentLanguageText.text = languageLabels[currentLanguageIndex];
 		}
 
-		// Screen Mode Setting
-		private void InitializeScreenModes() {
-			int displayWidth = Display.main.systemWidth;
-			int displayHeight = Display.main.systemHeight;
-			bool is16by9 = Mathf.Abs((float)displayWidth / displayHeight - 16f / 9f) < 0.02f;
-
-			availableScreenModes.Clear();
-
-			if (is16by9) {
-				availableScreenModes.Add(new ScreenModeOption {
-					width = displayWidth, height = displayHeight,
-					isFullscreen = true, labelKey = "ui.settings.screen.fullscreen"
-				});
-			}
-
-			foreach (var (w, h, key) in standardResolutions) {
-				if (w <= displayWidth && h <= displayHeight) {
-					availableScreenModes.Add(new ScreenModeOption {
-						width = w, height = h, isFullscreen = false, labelKey = key
-					});
-				}
-			}
-
-			// Restore last saved screen mode
-			int savedWidth = PlayerPrefs.GetInt("ScreenWidth", -1);
-			int savedHeight = PlayerPrefs.GetInt("ScreenHeight", -1);
-			int savedFullscreen = PlayerPrefs.GetInt("ScreenFullscreen", -1);
-
-			currentScreenModeIndex = 0;
-			for (int i = 0; i < availableScreenModes.Count; i++) {
-				var opt = availableScreenModes[i];
-				if (opt.width == savedWidth && opt.height == savedHeight &&
-					(opt.isFullscreen ? 1 : 0) == savedFullscreen) {
-					currentScreenModeIndex = i;
-					break;
-				}
-			}
-
-			ApplyScreenMode(currentScreenModeIndex);
-			UpdateScreenModeLabel();
-		}
-
-		private void CycleScreenMode(bool add) {
-			if (availableScreenModes.Count == 0) return;
-			currentScreenModeIndex = (((currentScreenModeIndex + (add ? 1 : -1)) % availableScreenModes.Count) + availableScreenModes.Count) % availableScreenModes.Count;
-			ApplyScreenMode(currentScreenModeIndex);
-			AudioManager.instance.PlayPreloadedSFX("optionChange");
-			UpdateScreenModeLabel();
-		}
-
-		private void ApplyScreenMode(int index) {
-			if (availableScreenModes.Count == 0) return;
-			var opt = availableScreenModes[index];
-			Screen.SetResolution(opt.width, opt.height, opt.isFullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
-			PlayerPrefs.SetInt("ScreenWidth", opt.width);
-			PlayerPrefs.SetInt("ScreenHeight", opt.height);
-			PlayerPrefs.SetInt("ScreenFullscreen", opt.isFullscreen ? 1 : 0);
-		}
-
-		private void UpdateScreenModeLabel() {
-			if (availableScreenModes.Count == 0) return;
-			menuContainer.currentScreenModeText.SetKey(availableScreenModes[currentScreenModeIndex].labelKey);
-		}
-
 		//Colorblind Mode Setting
 		private void ToggleColorblindMode() {
 			isColorblindModeOn = !isColorblindModeOn;
 			PlayerPrefs.SetInt("ColorblindMode", isColorblindModeOn ? 1 : 0);
+			PlayerPrefs.Save();
 			OnColorblindModeToggled?.Invoke();
 			AudioManager.instance.PlayPreloadedSFX("optionChange");
 			UpdateColorblindModeLabel();
