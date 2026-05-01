@@ -45,6 +45,7 @@ namespace origin.language
         public void SetLanguage(string code)
         {
 			PlayerPrefs.SetString("Language", code);
+			PlayerPrefs.Save();
             string fileName = code switch
             {
                 "kor" => "strings_ko",

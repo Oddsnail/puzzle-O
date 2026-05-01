@@ -25,13 +25,15 @@ namespace origin.settings
         private void SetMusic(float value)
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20f);
-            PlayerPrefs.SetFloat("MusicVolume", value);
+			PlayerPrefs.SetFloat("MusicVolume", value);
+			PlayerPrefs.Save();
         }
 
         private void SetSFX(float value)
         {
             audioMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20f);
             PlayerPrefs.SetFloat("SFXVolume", value);
+			PlayerPrefs.Save();
         }
     }
 }

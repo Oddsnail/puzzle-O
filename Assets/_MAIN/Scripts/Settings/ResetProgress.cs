@@ -31,6 +31,7 @@ namespace origin.IO {
 			AudioManager.instance.PlayPreloadedSFX("optionChange");
 			if (forReal) {
 				PlayerPrefs.DeleteAll();
+				PlayerPrefs.Save();
 				forReal = false;
 				menuGameFlow.RefreshContinueButton();
 				mainMenuBG.RefreshMainMenuBackground();
