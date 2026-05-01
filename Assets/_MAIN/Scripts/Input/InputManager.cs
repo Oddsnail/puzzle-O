@@ -48,7 +48,9 @@ namespace origin.IO {
 				TutorialManager.instance.OnNextDialogueRequest();
 				return;
 			}
-			DialogueManager.instance.OnNextDialogueRequest();
+			if (DialogueManager.instance != null) {
+				DialogueManager.instance.OnNextDialogueRequest();
+			}
 		}
 
 		public void OnPuzzleChoice(InputAction.CallbackContext c) {
@@ -57,7 +59,9 @@ namespace origin.IO {
 				TutorialManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
 				return;
 			}
-			PuzzleManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
+			if (PuzzleManager.instance != null) {
+				PuzzleManager.instance.OnCharacterGuess(c.control.name.ToUpper()[0]);
+			}
 		}
 
 		public void OnEscapeMenu(InputAction.CallbackContext c) {
@@ -69,7 +73,9 @@ namespace origin.IO {
 		public void OnLogToggle(InputAction.CallbackContext c) {
 			if (TutorialManager.instance != null && !TutorialManager.instance.ShouldAllowInput("Log"))
 				return;
-			DialogueManager.instance.ToggleLog();
+			if (DialogueManager.instance != null) {
+				DialogueManager.instance.ToggleLog();
+			}
 		}
 	}
 }
