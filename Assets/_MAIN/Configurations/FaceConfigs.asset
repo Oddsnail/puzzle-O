@@ -21,7 +21,7 @@ MonoBehaviour:
     eyebrow:
       localPosition: {x: -205, y: 1644}
     mouth:
-      localPosition: {x: -196, y: 1451}
+      localPosition: {x: -196, y: 1448}
     expressions:
     - name: blsh
       layer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
     - name: blsh
       layer: 0
       data:
-        localPosition: {x: 96, y: 1428}
+        localPosition: {x: 89, y: 1420}
     - name: sweat
       layer: 1
       data:

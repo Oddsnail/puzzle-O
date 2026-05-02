@@ -218,7 +218,7 @@ setposX(yjh -900)
 [yjh:_-__5:] "..."
 
 closeDialogue()
-wait(3)
+wait(1.5)
 setposX(yjh -800)
 sp(yjh std2-113)
 play(sfx/sfx_footstep1 -v 0.7)
@@ -235,7 +235,7 @@ setposX(yjh 100)
 sp(yjh std1-115)
 c(yjh)
 play(sfx/sfx_footstep1 -v 0.7)
-wait(1.2)
+wait(1.7)
 setposX(yjh 700)
 sp(yjh std2-113)
 play(sfx/sfx_footstep1 -v 0.7)
@@ -246,7 +246,6 @@ play(sfx/sfx_footstep1 -v 0.7)
 
 wait-manuFogOn()
 remove(lde yjh)
-wait(1)
 
 # end of file
 

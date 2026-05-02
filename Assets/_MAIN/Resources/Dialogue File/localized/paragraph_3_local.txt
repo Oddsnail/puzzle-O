@@ -16,7 +16,7 @@ manuFogOff()
 closeDialogue()
 bgFogOff()
 
-puzzle(lde 4 4 classic s1 ldef)
+puzzle(lde 4 5 classic s1 ldef)
 
 .s1
 appear(yjh lde)

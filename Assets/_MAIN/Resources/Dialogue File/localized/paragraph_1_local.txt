@@ -31,7 +31,7 @@ stopGrad(spaceship_earth)
 hl(yjh)
 [yjh::] "..."
 wait(1)
-[yjh:_-134-sweat:] "...!"
+[yjh:_-134-sweat:h] "...!"
 wait(1.3)
 play(sfx/sfx_punch -v 0.4)
 wait(0.3)
@@ -138,12 +138,12 @@ j(fail)
 .tutoPass
 
 appear(yjh lde)
-[lde:std2-411-blsh:s] "..."
+[lde:std2-411:s] "..."
 play(sfx/sfx_cloth2 -v 0.4)
 [yjh:std1-114:h] "@p1.46.0"
 play(sfx/sfx_cloth1 -v 0.4)
-[lde:_-311-blsh:s] "..."
-[lde:_-312-blsh:s] "@p1.48.0"
+[lde:_-311:s] "..."
+[lde:_-312:s] "@p1.48.0"
 play(sfx/emotion_surprise)
 [yjh:std1-134:h] "@p1.49.0"
 [lde:std2-332-sweat:c] "@p1.50.0{wa:0.3}@p1.50.1"
