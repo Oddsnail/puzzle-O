@@ -3,4 +3,8 @@
 Project developed around 2024 Dec ~ 2026 Apr by Oddsnail.
 You can download playable demo version in the below itch.io page.
 
-{link}
+[{link}](https://oddsnail.itch.io/puzzleo)
+
+# Key feature for future games:
+Dialogue DSL
+Tutorial Manager Structure
